@@ -649,7 +649,7 @@
     transition: transform .3s ease, box-shadow .3s ease;
   }
   .tcard:hover{ transform: translateY(-4px); box-shadow: var(--shadow-lift); }
-  .tcard.feature{ flex-basis: 460px; background: rgba(255,255,253,0.85); }
+  .tcard.feature{ flex-basis: 460px; background: rgba(255,253,248,0.85); }
   .quote{ font-family: var(--serif); font-size: 22px; line-height: 1.3; letter-spacing: -0.005em; color: var(--ink); }
   .tcard.feature .quote{ font-size: 26px; }
   .who{ display:flex; align-items:center; gap: 12px; margin-top: 24px; }
@@ -797,7 +797,7 @@
   .form-row label{ font-size: 12px; letter-spacing: .04em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
   .form-row input, .form-row select{
     background: rgba(255,255,255,0.05);
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255,255,255,0.12);
     color: #fff; border-radius: 12px;
     padding: 12px 14px; font-size: 14.5px;
     font-family: var(--sans);
@@ -939,12 +939,15 @@
 
   /* subtle entrance */
   .fade-up{
-    opacity: 0; transform: translateY(20px) scale(0.98);
-    transition: opacity .9s cubic-bezier(0.16, 1, 0.3, 1), transform .9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
   }
-  .fade-up.in{ opacity: 1; transform: translateY(0) scale(1); }
+  .fade-up.in{ opacity: 1; transform: translateY(0); }
 
   /* ===== Design polish (Gemini suggestions, additive) ===== */
+  .fade-up{ opacity:0; transform:translateY(20px) scale(0.98); transition:opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1); }
+  .fade-up.in{ opacity:1; transform:translateY(0) scale(1); }
+
   .stat, .svc, .step, .q{
     border:1px solid rgba(10,10,12,0.06) !important;
     box-shadow:0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 12px rgba(10,10,12,0.02), 0 16px 32px -16px rgba(10,10,12,0.06) !important;
@@ -1278,7 +1281,7 @@
       </div>
 
       <div class="svc s3">
-        <div class="ico-lg"><i class="ti ti-passport"></i></div>
+        <div class="ico-lg"><i class="ti ti-license"></i></div>
         <h3>Visa &amp; documentation</h3>
         <p>The paperwork that scares everyone else. Financials, biometrics, interviews, GTE statements — sequenced into a checklist that won't surprise you at 11pm.</p>
         <ul>
@@ -1714,7 +1717,7 @@
 </footer>
 
 <script>
-  /* Sliding tab indicator + filter */
+  /* ============ Sliding tab indicator + filter ============ */
   (function(){
     const wrap = document.querySelector('.dest-tabs');
     if(!wrap) return;
@@ -1752,6 +1755,7 @@
       });
     });
 
+    // init
     const initial = wrap.querySelector('.dest-tab[aria-selected="true"]') || tabs[0];
     requestAnimationFrame(() => moveIndicatorTo(initial));
     window.addEventListener('resize', () => {
@@ -1760,7 +1764,7 @@
     });
   })();
 
-  /* Hero search with live results */
+  /* ============ Hero search with live results ============ */
   (function(){
     const root = document.getElementById('heroSearch');
     if(!root) return;
@@ -1860,7 +1864,9 @@
       if(!row) return;
       input.value = row.dataset.name;
       close();
+      // Germany has a dedicated detail page
       if(row.dataset.name && row.dataset.name.toLowerCase().indexOf('germany') !== -1){ window.location.href = 'germany.html'; return; }
+      // smooth scroll to destinations
       document.getElementById('destinations').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     btn.addEventListener('click', () => {
@@ -1883,7 +1889,7 @@
     });
   })();
 
-  /* Custom select (with search) */
+  /* ============ Custom select (with search) ============ */
   (function(){
     const all = document.querySelectorAll('.cselect');
     all.forEach(setupSelect);
@@ -1891,9 +1897,11 @@
     function setupSelect(el){
       const trigger = el.querySelector('.cselect-trigger');
       const labelText = trigger.querySelector('.label-text');
+      const panel = el.querySelector('.cselect-panel');
       const opts = [...el.querySelectorAll('.copt')];
       const search = el.querySelector('.cselect-search input');
       const list = el.querySelector('.cselect-list');
+      const placeholder = el.dataset.placeholder || 'Select…';
 
       trigger.addEventListener('click', e => {
         e.stopPropagation();
@@ -1943,20 +1951,21 @@
     function escape(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   })();
 
-  /* FAQ accordion */
+  /* ============ FAQ accordion ============ */
   (function(){
     const items = document.querySelectorAll('.q');
     items.forEach(q => {
       const head = q.querySelector('.q-head');
       head.addEventListener('click', () => {
         const isOpen = q.dataset.open === 'true';
+        // close all (single-open behavior)
         items.forEach(o => { if(o !== q) o.dataset.open = 'false'; });
         q.dataset.open = isOpen ? 'false' : 'true';
       });
     });
   })();
 
-  /* Animated counters + reveal */
+  /* ============ Animated counters + reveal ============ */
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   function animateCount(el){
     const target = parseFloat(el.dataset.target);
@@ -1988,10 +1997,12 @@
   }, { threshold: 0.18 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
+  /* stagger reveal for process steps */
   document.querySelectorAll('.process .step').forEach((s, i) => {
     s.style.transitionDelay = (i * 80) + 'ms';
   });
 
+  /* smooth-scroll for in-page anchors */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
@@ -2001,5 +2012,6 @@
     });
   });
 </script>
+
 </body>
 </html>
