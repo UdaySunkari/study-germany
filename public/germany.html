@@ -799,7 +799,7 @@
   .form-row label{ font-size: 12px; letter-spacing: .04em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
   .form-row input, .form-row select{
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid var(--line);
     color: #fff; border-radius: 12px;
     padding: 12px 14px; font-size: 14.5px;
     font-family: var(--sans);
@@ -1047,7 +1047,7 @@
   </div>
 </header>
 
-<!-- FACTS (true Germany facts, using the stats component) -->
+<!-- FACTS -->
 <section id="facts">
   <div class="wrap">
     <div class="stats">
@@ -1060,7 +1060,7 @@
   </div>
 </section>
 
-<!-- WHY GERMANY (services-grid component) -->
+<!-- WHY GERMANY -->
 <section id="why">
   <div class="wrap">
     <div class="section-head">
@@ -1081,7 +1081,7 @@
   </div>
 </section>
 
-<!-- WHAT WE HANDLE (services-grid component) -->
+<!-- WHAT WE HANDLE -->
 <section id="services">
   <div class="wrap">
     <div class="section-head">
@@ -1102,7 +1102,7 @@
   </div>
 </section>
 
-<!-- PROCESS (process component) -->
+<!-- PROCESS -->
 <section id="process">
   <div class="wrap">
     <div class="section-head">
@@ -1122,7 +1122,7 @@
   </div>
 </section>
 
-<!-- CONSULT (consult component, WhatsApp-first) -->
+<!-- CONSULT -->
 <section id="consult">
   <div class="wrap">
     <div class="consult">
@@ -1153,7 +1153,7 @@
   </div>
 </section>
 
-<!-- FAQ (faq component) -->
+<!-- FAQ -->
 <section id="faq">
   <div class="wrap">
     <div class="faq">
@@ -1189,7 +1189,7 @@
 </a>
 
 <script>
-  /* FAQ accordion (same behaviour as homepage) */
+  /* FAQ accordion */
   (function(){
     const items = document.querySelectorAll('.q');
     items.forEach(q => {
@@ -1202,7 +1202,7 @@
     });
   })();
 
-  /* animated counters + reveal (same as homepage) */
+  /* animated counters + reveal */
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   function animateCount(el){
     const target = parseFloat(el.dataset.target);
