@@ -943,6 +943,29 @@
     transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
   }
   .fade-up.in{ opacity: 1; transform: translateY(0); }
+
+  /* ===== Design polish (Gemini suggestions, additive) ===== */
+  .fade-up{ opacity:0; transform:translateY(20px) scale(0.98); transition:opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1); }
+  .fade-up.in{ opacity:1; transform:translateY(0) scale(1); }
+
+  .stat, .svc, .step, .q{
+    border:1px solid rgba(10,10,12,0.06) !important;
+    box-shadow:0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 12px rgba(10,10,12,0.02), 0 16px 32px -16px rgba(10,10,12,0.06) !important;
+  }
+  .svc:hover, .stat:hover, .step:hover{
+    border-color:rgba(10,10,12,0.12) !important;
+    box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 12px 24px -10px rgba(10,10,12,0.04), 0 32px 64px -20px rgba(10,10,12,0.14) !important;
+  }
+
+  .svc li::before{ content:""; width:5px; height:5px; border-radius:50%; background:var(--ink-2); opacity:.4; border:none; flex:0 0 5px; margin-right:4px; }
+
+  .form-row input, .form-row select, .cselect-trigger{ transition:background .25s ease, border-color .25s ease, box-shadow .25s ease !important; }
+  .form-row input:focus, .form-row select:focus{ border-color:rgba(255,255,255,0.5) !important; background:rgba(255,255,255,0.1) !important; box-shadow:0 0 0 4px rgba(255,255,255,0.05); }
+
+  .q-body{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .4s cubic-bezier(0.25,1,0.5,1) !important; }
+  .q .ans{ padding:0 22px 22px; color:var(--muted); font-size:14.5px; line-height:1.6; opacity:0; transform:translateY(-8px); transition:opacity .25s ease, transform .35s cubic-bezier(0.25,1,0.5,1) !important; }
+  .q[data-open="true"] .ans{ opacity:1; transform:translateY(0); transition-delay:.05s; }
+
 </style>
 </head>
 <body>
@@ -1194,7 +1217,7 @@
         </div>
       </a>
 
-      <a href="#consult" class="dest-card" data-region="europe">
+      <a href="germany.html" class="dest-card" data-region="europe">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/berlin-brandenburg/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇩🇪</div>
@@ -1652,7 +1675,7 @@
         <a href="#">Canada</a>
         <a href="#">Australia</a>
         <a href="#">Ireland</a>
-        <a href="#">Germany</a>
+        <a href="germany.html">Germany</a>
       </div>
       <div>
         <h5>Services</h5>
@@ -1841,6 +1864,8 @@
       if(!row) return;
       input.value = row.dataset.name;
       close();
+      // Germany has a dedicated detail page
+      if(row.dataset.name && row.dataset.name.toLowerCase().indexOf('germany') !== -1){ window.location.href = 'germany.html'; return; }
       // smooth scroll to destinations
       document.getElementById('destinations').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
