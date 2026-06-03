@@ -9,6 +9,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css" />
+<meta name="robots" content="noindex, nofollow" />
+<!-- Auth: requires a logged-in student once Supabase is configured in auth.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+  (async () => {
+    if (window.Auth && Auth.configured) {
+      document.documentElement.style.visibility = 'hidden';
+      const u = await Auth.requireUser('Login.html');
+      if (u) document.documentElement.style.visibility = '';
+    }
+  })();
+</script>
 <style>
   :root{
     --ink:#0a0a0c; --ink-2:#1a1a1f; --ink-3:#3a3a44;
@@ -1490,6 +1503,25 @@
 
       <!-- ============ OVERVIEW ============ -->
       <section class="view active" data-view="overview">
+        <div id="liveTest" style="display:none;margin-bottom:18px;border:1px solid rgba(10,10,12,0.1);border-radius:18px;padding:20px;background:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a95;font-weight:600;">Live account · test</div>
+              <div style="font-family:'Instrument Serif',serif;font-size:21px;margin-top:2px;">Signed in as <span id="ltEmail">…</span></div>
+            </div>
+            <button id="ltLogout" type="button" style="padding:9px 15px;border-radius:999px;border:1px solid rgba(10,10,12,0.12);background:#fff;font-size:13px;cursor:pointer;">Sign out</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+            <label style="font-size:13px;color:#5b5b66;">Full name<input id="ltName" type="text" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;box-sizing:border-box;"/></label>
+            <label style="font-size:13px;color:#5b5b66;">Target country<input id="ltCountry" type="text" placeholder="Germany" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;box-sizing:border-box;"/></label>
+          </div>
+          <label style="font-size:13px;color:#5b5b66;display:block;margin-top:12px;">Notes<textarea id="ltNotes" rows="2" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;resize:vertical;box-sizing:border-box;"></textarea></label>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
+            <button id="ltSave" type="button" style="padding:10px 18px;border-radius:999px;border:0;background:#0a0a0c;color:#fff;font-size:14px;cursor:pointer;">Save to my account</button>
+            <span id="ltStatus" style="font-size:13px;color:#5b5b66;"></span>
+          </div>
+          <div style="font-size:12px;color:#8a8a95;margin-top:10px;">Saves to your Supabase <code>profiles</code> table. Reload the page and your data loads back — that's real login + per-user data persistence.</div>
+        </div>
         <div class="greet">
           <div class="greet-hero">
             <div>
@@ -3446,5 +3478,34 @@
   if(hash && titleMap[hash]) setView(hash);
 </script>
 
+<script>
+  /* ===== Live account test: real login + per-user data saving ===== */
+  (async () => {
+    if (!(window.Auth && Auth.configured)) return;     // demo mode: leave dashboard as preview
+    const user = await Auth.getUser();
+    if (!user) return;                                  // head gate already redirects; safety only
+    const sb = Auth.client, $ = (id) => document.getElementById(id);
+    const card = $('liveTest'); if (card) card.style.display = 'block';
+    if ($('ltEmail')) $('ltEmail').textContent = user.email;
+    if ($('ltLogout')) $('ltLogout').onclick = () => Auth.signOut('Login.html');
+    // load this user's saved row
+    try {
+      const { data } = await sb.from('profiles').select('full_name,target_country,notes').eq('user_id', user.id).maybeSingle();
+      if (data) { $('ltName').value = data.full_name || ''; $('ltCountry').value = data.target_country || ''; $('ltNotes').value = data.notes || ''; }
+    } catch (e) { console.warn('load profile:', e); }
+    // save (upsert)
+    if ($('ltSave')) $('ltSave').onclick = async () => {
+      $('ltStatus').textContent = 'Saving…';
+      try {
+        const { error } = await sb.from('profiles').upsert({
+          user_id: user.id, full_name: $('ltName').value, target_country: $('ltCountry').value,
+          notes: $('ltNotes').value, updated_at: new Date().toISOString()
+        });
+        if (error) throw error;
+        $('ltStatus').textContent = 'Saved \u2713 — reload the page to confirm it persists.';
+      } catch (e) { $('ltStatus').textContent = 'Error: ' + (e.message || e); }
+    };
+  })();
+</script>
 </body>
 </html>

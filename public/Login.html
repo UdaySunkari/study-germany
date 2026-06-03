@@ -362,7 +362,7 @@
         </form>
 
         <div class="signup-line">
-          New to Vayas? <a href="#">Create an account</a> — it's free.
+          New to Vayas? <a href="#" onclick="return handleSignup(event)">Create an account</a> — it's free.
         </div>
       </div>
     </div>
@@ -419,6 +419,33 @@
     showError('Demo mode — login isn\u2019t connected yet. Set up Supabase in auth.js to make it real.');
     const isAdmin = /admin|counsellor|console/i.test(email);
     setTimeout(() => { window.location.href = isAdmin ? 'AdminDashboard.html' : 'Dashboard.html'; }, 900);
+    return false;
+  }
+
+  // Sign up a new student account, then sign in (for testing the flow).
+  async function handleSignup(e){
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    if (!(window.Auth && Auth.configured)) {
+      showError('Sign-up isn\u2019t connected yet — set up Supabase in auth.js first.');
+      return false;
+    }
+    if (!email || password.length < 6) {
+      showError('Enter an email and a password of at least 6 characters, then tap Create an account.');
+      return false;
+    }
+    try {
+      await Auth.signUp(email, password);
+      try {
+        const { user } = await Auth.signIn(email, password);
+        window.location.href = Auth.isAdmin(user) ? 'AdminDashboard.html' : 'Dashboard.html';
+      } catch {
+        showError('Account created! Confirm via the email Supabase sent, then sign in. (Tip: turn off email confirmation in Supabase for instant testing.)');
+      }
+    } catch (err) {
+      showError(err && err.message ? err.message : 'Could not create the account.');
+    }
     return false;
   }
 

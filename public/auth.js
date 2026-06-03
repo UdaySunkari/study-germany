@@ -38,6 +38,14 @@ const Auth = {
     return data;
   },
 
+  // Create a new student account.
+  async signUp(email, password) {
+    if (!_sb) throw Object.assign(new Error('Auth not configured'), { code: 'no-config' });
+    const { data, error } = await _sb.auth.signUp({ email, password });
+    if (error) throw error;
+    return data;
+  },
+
   async signOut(redirectTo = 'Login.html') {
     if (_sb) await _sb.auth.signOut();
     window.location.replace(redirectTo);
@@ -64,6 +72,20 @@ const Auth = {
     }
     const user = await this.getUser();
     if (!user || !this.isAdmin(user)) {
+      window.location.replace(loginUrl);
+      return null;
+    }
+    return user;
+  },
+
+  // Gate for any logged-in student page. Redirects to login if not signed in.
+  async requireUser(loginUrl = 'Login.html') {
+    if (!_sb) {
+      console.warn('[Auth] Supabase not configured yet — login gate is OFF. Fill in auth.js to enable it.');
+      return null;
+    }
+    const user = await this.getUser();
+    if (!user) {
       window.location.replace(loginUrl);
       return null;
     }
