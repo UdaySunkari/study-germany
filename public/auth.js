@@ -15,11 +15,11 @@
 //  (it will warn in the console instead of locking people out).
 // ============================================================================
 
-const SUPABASE_URL  = 'YOUR_SUPABASE_URL';       // e.g. https://abcd1234.supabase.co
-const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';  // the long "anon public" key
+const SUPABASE_URL  = 'https://imuazoxpywjpccltyadt.supabase.co';       // e.g. https://abcd1234.supabase.co
+const SUPABASE_ANON = 'sb_publishable_4uNLxDkCUmHcx8yrzo_vnw_5LcqCqZL';  // the long "anon public" key
 const ADMIN_EMAILS  = [                          // only these emails get the admin console
-  'you@example.com',
-  'cofounder@example.com',
+  'udaykumar.sunkari1@gmail.com',
+  'turbosolutionss@gmail.com',
 ];
 
 const _configured = !/YOUR_SUPABASE/.test(SUPABASE_URL + SUPABASE_ANON)
