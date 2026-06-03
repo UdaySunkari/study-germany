@@ -3,11 +3,24 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin — Meridian Console</title>
+<title>Admin — Vayas Console</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%230a0a0c%22/%3E%3Csvg%20x%3D%2220%22%20y%3D%2227%22%20width%3D%2260%22%20height%3D%2246%22%20viewBox%3D%220%200%201115%20855%22%20fill%3D%22%23f4efe3%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20transform%3D%22translate%2879.2%2C781.4%29%20scale%281%2C-1%29%22%3E%3Cpath%20d%3D%22M658.760498046875%20708V688Q638.48046875%20681.7599487304688%20615.2204284667969%20658.4398498535156Q591.9603881835938%20635.1197509765625%20573.0403442382812%20584.0396118164062L350.84063720703125%20-3.39996337890625Q345.64056396484375%20-3.0799560546875%20339.9604797363281%20-2.919952392578125Q334.2803955078125%20-2.75994873046875%20328.4403076171875%20-2.75994873046875Q322.92022705078125%20-2.75994873046875%20317.2401428222656%20-2.919952392578125Q311.56005859375%20-3.0799560546875%20306.3599853515625%20-3.39996337890625L56.599853515625%20624Q41.91986083984375%20661.0399780273438%2024.039886474609375%20674.0199890136719Q6.159912109375%20687%20-9.2000732421875%20688V708Q15.9200439453125%20707%2051.50018310546875%20706.0Q87.080322265625%20705%20121.80047607421875%20705Q164.64056396484375%20705%20202.16064453125%20706.0Q239.68072509765625%20707%20262.60076904296875%20708V688Q229.560791015625%20687%20211.90078735351562%20680.3200073242188Q194.24078369140625%20673.6400146484375%20192.4207763671875%20656.1400146484375Q190.60076904296875%20638.6400146484375%20203.9207763671875%20604L388.000732421875%20127.0003662109375L369.440673828125%20105.520263671875L524.240234375%20515.279296875Q548.4403076171875%20580.1595458984375%20548.4003295898438%20617.3796997070312Q548.3603515625%20654.599853515625%20526.3603515625%20670.7999267578125Q504.3603515625%20687%20463.0003662109375%20688V708Q494.88043212890625%20707%20524.7204284667969%20706.0Q554.5604248046875%20705%20583.1204833984375%20705Q607.200439453125%20705%20625.48046875%20706.0Q643.760498046875%20707%20658.760498046875%20708Z%22/%3E%3Cg%20transform%3D%22translate%28309.7%2C0%29%22%3E%3Cpath%20d%3D%22M347.00054931640625%20711.3999633789062%20590.3605346679688%2084Q605.04052734375%2047.280029296875%20623.0805053710938%2034.1400146484375Q641.1204833984375%2021%20656.1604614257812%2020V0Q631.0403442382812%202%20595.960205078125%202.5Q560.8800659179688%203%20525.159912109375%203Q482.31982421875%203%20444.79974365234375%202.5Q407.2796630859375%202%20384.359619140625%200V20Q435.359619140625%2022%20449.1996154785156%2037.5Q463.03961181640625%2053%20443.03961181640625%20104L265.35980224609375%20583.7196044921875L282.63983154296875%20603.759765625L120.16009521484375%20181.52044677734375Q101.280029296875%20133.520263671875%2097.48001098632812%20102.18017578125Q93.67999267578125%2070.840087890625%20102.66000366210938%2053.24005126953125Q111.6400146484375%2035.6400146484375%20132.62002563476562%2028.32000732421875Q153.60003662109375%2021%20184.280029296875%2020V0Q153.39996337890625%202%20123.219970703125%202.5Q93.03997802734375%203%2064.159912109375%203Q41.0799560546875%203%2022.2999267578125%202.5Q3.5198974609375%202%20-11.4801025390625%200V20Q9.47991943359375%2024.67999267578125%2030.959930419921875%2045.4200439453125Q52.43994140625%2066.16009521484375%2071.67999267578125%20116.6002197265625L302.5198974609375%20711.3999633789062Q312.9200439453125%20710.7599487304688%20324.7602233886719%20710.7599487304688Q336.60040283203125%20710.7599487304688%20347.00054931640625%20711.3999633789062ZM441.159912109375%20288V268H143.159912109375L153.159912109375%20288Z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css" />
+<!-- Auth: protects this console once Supabase is configured in auth.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+  (async () => {
+    if (window.Auth && Auth.configured) {
+      document.documentElement.style.visibility = 'hidden';
+      const user = await Auth.requireAdmin('Login.html');
+      if (user) document.documentElement.style.visibility = '';
+    }
+  })();
+</script>
 <style>
   :root{
     --ink:#0a0a0c; --ink-2:#1a1a1f; --ink-3:#3a3a44;
@@ -322,8 +335,8 @@
   <!-- ===== SIDEBAR ===== -->
   <aside class="side">
     <div class="brand">
-      <span class="brand-mark"></span>
-      Meridian <span class="tag">Admin</span>
+      <span class="brand-mark" aria-hidden="true" style="background:#0a0a0c;display:grid;place-items:center;overflow:hidden;"><svg viewBox="0 0 1115 855" fill="#f4efe3" style="width:64%;height:auto;display:block"><g transform="translate(79.2,781.4) scale(1,-1)"><path d="M658.760498046875 708V688Q638.48046875 681.7599487304688 615.2204284667969 658.4398498535156Q591.9603881835938 635.1197509765625 573.0403442382812 584.0396118164062L350.84063720703125 -3.39996337890625Q345.64056396484375 -3.0799560546875 339.9604797363281 -2.919952392578125Q334.2803955078125 -2.75994873046875 328.4403076171875 -2.75994873046875Q322.92022705078125 -2.75994873046875 317.2401428222656 -2.919952392578125Q311.56005859375 -3.0799560546875 306.3599853515625 -3.39996337890625L56.599853515625 624Q41.91986083984375 661.0399780273438 24.039886474609375 674.0199890136719Q6.159912109375 687 -9.2000732421875 688V708Q15.9200439453125 707 51.50018310546875 706.0Q87.080322265625 705 121.80047607421875 705Q164.64056396484375 705 202.16064453125 706.0Q239.68072509765625 707 262.60076904296875 708V688Q229.560791015625 687 211.90078735351562 680.3200073242188Q194.24078369140625 673.6400146484375 192.4207763671875 656.1400146484375Q190.60076904296875 638.6400146484375 203.9207763671875 604L388.000732421875 127.0003662109375L369.440673828125 105.520263671875L524.240234375 515.279296875Q548.4403076171875 580.1595458984375 548.4003295898438 617.3796997070312Q548.3603515625 654.599853515625 526.3603515625 670.7999267578125Q504.3603515625 687 463.0003662109375 688V708Q494.88043212890625 707 524.7204284667969 706.0Q554.5604248046875 705 583.1204833984375 705Q607.200439453125 705 625.48046875 706.0Q643.760498046875 707 658.760498046875 708Z"/><g transform="translate(309.7,0)"><path d="M347.00054931640625 711.3999633789062 590.3605346679688 84Q605.04052734375 47.280029296875 623.0805053710938 34.1400146484375Q641.1204833984375 21 656.1604614257812 20V0Q631.0403442382812 2 595.960205078125 2.5Q560.8800659179688 3 525.159912109375 3Q482.31982421875 3 444.79974365234375 2.5Q407.2796630859375 2 384.359619140625 0V20Q435.359619140625 22 449.1996154785156 37.5Q463.03961181640625 53 443.03961181640625 104L265.35980224609375 583.7196044921875L282.63983154296875 603.759765625L120.16009521484375 181.52044677734375Q101.280029296875 133.520263671875 97.48001098632812 102.18017578125Q93.67999267578125 70.840087890625 102.66000366210938 53.24005126953125Q111.6400146484375 35.6400146484375 132.62002563476562 28.32000732421875Q153.60003662109375 21 184.280029296875 20V0Q153.39996337890625 2 123.219970703125 2.5Q93.03997802734375 3 64.159912109375 3Q41.0799560546875 3 22.2999267578125 2.5Q3.5198974609375 2 -11.4801025390625 0V20Q9.47991943359375 24.67999267578125 30.959930419921875 45.4200439453125Q52.43994140625 66.16009521484375 71.67999267578125 116.6002197265625L302.5198974609375 711.3999633789062Q312.9200439453125 710.7599487304688 324.7602233886719 710.7599487304688Q336.60040283203125 710.7599487304688 347.00054931640625 711.3999633789062ZM441.159912109375 288V268H143.159912109375L153.159912109375 288Z"/></g></g></svg></span>
+      Vayas <span class="tag">Admin</span>
     </div>
 
     <div class="nav-label">Console</div>
@@ -331,6 +344,9 @@
     <button class="nav-item" data-view="clients"><i class="ti ti-users"></i> Clients <span class="badge">6</span></button>
     <button class="nav-item" data-view="applications"><i class="ti ti-files"></i> Applications <span class="badge">9</span></button>
     <button class="nav-item" data-view="messages"><i class="ti ti-messages"></i> Messages <span class="badge" id="msgBadge">3</span></button>
+
+    <div class="nav-label">Insights</div>
+    <a class="nav-item" href="https://dash.cloudflare.com/" target="_blank" rel="noopener" style="text-decoration:none;"><i class="ti ti-chart-bar"></i> Traffic analytics <i class="ti ti-external-link" style="margin-left:auto; font-size:13px; opacity:.55;"></i></a>
 
     <div class="nav-label">Catalogue</div>
     <button class="nav-item" data-view="universities"><i class="ti ti-building-bank"></i> Universities</button>
@@ -342,7 +358,7 @@
 
     <div class="side-foot">
       <div class="user-pill">
-        <div class="av" style="background-image:url('https://i.pravatar.cc/120?img=45')"></div>
+        <div class="av" style="background-image:url('assets/avatar.svg')"></div>
         <div class="who">
           <div class="name">Riya Sharma</div>
           <div class="role">Lead counsellor · Admin</div>
@@ -359,6 +375,7 @@
       <div class="search"><i class="ti ti-search"></i><input type="text" id="globalSearch" placeholder="Search clients, applications, universities…" /></div>
       <button class="icon-btn" aria-label="Notifications"><i class="ti ti-bell"></i><span class="dot"></span></button>
       <a class="icon-btn" href="Dashboard.html" title="Open student view"><i class="ti ti-external-link"></i></a>
+      <button class="icon-btn" id="logoutBtn" title="Sign out" aria-label="Sign out"><i class="ti ti-logout"></i></button>
     </header>
 
     <div class="content" id="content">
@@ -456,7 +473,7 @@
           </div>
           <div class="chat-main">
             <div class="chat-head">
-              <div class="av online" id="chatHeadAv" style="background-image:url('https://i.pravatar.cc/120?img=47')"></div>
+              <div class="av online" id="chatHeadAv" style="background-image:url('assets/avatar.svg')"></div>
               <div class="info"><div class="name" id="chatHeadName">Aanya Raj</div><div class="sub online" id="chatHeadSub">Online · UCL · MSc Data Science</div></div>
               <div class="actions">
                 <button class="icon-btn" data-modal="clientDetail" id="chatViewClient" aria-label="View client"><i class="ti ti-user"></i></button>
@@ -534,8 +551,8 @@
         <div class="view-head"><div class="left"><h2>Settings</h2><p>Console preferences and team configuration.</p></div></div>
         <div class="card" style="max-width:640px;">
           <div class="card-head"><h3><i class="ti ti-building"></i> Organisation</h3></div>
-          <div class="ff"><label>Agency name</label><input value="Meridian Study Abroad" /></div>
-          <div class="ff-row"><div class="ff"><label>Support email</label><input value="hello@meridian.study" /></div><div class="ff"><label>Phone</label><input value="+44 20 7946 0102" /></div></div>
+          <div class="ff"><label>Agency name</label><input value="Vayas Abroad" /></div>
+          <div class="ff-row"><div class="ff"><label>Support email</label><input value="hello@vayasabroad.com" /></div><div class="ff"><label>Phone</label><input value="+49 1522 6389297" /></div></div>
           <div class="ff"><label>Default currency</label><select><option>USD ($)</option><option>GBP (£)</option><option>EUR (€)</option><option>INR (₹)</option></select></div>
           <div style="display:flex; justify-content:flex-end;"><button class="btn btn-dark" onclick="toast('Settings saved')">Save changes</button></div>
         </div>
@@ -551,5 +568,12 @@
 <script src="livechat.js"></script>
 <script src="admin-data.js"></script>
 <script src="admin-app.js"></script>
+<script>
+  // Sign out (works once Supabase is configured; otherwise just returns to login)
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    if (window.Auth) Auth.signOut('Login.html');
+    else window.location.href = 'Login.html';
+  });
+</script>
 </body>
 </html>
