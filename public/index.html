@@ -700,7 +700,6 @@
   .consult{
     position: relative;
     border-radius: var(--radius-lg);
-    overflow: hidden;
     background:
       radial-gradient(80% 60% at 20% 0%, rgba(255,255,255,0.5), transparent 60%),
       radial-gradient(60% 60% at 100% 100%, rgba(255,255,255,0.25), transparent 60%),
@@ -713,6 +712,8 @@
   }
   .consult::before{
     content:""; position:absolute; inset: 0; pointer-events:none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     mix-blend-mode: screen;
     opacity: .35;
@@ -786,6 +787,7 @@
   .cselect.open .cselect-panel{
     opacity: 1; transform: translateY(0) scale(1);
     max-height: 320px; pointer-events: auto;
+    overflow-y: auto;
   }
   .cselect-search{
     display:flex; align-items:center; gap: 8px;
