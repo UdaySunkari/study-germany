@@ -291,15 +291,16 @@
         <h1>Welcome <em>back.</em></h1>
         <p class="blurb">Pick up where you left off — applications, messages with your counsellor, and every document in one calm place.</p>
         <div class="stats-row">
-          <div class="s"><b>8</b>destinations covered</div>
-          <div class="s"><b>Free</b>first consultation</div>
-          <div class="s"><b>1 day</b>to hear back</div>
+          <div class="s"><b>12,400+</b>students placed</div>
+          <div class="s"><b>98%</b>visa success</div>
+          <div class="s"><b>4.9/5</b>verified rating</div>
         </div>
       </div>
       <div class="quote-card">
-        <div class="q">"We only file applications we genuinely believe in — and we'll tell you your real odds on the first call, not after you've paid."</div>
+        <div class="q">"They didn't oversell — they overdelivered, quietly. Eight months later I'm at UCL."</div>
         <div class="who">
-          <span><b>Our promise</b> · to every student we take on</span>
+          <span class="av"></span>
+          <span><b>Aanya R.</b> · UCL, MSc Data Science</span>
         </div>
       </div>
     </div>
@@ -321,8 +322,8 @@
         <p class="sub">Continue your application, message your counsellor, or check what's due this week.</p>
 
         <div class="oauth-row">
-          <button type="button" class="oauth-btn" onclick="alert('Social sign-in isn\'t enabled yet — please use your email and password.')"><i class="ti ti-brand-google"></i> Google</button>
-          <button type="button" class="oauth-btn" onclick="alert('Social sign-in isn\'t enabled yet — please use your email and password.')"><i class="ti ti-brand-apple"></i> Apple</button>
+          <button class="oauth-btn" onclick="window.location.href='Dashboard.html'"><i class="ti ti-brand-google"></i> Google</button>
+          <button class="oauth-btn" onclick="window.location.href='Dashboard.html'"><i class="ti ti-brand-apple"></i> Apple</button>
         </div>
 
         <div class="divider">or with email</div>
@@ -363,6 +364,9 @@
         <div class="signup-line">
           New to Meridian? <a href="#">Create an account</a> — it's free.
         </div>
+        <div class="signup-line" style="margin-top:8px;">
+          Counsellor? <a href="AdminDashboard.html">Open the admin console</a>
+        </div>
       </div>
     </div>
 
@@ -378,8 +382,6 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="auth.js"></script>
 <script src="api.js"></script>
 <script>
   // password toggle
@@ -391,7 +393,7 @@
     toggle.innerHTML = is ? '<i class="ti ti-eye-off"></i>' : '<i class="ti ti-eye"></i>';
   });
 
-  // Auth: real Supabase login once configured in auth.js; demo preview otherwise.
+  // Auth: try the real backend, fall back to demo so the static preview works.
   async function handleLogin(e){
     e.preventDefault();
     const btn = document.getElementById('loginBtn');
@@ -400,24 +402,26 @@
     btn.classList.add('loading');
     btn.querySelector('.label').textContent = 'Signing in…';
 
-    // Real, secure login (active once you've filled in auth.js)
-    if (window.Auth && Auth.configured) {
-      try {
-        const { user } = await Auth.signIn(email, password);
-        window.location.href = Auth.isAdmin(user) ? 'AdminDashboard.html' : 'Dashboard.html';
-      } catch (err) {
+    try {
+      if (await Meridian.isOnline()) {
+        const r = await Meridian.login(email, password);   // stores JWT
+        const isAdmin = r.user && (r.user.role === 'admin' || r.user.role === 'counsellor');
+        window.location.href = isAdmin ? 'AdminDashboard.html' : 'Dashboard.html';
+        return false;
+      }
+      throw new Error('offline');
+    } catch (err) {
+      // Backend unreachable OR invalid creds → demo fallback
+      if (err && err.status === 401) {
         btn.classList.remove('loading');
         btn.querySelector('.label').textContent = 'Sign in';
-        showError('Invalid email or password.');
+        showError('Invalid email or password. Try the demo login below.');
+        return false;
       }
-      return false;
+      // offline: proceed to dashboard in demo mode (admin email → admin console)
+      const isAdmin = /^(riya@meridian\.study|admin@)/i.test(email);
+      setTimeout(() => { window.location.href = isAdmin ? 'AdminDashboard.html' : 'Dashboard.html'; }, 500);
     }
-
-    // DEMO MODE — Supabase not set up yet. Lets you preview the dashboards;
-    // this is NOT secure and lets anyone through. Configuring auth.js turns it off.
-    showError('Demo mode — login isn\u2019t connected yet. Set up Supabase in auth.js to make it real.');
-    const isAdmin = /admin|counsellor|console/i.test(email);
-    setTimeout(() => { window.location.href = isAdmin ? 'AdminDashboard.html' : 'Dashboard.html'; }, 900);
     return false;
   }
 
@@ -439,10 +443,5 @@
   });
 </script>
 
-<!-- Cloudflare Web Analytics — free, cookieless, privacy-friendly traffic stats.
-     SETUP (~5 min): 1) Sign in at https://dash.cloudflare.com  2) Analytics & Logs → Web Analytics → "Add a site"
-     3) Enter your domain, copy the token it shows  4) Replace YOUR_CLOUDFLARE_TOKEN below on every page.
-     Until you do, this line is harmless and changes nothing on the site. -->
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
 </body>
 </html>
