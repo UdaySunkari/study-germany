@@ -516,6 +516,24 @@
     display:grid; place-items:center;
     font-size: 18px;
   }
+  /* live vs coming-soon treatment */
+  .dest-card .corner-badge{
+    position:absolute; top: 12px; right: 12px; z-index: 2;
+    font-size: 11px; font-weight: 600; letter-spacing: .02em;
+    padding: 5px 11px; border-radius: 999px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.3);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .dest-card.live{ outline: 2px solid rgba(38,158,92,0.55); outline-offset: -2px; }
+  .dest-card.live .corner-badge{ background: rgba(38,158,92,0.9); color: #fff; }
+  .dest-card.live .corner-badge::before{
+    content:""; width:7px; height:7px; border-radius:50%; background:#fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+  }
+  .dest-card.soon .corner-badge{ background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.95); }
+  .dest-card.soon .dest-bg{ filter: grayscale(0.5) brightness(0.82); }
+  .dest-card.soon .glass-pill{ opacity: .85; }
 
   /* destination card photos via background-image inline */
   .dest-bg{ background-color: #cbb9a5; }
@@ -1019,8 +1037,7 @@
       <div class="search-results" id="heroSearchResults" role="listbox"></div>
     </div>
     <div class="hero-meta">
-      <div class="avatars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-      <div><b style="color:var(--ink-2)">12,400+ students</b> placed since 2014 · rated 4.9 / 5</div>
+      <div><b style="color:var(--ink-2)">Now taking students</b> for the Sept '26 intake · free first consultation</div>
     </div>
   </div>
 
@@ -1030,19 +1047,19 @@
 
       <div class="stage-chip chip-1">
         <div class="ico"><i class="ti ti-school"></i></div>
-        <div><b>1,200+ universities</b><small>across 30 countries</small></div>
+        <div><b>8 destinations</b><small>one coherent plan</small></div>
       </div>
       <div class="stage-chip chip-2">
-        <div class="ico"><i class="ti ti-shield-check"></i></div>
-        <div><b>98% visa success</b><small>last 12 months</small></div>
+        <div class="ico"><i class="ti ti-building-bank"></i></div>
+        <div><b>Germany</b><small>public unis, low fees</small></div>
       </div>
       <div class="stage-chip chip-3">
-        <div class="ico"><i class="ti ti-coin"></i></div>
-        <div><b>$48M scholarships</b><small>secured in 2025</small></div>
+        <div class="ico"><i class="ti ti-message-circle"></i></div>
+        <div><b>Free first call</b><small>45 minutes, no pitch</small></div>
       </div>
       <div class="stage-chip chip-4">
-        <div class="ico"><i class="ti ti-users"></i></div>
-        <div><b>1:1 counsellors</b><small>certified, global</small></div>
+        <div class="ico"><i class="ti ti-user-heart"></i></div>
+        <div><b>Founder-led</b><small>you work with us directly</small></div>
       </div>
     </div>
   </div>
@@ -1091,28 +1108,28 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <span class="kicker">By the numbers</span>
-        <h2 class="display">Quiet work,<br /><em>loud outcomes.</em></h2>
+        <span class="kicker">How we work</span>
+        <h2 class="display">Small by design,<br /><em>honest by default.</em></h2>
       </div>
-      <div class="right">A decade of placing students at the universities they actually wanted to attend — not just the ones they were told to settle for.</div>
+      <div class="right">We're a new, founder-led practice — so instead of an inflated track record, here are the things that are simply true about how we operate.</div>
     </div>
 
     <div class="stats">
       <div class="stat fade-up">
-        <div class="num"><span class="count" data-target="12400" data-suffix=""></span><sup>+</sup></div>
-        <div class="label">Students placed across 6 continents</div>
+        <div class="num"><span class="count" data-target="8" data-suffix=""></span></div>
+        <div class="label">Destination countries, one coherent plan</div>
       </div>
       <div class="stat fade-up">
-        <div class="num"><span class="count" data-target="98" data-suffix=""></span><sup>%</sup></div>
-        <div class="label">Visa success rate (last 12 months)</div>
+        <div class="num"><span class="count" data-target="2" data-suffix=""></span></div>
+        <div class="label">Intakes a year for Germany — October &amp; April</div>
       </div>
       <div class="stat fade-up">
-        <div class="num"><span class="count" data-target="48" data-prefix="$" data-suffix="M"></span></div>
-        <div class="label">Scholarships secured in 2025</div>
+        <div class="num"><span class="count" data-target="18" data-suffix=""></span><sup>mo</sup></div>
+        <div class="label">Stay-back to find work after a German degree</div>
       </div>
       <div class="stat fade-up">
-        <div class="num"><span class="count" data-target="4.9" data-decimals="1"></span><sup>/5</sup></div>
-        <div class="label">Average student rating, verified</div>
+        <div class="num"><span class="count" data-target="1" data-suffix=""></span></div>
+        <div class="label">Working day — that's how fast we reply</div>
       </div>
     </div>
   </div>
@@ -1124,7 +1141,8 @@
     <div class="section-head" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
       <div class="left" style="text-align:center;">
         <span class="kicker">Destinations</span>
-        <h2 class="display">Eight countries.<br /><em>One coherent plan.</em></h2>
+        <h2 class="display">Germany now.<br /><em>Europe next.</em></h2>
+        <p style="max-width:54ch; margin:14px auto 0; color:var(--muted); font-size:15px; line-height:1.6;">We specialise in Germany — it's where we are and where we've done it ourselves. These are the next destinations we're opening for Indian students, starting across Europe.</p>
       </div>
     </div>
 
@@ -1139,107 +1157,115 @@
     </div>
 
     <div class="destinations">
-      <a href="#consult" class="dest-card" data-region="english pr">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/london-bigben/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇬🇧</div>
-        <div class="meta">
-          <div>
-            <h3>United Kingdom</h3>
-            <div class="sub">160+ universities · Sept / Jan intakes</div>
-          </div>
-          <div class="glass-pill">From £14k/yr</div>
-        </div>
-      </a>
-
-      <a href="#consult" class="dest-card" data-region="english">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/newyork-skyline/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇺🇸</div>
-        <div class="meta">
-          <div>
-            <h3>United States</h3>
-            <div class="sub">800+ universities · Fall / Spring intakes</div>
-          </div>
-          <div class="glass-pill">F-1 visa</div>
-        </div>
-      </a>
-
-      <a href="#consult" class="dest-card" data-region="english pr">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/toronto-lake/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇨🇦</div>
-        <div class="meta">
-          <div>
-            <h3>Canada</h3>
-            <div class="sub">240+ designated institutions · 3 intakes</div>
-          </div>
-          <div class="glass-pill">PGWP pathway</div>
-        </div>
-      </a>
-
-      <a href="#consult" class="dest-card" data-region="english pr">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/sydney-opera/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇦🇺</div>
-        <div class="meta">
-          <div>
-            <h3>Australia</h3>
-            <div class="sub">43 universities · Feb / July intakes</div>
-          </div>
-          <div class="glass-pill">PR points</div>
-        </div>
-      </a>
-
-      <a href="#consult" class="dest-card" data-region="english europe pr">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/dublin-cliffs/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇮🇪</div>
-        <div class="meta">
-          <div>
-            <h3>Ireland</h3>
-            <div class="sub">34 institutions · Sept intake</div>
-          </div>
-          <div class="glass-pill">2-yr stay-back</div>
-        </div>
-      </a>
-
-      <a href="#consult" class="dest-card" data-region="english pr">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/auckland-bay/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇳🇿</div>
-        <div class="meta">
-          <div>
-            <h3>New Zealand</h3>
-            <div class="sub">8 universities · Feb / July intakes</div>
-          </div>
-          <div class="glass-pill">Work rights</div>
-        </div>
-      </a>
-
-      <a href="germany.html" class="dest-card" data-region="europe">
+      <a href="germany.html" class="dest-card live" data-region="europe">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/berlin-brandenburg/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇩🇪</div>
+        <div class="corner-badge">Open now</div>
         <div class="meta">
           <div>
             <h3>Germany</h3>
-            <div class="sub">400+ institutions · 2 intakes</div>
+            <div class="sub">400+ public universities · Oct &amp; April intakes</div>
           </div>
           <div class="glass-pill">Public, low fees</div>
         </div>
       </a>
 
-      <a href="#consult" class="dest-card" data-region="europe">
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Ireland.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english pr" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/dublin-cliffs/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇮🇪</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>Ireland</h3>
+            <div class="sub">Sept intake · English-taught</div>
+          </div>
+          <div class="glass-pill">2-yr stay-back</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Netherlands.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/amsterdam-canal/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇳🇱</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>Netherlands</h3>
+            <div class="sub">Sept / Feb · widely English-taught</div>
+          </div>
+          <div class="glass-pill">Orientation year</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20France.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/paris-louvre/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇫🇷</div>
+        <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
             <h3>France</h3>
-            <div class="sub">3,500+ programs · English-taught available</div>
+            <div class="sub">English-taught programmes available</div>
           </div>
           <div class="glass-pill">Schengen</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20Kingdom.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/london-bigben/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇬🇧</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>United Kingdom</h3>
+            <div class="sub">Sept / Jan intakes</div>
+          </div>
+          <div class="glass-pill">2-yr Graduate Route</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Canada.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/toronto-lake/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇨🇦</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>Canada</h3>
+            <div class="sub">3 intakes a year</div>
+          </div>
+          <div class="glass-pill">PGWP pathway</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20States.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/newyork-skyline/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇺🇸</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>United States</h3>
+            <div class="sub">Fall / Spring intakes</div>
+          </div>
+          <div class="glass-pill">F-1 visa · OPT</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Australia.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/sydney-opera/700/900')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇦🇺</div>
+        <div class="corner-badge">Coming soon</div>
+        <div class="meta">
+          <div>
+            <h3>Australia</h3>
+            <div class="sub">Feb / July intakes</div>
+          </div>
+          <div class="glass-pill">PR points</div>
         </div>
       </a>
     </div>
@@ -1369,10 +1395,10 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <span class="kicker">Student stories</span>
-        <h2 class="display">Real applications.<br /><em>Real offers.</em></h2>
+        <span class="kicker">What we promise</span>
+        <h2 class="display">No reviews yet.<br /><em>Just promises we'll keep.</em></h2>
       </div>
-      <div class="right">A small sample from the last cohort. Names are real, photos withheld for privacy.</div>
+      <div class="right">We're new, so we won't show you testimonials we don't have. Here's what we commit to instead — and you can hold us to every line of it.</div>
     </div>
 
     <div class="t-marquee">
@@ -1380,129 +1406,105 @@
         <!-- set 1 -->
         <div class="tcard feature">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"I came to Meridian with a 7.2 GPA and a panic. Eight months later I'm on the Tube heading to a UCL lecture. They didn't oversell — they overdelivered, quietly."</div>
+            <div class="quote">"We'll only take on your application if we genuinely believe in it. If your odds are long, you'll hear it on the first call — not after you've paid."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/aanya-portrait/120/120')"></div>
-            <div><div class="who-name">Aanya R.</div><div class="who-meta">UCL · MSc Data Science · London 🇬🇧</div></div>
+            <div><div class="who-name">On honesty</div><div class="who-meta">before you commit</div></div>
           </div>
         </div>
 
         <div class="tcard">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"The SOP draft they pushed back on was the one that got me into Toronto. Worth every minute."</div>
+            <div class="quote">"You work directly with the founder. The person who plans your shortlist is the person who replies when you message at 11pm."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/diego-portrait/120/120')"></div>
-            <div><div class="who-name">Diego M.</div><div class="who-meta">U of Toronto · Civil Eng · Canada 🇨🇦</div></div>
+            <div><div class="who-name">On who you get</div><div class="who-meta">no call-centre</div></div>
           </div>
         </div>
 
         <div class="tcard">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"They sat with my dad through the financial documents call. That meant more than any acceptance letter."</div>
+            <div class="quote">"Germany's public universities charge little to no tuition. For the right student, that quietly changes the entire maths of studying abroad."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/mei-portrait/120/120')"></div>
-            <div><div class="who-name">Mei L.</div><div class="who-meta">Monash · MBA · Melbourne 🇦🇺</div></div>
+            <div><div class="who-name">On Germany</div><div class="who-meta">why we start here</div></div>
           </div>
         </div>
 
         <div class="tcard feature">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"Three offers, one full ride. The scholarship application strategy was the difference between dreaming about NYU and actually going."</div>
+            <div class="quote">"We write your statement of purpose with you, not for you — pushing back and asking hard questions until it reads like you on your best day."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/tobi-portrait/120/120')"></div>
-            <div><div class="who-name">Tobi A.</div><div class="who-meta">NYU · MFA Film · New York 🇺🇸</div></div>
+            <div><div class="who-name">On your application</div><div class="who-meta">honest drafts</div></div>
           </div>
         </div>
 
         <div class="tcard">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"I'd been ghosted by two other consultancies. Meridian replied in 11 minutes and never stopped."</div>
+            <div class="quote">"One free 45-minute call, a reply within one working day, and no follow-up spam if it turns out we're not the right fit."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/rahul-portrait/120/120')"></div>
-            <div><div class="who-name">Rahul P.</div><div class="who-meta">TU Munich · MS CS · Germany 🇩🇪</div></div>
+            <div><div class="who-name">On your first call</div><div class="who-meta">no pressure</div></div>
           </div>
         </div>
 
         <div class="tcard">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"The visa interview prep felt like a real interview. The real one felt like a chat."</div>
+            <div class="quote">"We map every scholarship and grant you actually qualify for — and tell you straight which ones are worth the effort."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/sara-portrait/120/120')"></div>
-            <div><div class="who-name">Sara K.</div><div class="who-meta">Trinity College · MSc · Dublin 🇮🇪</div></div>
+            <div><div class="who-name">On funding</div><div class="who-meta">realistic, not wishful</div></div>
           </div>
         </div>
 
         <!-- set 2 (duplicate for seamless loop) -->
         <div class="tcard feature" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"I came to Meridian with a 7.2 GPA and a panic. Eight months later I'm on the Tube heading to a UCL lecture. They didn't oversell — they overdelivered, quietly."</div>
+            <div class="quote">"We'll only take on your application if we genuinely believe in it. If your odds are long, you'll hear it on the first call — not after you've paid."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/aanya-portrait/120/120')"></div>
-            <div><div class="who-name">Aanya R.</div><div class="who-meta">UCL · MSc Data Science · London 🇬🇧</div></div>
+            <div><div class="who-name">On honesty</div><div class="who-meta">before you commit</div></div>
           </div>
         </div>
         <div class="tcard" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"The SOP draft they pushed back on was the one that got me into Toronto. Worth every minute."</div>
+            <div class="quote">"You work directly with the founder. The person who plans your shortlist is the person who replies when you message at 11pm."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/diego-portrait/120/120')"></div>
-            <div><div class="who-name">Diego M.</div><div class="who-meta">U of Toronto · Civil Eng · Canada 🇨🇦</div></div>
+            <div><div class="who-name">On who you get</div><div class="who-meta">no call-centre</div></div>
           </div>
         </div>
         <div class="tcard" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"They sat with my dad through the financial documents call. That meant more than any acceptance letter."</div>
+            <div class="quote">"Germany's public universities charge little to no tuition. For the right student, that quietly changes the entire maths of studying abroad."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/mei-portrait/120/120')"></div>
-            <div><div class="who-name">Mei L.</div><div class="who-meta">Monash · MBA · Melbourne 🇦🇺</div></div>
+            <div><div class="who-name">On Germany</div><div class="who-meta">why we start here</div></div>
           </div>
         </div>
         <div class="tcard feature" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"Three offers, one full ride. The scholarship application strategy was the difference between dreaming about NYU and actually going."</div>
+            <div class="quote">"We write your statement of purpose with you, not for you — pushing back and asking hard questions until it reads like you on your best day."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/tobi-portrait/120/120')"></div>
-            <div><div class="who-name">Tobi A.</div><div class="who-meta">NYU · MFA Film · New York 🇺🇸</div></div>
+            <div><div class="who-name">On your application</div><div class="who-meta">honest drafts</div></div>
           </div>
         </div>
         <div class="tcard" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"I'd been ghosted by two other consultancies. Meridian replied in 11 minutes and never stopped."</div>
+            <div class="quote">"One free 45-minute call, a reply within one working day, and no follow-up spam if it turns out we're not the right fit."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/rahul-portrait/120/120')"></div>
-            <div><div class="who-name">Rahul P.</div><div class="who-meta">TU Munich · MS CS · Germany 🇩🇪</div></div>
+            <div><div class="who-name">On your first call</div><div class="who-meta">no pressure</div></div>
           </div>
         </div>
         <div class="tcard" aria-hidden="true">
           <div>
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <div class="quote">"The visa interview prep felt like a real interview. The real one felt like a chat."</div>
+            <div class="quote">"We map every scholarship and grant you actually qualify for — and tell you straight which ones are worth the effort."</div>
           </div>
           <div class="who">
-            <div class="av" style="background-image:url('https://picsum.photos/seed/sara-portrait/120/120')"></div>
-            <div><div class="who-name">Sara K.</div><div class="who-meta">Trinity College · MSc · Dublin 🇮🇪</div></div>
+            <div><div class="who-name">On funding</div><div class="who-meta">realistic, not wishful</div></div>
           </div>
         </div>
 
@@ -1629,21 +1631,21 @@
             <span>What grades do I need?</span>
             <span class="q-icon"><i class="ti ti-plus"></i></span>
           </button>
-          <div class="q-body"><div class="q-body-inner"><div class="ans">Less than you think. We've placed students with 6.0 GPAs into top-100 universities by leaning hard on portfolio, work experience, and the right country. Meet us where you are.</div></div></div>
+          <div class="q-body"><div class="q-body-inner"><div class="ans">Often less than you fear. A lot rides on portfolio, work experience, and choosing the right country — Germany and others weigh more than a single GPA number. Tell us where you are on the call and we'll be straight about your options.</div></div></div>
         </div>
         <div class="q" data-open="false">
           <button type="button" class="q-head">
             <span>What happens if my visa is refused?</span>
             <span class="q-icon"><i class="ti ti-plus"></i></span>
           </button>
-          <div class="q-body"><div class="q-body-inner"><div class="ans">We rebuild and refile, or shift you to a country where you'd succeed. The 98% number isn't an accident — it's because we don't file applications we're not confident about.</div></div></div>
+          <div class="q-body"><div class="q-body-inner"><div class="ans">We rebuild and refile, or shift you to a country where you'd succeed. Our approach is to only file applications we're genuinely confident about — so a refusal is something we plan against from the first call, not something we hope to avoid.</div></div></div>
         </div>
         <div class="q" data-open="false">
           <button type="button" class="q-head">
             <span>Do you help with funding?</span>
             <span class="q-icon"><i class="ti ti-plus"></i></span>
           </button>
-          <div class="q-body"><div class="q-body-inner"><div class="ans">Scholarships, education loans, and country-specific grants — yes, all of it. We mapped $48M in funding for students last year and it's a core part of every application.</div></div></div>
+          <div class="q-body"><div class="q-body-inner"><div class="ans">Scholarships, education loans, and country-specific grants — yes, all of it. Mapping the funding you actually qualify for is a core part of every application we take on, and we'll tell you honestly which ones are worth the effort.</div></div></div>
         </div>
         <div class="q" data-open="false">
           <button type="button" class="q-head">
@@ -1666,7 +1668,7 @@
           <span class="brand-mark" aria-hidden="true"></span>
           Meridian
         </div>
-        <p class="foot-brand">A small, full-service consultancy helping students apply to universities abroad. Offices in Mumbai, Singapore, Lagos and Toronto. Operating since 2014.</p>
+        <p class="foot-brand">A small, founder-led consultancy helping students apply to universities abroad — starting with Germany. New, independent, and honest about it.</p>
       </div>
       <div>
         <h5>Destinations</h5>
