@@ -8,6 +8,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css" />
+<!-- Auth: protects this console once Supabase is configured in auth.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+  (async () => {
+    if (window.Auth && Auth.configured) {
+      document.documentElement.style.visibility = 'hidden';
+      const user = await Auth.requireAdmin('Login.html');
+      if (user) document.documentElement.style.visibility = '';
+    }
+  })();
+</script>
 <style>
   :root{
     --ink:#0a0a0c; --ink-2:#1a1a1f; --ink-3:#3a3a44;
@@ -359,6 +371,7 @@
       <div class="search"><i class="ti ti-search"></i><input type="text" id="globalSearch" placeholder="Search clients, applications, universities…" /></div>
       <button class="icon-btn" aria-label="Notifications"><i class="ti ti-bell"></i><span class="dot"></span></button>
       <a class="icon-btn" href="Dashboard.html" title="Open student view"><i class="ti ti-external-link"></i></a>
+      <button class="icon-btn" id="logoutBtn" title="Sign out" aria-label="Sign out"><i class="ti ti-logout"></i></button>
     </header>
 
     <div class="content" id="content">
@@ -551,5 +564,12 @@
 <script src="livechat.js"></script>
 <script src="admin-data.js"></script>
 <script src="admin-app.js"></script>
+<script>
+  // Sign out (works once Supabase is configured; otherwise just returns to login)
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    if (window.Auth) Auth.signOut('Login.html');
+    else window.location.href = 'Login.html';
+  });
+</script>
 </body>
 </html>
