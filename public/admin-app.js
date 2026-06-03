@@ -6,7 +6,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  const ME = { role: 'admin', userId: 'riya', name: 'Riya Sharma', avatar: 'assets/avatar.svg' };
+  const ME = { role: 'admin', userId: 'riya', name: 'Riya Sharma', avatar: 'https://i.pravatar.cc/120?img=45' };
 
   // ── Toast ─────────────────────────────────────────────────────
   let toastTimer;
@@ -180,7 +180,7 @@
       ranking: Number($('#u_ranking').value) || 999,
       acceptance: Number($('#u_acceptance').value) || 0,
       tuition: $('#u_tuition').value.trim() || '—',
-      photo: $('#u_photo').value.trim() || `assets/img-1.svg`,
+      photo: $('#u_photo').value.trim() || `https://picsum.photos/seed/uni${Date.now(`,
     };
   }
 
