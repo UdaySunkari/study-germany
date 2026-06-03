@@ -3,7 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Meridian — Study Abroad Consulting</title>
+<title>Meridian — Study in Germany, guided by students who did it</title>
+<meta name="description" content="A founder-led consultancy helping Indian students study in Germany — university shortlisting, applications, APS, blocked account and visa guidance. Free first consultation." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://study-germany.netlify.app/" />
+<!-- Social share preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Meridian — Study in Germany, guided by students who did it" />
+<meta property="og:description" content="Founder-led help for Indian students applying to German universities. Free first consultation, honest advice." />
+<meta property="og:url" content="https://study-germany.netlify.app/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Meridian — Study in Germany" />
+<meta name="twitter:description" content="Founder-led help for Indian students applying to German universities." />
+<!-- Favicon (inline SVG, no extra file needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0a0c'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23f4efe3' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -1528,7 +1541,7 @@
         </div>
       </div>
 
-      <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent — we\\'ll be in touch ✓'; this.querySelector('button').disabled=true;">
+      <form class="form-card" onsubmit="return submitLead(event)">
         <div class="form-grid">
           <div class="form-row">
             <label for="fn">First name</label>
@@ -2015,5 +2028,36 @@
   });
 </script>
 
+<script>
+  // Homepage consultation form → opens WhatsApp to your number with the details prefilled.
+  function submitLead(e){
+    e.preventDefault();
+    const NUMBER = '4915226389297';
+    const val = id => ((document.getElementById(id) || {}).value || '').trim();
+    const sel = id => {
+      const el = document.querySelector('#' + id + ' .label-text');
+      if (!el || el.querySelector('.placeholder')) return '';
+      return el.textContent.trim();
+    };
+    const name = [val('fn'), val('ln')].filter(Boolean).join(' ');
+    let msg = "Hi Meridian! I'd like to book a free consultation.";
+    if (name)        msg += '\nName: ' + name;
+    if (val('em'))   msg += '\nEmail: ' + val('em');
+    if (sel('csDest')) msg += '\nDestination: ' + sel('csDest');
+    if (sel('csLevel')) msg += '\nLevel: ' + sel('csLevel');
+
+    window.open('https://wa.me/' + NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) { btn.innerHTML = 'Opening WhatsApp\u2026'; btn.disabled = true;
+      setTimeout(() => { btn.innerHTML = 'Sent \u2014 check WhatsApp \u2713'; }, 1200); }
+    return false;
+  }
+</script>
+<!-- Cloudflare Web Analytics — free, cookieless, privacy-friendly traffic stats.
+     SETUP (~5 min): 1) Sign in at https://dash.cloudflare.com  2) Analytics & Logs → Web Analytics → "Add a site"
+     3) Enter your domain, copy the token it shows  4) Replace YOUR_CLOUDFLARE_TOKEN below on every page.
+     Until you do, this line is harmless and changes nothing on the site. -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
 </body>
 </html>
