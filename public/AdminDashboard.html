@@ -328,6 +328,7 @@
     .chat-shell{ grid-template-columns:1fr; } .chat-list{ display:none; }
     .topbar .search{ display:none; } .uni-admin-grid{ grid-template-columns:1fr; }
   }
+  .flag-img{ width:18px; height:13.5px; border-radius:2.5px; object-fit:cover; display:inline-block; vertical-align:-2px; box-shadow:0 0 0 1px rgba(10,10,12,0.10); }
 </style>
 </head>
 <body>
@@ -503,12 +504,12 @@
         <div class="filter-bar" id="uniFilter">
           <div class="filter-search"><i class="ti ti-search"></i><input type="text" id="uniSearch" placeholder="Search universities…" /></div>
           <button class="filter-chip active" data-country="all">All</button>
-          <button class="filter-chip" data-country="uk">🇬🇧 UK</button>
-          <button class="filter-chip" data-country="us">🇺🇸 US</button>
-          <button class="filter-chip" data-country="ca">🇨🇦 Canada</button>
-          <button class="filter-chip" data-country="au">🇦🇺 Australia</button>
-          <button class="filter-chip" data-country="de">🇩🇪 Germany</button>
-          <button class="filter-chip" data-country="ch">🇨🇭 Switzerland</button>
+          <button class="filter-chip" data-country="uk"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> UK</button>
+          <button class="filter-chip" data-country="us"><img class="flag-img" src="assets/flags/us.svg" alt="" /> US</button>
+          <button class="filter-chip" data-country="ca"><img class="flag-img" src="assets/flags/ca.svg" alt="" /> Canada</button>
+          <button class="filter-chip" data-country="au"><img class="flag-img" src="assets/flags/au.svg" alt="" /> Australia</button>
+          <button class="filter-chip" data-country="de"><img class="flag-img" src="assets/flags/de.svg" alt="" /> Germany</button>
+          <button class="filter-chip" data-country="ch"><img class="flag-img" src="assets/flags/ch.svg" alt="" /> Switzerland</button>
         </div>
         <div class="uni-admin-grid" id="uniGrid"></div>
       </section>

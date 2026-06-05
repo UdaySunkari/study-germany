@@ -1386,6 +1386,7 @@
     .uni-grid{ grid-template-columns: 1fr; }
     .help-topics{ grid-template-columns: 1fr; }
   }
+  .flag-img{ width:18px; height:13.5px; border-radius:2.5px; object-fit:cover; display:inline-block; vertical-align:-2px; box-shadow:0 0 0 1px rgba(10,10,12,0.10); }
 </style>
 </head>
 <body>
@@ -1676,7 +1677,7 @@
             <div class="uni-logo">UCL</div>
             <div class="info">
               <div class="top"><div class="uni">University College London</div><span class="status in-review"><span class="dot"></span> In review</span></div>
-              <div class="course">MSc Data Science · Sept 2026 intake · London 🇬🇧</div>
+              <div class="course">MSc Data Science · Sept 2026 intake · London <img class="flag-img" src="assets/flags/gb.svg" alt="" /></div>
               <div class="progress"><span style="width: 85%;"></span></div>
               <div class="progress-label">85% complete · Interview scheduled Apr 14</div>
             </div>
@@ -1690,7 +1691,7 @@
             <div class="uni-logo">UofT</div>
             <div class="info">
               <div class="top"><div class="uni">University of Toronto</div><span class="status offer"><span class="dot"></span> Offer received</span></div>
-              <div class="course">MSc Applied Computing · Sept 2026 · Toronto 🇨🇦</div>
+              <div class="course">MSc Applied Computing · Sept 2026 · Toronto <img class="flag-img" src="assets/flags/ca.svg" alt="" /></div>
               <div class="progress"><span style="width: 100%;"></span></div>
               <div class="progress-label">Accept by April 11 · Scholarship: CAD $12,000</div>
             </div>
@@ -1704,7 +1705,7 @@
             <div class="uni-logo">IC</div>
             <div class="info">
               <div class="top"><div class="uni">Imperial College London</div><span class="status offer"><span class="dot"></span> Offer received</span></div>
-              <div class="course">MSc Computing Science · Sept 2026 · London 🇬🇧</div>
+              <div class="course">MSc Computing Science · Sept 2026 · London <img class="flag-img" src="assets/flags/gb.svg" alt="" /></div>
               <div class="progress"><span style="width: 100%;"></span></div>
               <div class="progress-label">Visa interview April 22 · Unconditional</div>
             </div>
@@ -1718,7 +1719,7 @@
             <div class="uni-logo">NYU</div>
             <div class="info">
               <div class="top"><div class="uni">New York University</div><span class="status submitted"><span class="dot"></span> Submitted</span></div>
-              <div class="course">MS Data Science · Fall 2026 · New York 🇺🇸</div>
+              <div class="course">MS Data Science · Fall 2026 · New York <img class="flag-img" src="assets/flags/us.svg" alt="" /></div>
               <div class="progress"><span style="width: 100%;"></span></div>
               <div class="progress-label">Decision expected mid-May</div>
             </div>
@@ -1732,7 +1733,7 @@
             <div class="uni-logo">ETH</div>
             <div class="info">
               <div class="top"><div class="uni">ETH Zürich</div><span class="status draft"><span class="dot"></span> Draft</span></div>
-              <div class="course">MSc Data Science · Sept 2026 · Zürich 🇨🇭</div>
+              <div class="course">MSc Data Science · Sept 2026 · Zürich <img class="flag-img" src="assets/flags/ch.svg" alt="" /></div>
               <div class="progress"><span style="width: 42%;"></span></div>
               <div class="progress-label">SOP draft pending · Deadline April 30</div>
             </div>
@@ -2064,13 +2065,13 @@
         <div class="filter-bar" id="uniFilter">
           <div class="filter-search"><i class="ti ti-search"></i><input type="text" id="uniSearch" placeholder="Search name or city…" /></div>
           <button class="filter-chip active" data-country="all">All</button>
-          <button class="filter-chip" data-country="uk">🇦🇬 UK</button>
-          <button class="filter-chip" data-country="us">🇺🇸 US</button>
-          <button class="filter-chip" data-country="ca">🇨🇦 Canada</button>
-          <button class="filter-chip" data-country="au">🇦🇺 Australia</button>
-          <button class="filter-chip" data-country="ie">🇮🇪 Ireland</button>
-          <button class="filter-chip" data-country="de">🇩🇪 Germany</button>
-          <button class="filter-chip" data-country="ch">🇨🇭 Switzerland</button>
+          <button class="filter-chip" data-country="uk"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> UK</button>
+          <button class="filter-chip" data-country="us"><img class="flag-img" src="assets/flags/us.svg" alt="" /> US</button>
+          <button class="filter-chip" data-country="ca"><img class="flag-img" src="assets/flags/ca.svg" alt="" /> Canada</button>
+          <button class="filter-chip" data-country="au"><img class="flag-img" src="assets/flags/au.svg" alt="" /> Australia</button>
+          <button class="filter-chip" data-country="ie"><img class="flag-img" src="assets/flags/ie.svg" alt="" /> Ireland</button>
+          <button class="filter-chip" data-country="de"><img class="flag-img" src="assets/flags/de.svg" alt="" /> Germany</button>
+          <button class="filter-chip" data-country="ch"><img class="flag-img" src="assets/flags/ch.svg" alt="" /> Switzerland</button>
           <div class="spacer"></div>
           <div class="filter-sort"><i class="ti ti-arrows-sort"></i><select id="uniSort"><option value="ranking">Ranking</option><option value="name">Name</option><option value="tuition">Tuition (low→high)</option></select></div>
         </div>
@@ -2079,7 +2080,7 @@
         <div class="uni-grid">
           <div class="uni-card" data-modal="uniDetail" data-uni="UCL" data-country="uk" data-ranking="9" data-tuition="46000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/ucl/600/400')">
-              <span class="flag-pill">🇬🇧 London</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> London</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2091,7 +2092,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Imperial" data-country="uk" data-ranking="8" data-tuition="46000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/imperial-uni/600/400')">
-              <span class="flag-pill">🇬🇧 London</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> London</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2103,7 +2104,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Toronto" data-country="ca" data-ranking="21" data-tuition="43000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/toronto-uni/600/400')">
-              <span class="flag-pill">🇨🇦 Toronto</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/ca.svg" alt="" /> Toronto</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2115,7 +2116,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="NYU" data-country="us" data-ranking="38" data-tuition="60000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/nyu-campus/600/400')">
-              <span class="flag-pill">🇺🇸 New York</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/us.svg" alt="" /> New York</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2127,7 +2128,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Monash" data-country="au" data-ranking="49" data-tuition="28000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/monash-uni/600/400')">
-              <span class="flag-pill">🇦🇺 Melbourne</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/au.svg" alt="" /> Melbourne</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2139,7 +2140,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="ETH" data-country="ch" data-ranking="7" data-tuition="1600">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/eth-zurich/600/400')">
-              <span class="flag-pill">🇨🇭 Zürich</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/ch.svg" alt="" /> Zürich</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2151,7 +2152,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Trinity" data-country="ie" data-ranking="87" data-tuition="23000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/trinity-college/600/400')">
-              <span class="flag-pill">🇮🇪 Dublin</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/ie.svg" alt="" /> Dublin</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2163,7 +2164,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="TUM" data-country="de" data-ranking="30" data-tuition="0">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/tum-munich/600/400')">
-              <span class="flag-pill">🇩🇪 Munich</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/de.svg" alt="" /> Munich</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2175,7 +2176,7 @@
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Edinburgh" data-country="uk" data-ranking="22" data-tuition="38000">
             <div class="photo" style="background-image:url('https://picsum.photos/seed/edinburgh-uni/600/400')">
-              <span class="flag-pill">🇬🇧 Edinburgh</span>
+              <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> Edinburgh</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
             <div class="body">
@@ -2840,14 +2841,14 @@
     <div class="ff"><label>Search</label><input placeholder="Name, city, course…" /></div>
     <div class="ff"><label>Country</label>
       <div class="chips">
-        <span class="chip-opt selected">🇬🇧 UK</span>
-        <span class="chip-opt selected">🇺🇸 US</span>
-        <span class="chip-opt selected">🇨🇦 Canada</span>
-        <span class="chip-opt">🇦🇺 Australia</span>
-        <span class="chip-opt">🇮🇪 Ireland</span>
-        <span class="chip-opt">🇩🇪 Germany</span>
-        <span class="chip-opt">🇨🇭 Switzerland</span>
-        <span class="chip-opt">🇳🇿 New Zealand</span>
+        <span class="chip-opt selected"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> UK</span>
+        <span class="chip-opt selected"><img class="flag-img" src="assets/flags/us.svg" alt="" /> US</span>
+        <span class="chip-opt selected"><img class="flag-img" src="assets/flags/ca.svg" alt="" /> Canada</span>
+        <span class="chip-opt"><img class="flag-img" src="assets/flags/au.svg" alt="" /> Australia</span>
+        <span class="chip-opt"><img class="flag-img" src="assets/flags/ie.svg" alt="" /> Ireland</span>
+        <span class="chip-opt"><img class="flag-img" src="assets/flags/de.svg" alt="" /> Germany</span>
+        <span class="chip-opt"><img class="flag-img" src="assets/flags/ch.svg" alt="" /> Switzerland</span>
+        <span class="chip-opt"><img class="flag-img" src="assets/flags/nz.svg" alt="" /> New Zealand</span>
       </div>
     </div>
     <div class="ff"><label>Level</label>

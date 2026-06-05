@@ -128,7 +128,7 @@
 
   // University add/edit form
   function uniForm(u) {
-    const v = u || { name: '', logo: '', country: '', cc: 'uk', flag: '🇬🇧', city: '', founded: 2000, ranking: 50, acceptance: 30, tuition: '', photo: '' };
+    const v = u || { name: '', logo: '', country: '', cc: 'uk', flag: '<img class="flag-img" src="assets/flags/gb.svg" alt="" />', city: '', founded: 2000, ranking: 50, acceptance: 30, tuition: '', photo: '' };
     const isEdit = !!u;
     return `
       <div class="modal-head">
@@ -145,7 +145,7 @@
           <div class="ff"><label>Country</label><input id="u_country" value="${esc(v.country)}" placeholder="United Kingdom" /></div>
           <div class="ff"><label>Country code</label>
             <select id="u_cc">
-              ${[['uk', '🇬🇧 UK'], ['us', '🇺🇸 US'], ['ca', '🇨🇦 Canada'], ['au', '🇦🇺 Australia'], ['ie', '🇮🇪 Ireland'], ['de', '🇩🇪 Germany'], ['ch', '🇨🇭 Switzerland'], ['nz', '🇳🇿 New Zealand'], ['fr', '🇫🇷 France'], ['nl', '🇳🇱 Netherlands']]
+              ${[['uk', 'UK'], ['us', 'US'], ['ca', 'Canada'], ['au', 'Australia'], ['ie', 'Ireland'], ['de', 'Germany'], ['cz', 'Czech Republic'], ['ch', 'Switzerland'], ['nz', 'New Zealand'], ['fr', 'France'], ['nl', 'Netherlands']]
                 .map(([code, lbl]) => `<option value="${code}" ${v.cc === code ? 'selected' : ''}>${lbl}</option>`).join('')}
             </select>
           </div>
@@ -166,7 +166,8 @@
         <button class="btn btn-dark" id="u_save"><i class="ti ti-check"></i> ${isEdit ? 'Save changes' : 'Add university'}</button>
       </div>`;
   }
-  const flagFor = (cc) => ({ uk: '🇬🇧', us: '🇺🇸', ca: '🇨🇦', au: '🇦🇺', ie: '🇮🇪', de: '🇩🇪', ch: '🇨🇭', nz: '🇳🇿', fr: '🇫🇷', nl: '🇳🇱' }[cc] || '🏳️');
+  const FLAG_CODES = { uk: 'gb', us: 'us', ca: 'ca', au: 'au', ie: 'ie', de: 'de', ch: 'ch', nz: 'nz', fr: 'fr', nl: 'nl', cz: 'cz' };
+  const flagFor = (cc) => FLAG_CODES[cc] ? `<img class="flag-img" src="assets/flags/${FLAG_CODES[cc]}.svg" alt="" />` : '';
 
   function readUniForm() {
     const cc = $('#u_cc').value;
@@ -180,7 +181,7 @@
       ranking: Number($('#u_ranking').value) || 999,
       acceptance: Number($('#u_acceptance').value) || 0,
       tuition: $('#u_tuition').value.trim() || '—',
-      photo: $('#u_photo').value.trim() || `https://picsum.photos/seed/uni${Date.now(`,
+      photo: $('#u_photo').value.trim() || '',
     };
   }
 
