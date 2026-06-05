@@ -1007,6 +1007,18 @@
   .q[data-open="true"] .ans{ opacity:1; transform:translateY(0); transition-delay:.05s; }
 
 
+
+  /* ============ UNIFIED HOVER FEEL ============
+     Same soft curve as the destination cards, everywhere. */
+  .dest-card, .stat, .step, .svc, .tcard{
+    transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s cubic-bezier(.2,.7,.2,1);
+    will-change: transform;
+  }
+  .stat:hover, .step:hover, .svc:hover, .tcard:hover, .dest-card:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
   /* ============ MOBILE FIXES (phones) ============ */
   @media (max-width: 640px){
     img, svg, video{ max-width: 100%; height: auto; }
