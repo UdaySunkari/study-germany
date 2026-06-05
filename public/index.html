@@ -521,6 +521,10 @@
     font-size: 12px; white-space: nowrap;
   }
   .flag-img{ width: 21px; height: 16px; border-radius: 3px; object-fit: cover; display: block; box-shadow: 0 0 0 1px rgba(10,10,12,0.08); }
+  .dest-card .flag .flag-fill{
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+  }
   .dest-card .flag{
     position:absolute; top: 12px; left: 12px;
     width: 36px; height: 36px; border-radius: 50%;
@@ -528,6 +532,8 @@
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255,255,255,0.3);
     display:grid; place-items:center;
+    overflow: hidden;
+    padding: 2px;
     font-size: 18px;
   }
   /* live vs coming-soon treatment */
@@ -1239,7 +1245,7 @@
       <a href="germany.html" class="dest-card live" data-region="europe">
         <div class="dest-bg" style="background-image:url('assets/berlin-aerial.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/de.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/de.svg" alt="" /></div>
         <div class="corner-badge">Open now</div>
         <div class="meta">
           <div>
@@ -1253,7 +1259,7 @@
       <a href="czech.html" class="dest-card live" data-region="europe">
         <div class="dest-bg" style="background-image:url('assets/prague-aerial.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/cz.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/cz.svg" alt="" /></div>
         <div class="corner-badge">Open now</div>
         <div class="meta">
           <div>
@@ -1267,7 +1273,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Ireland.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/dublin-trinity.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/ie.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/ie.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
@@ -1281,7 +1287,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Netherlands.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/amsterdam-canal.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/nl.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/nl.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
@@ -1295,7 +1301,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20France.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/paris-street.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/fr.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/fr.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
@@ -1309,7 +1315,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20Kingdom.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/london-park.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/gb.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/gb.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
@@ -1323,7 +1329,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Canada.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/banff-canada.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/ca.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/ca.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
@@ -1337,7 +1343,7 @@
       <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Australia.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('assets/australia-coast.webp')"></div>
         <div class="scrim"></div>
-        <div class="flag" aria-hidden="true"><img class="flag-img" src="assets/flags/au.svg" alt="" /></div>
+        <div class="flag" aria-hidden="true"><img class="flag-fill" src="assets/flags/1x1/au.svg" alt="" /></div>
         <div class="corner-badge">Coming soon</div>
         <div class="meta">
           <div>
