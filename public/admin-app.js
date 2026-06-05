@@ -44,7 +44,9 @@
     </div>`;
   }
   function renderClients() {
-    $('#clientRows').innerHTML = AdminData.clients.map(clientRow).join('');
+    $('#clientRows').innerHTML = AdminData.clients.length
+      ? AdminData.clients.map(clientRow).join('')
+      : `<div class="t-row body" style="grid-template-columns:1fr;justify-items:center;padding:42px 20px;color:var(--muted)"><div style="text-align:center"><i class="ti ti-users" style="font-size:30px;display:block;margin-bottom:8px;color:var(--muted-2)"></i>No clients yet. When a student signs up or you add one, they appear here.</div></div>`;
   }
 
   // ── Render: Applications ──────────────────────────────────────
@@ -58,7 +60,11 @@
       <div class="row-actions"><button class="mini-btn" title="Open"><i class="ti ti-arrow-right"></i></button></div>
     </div>`;
   }
-  function renderApps() { $('#appRows').innerHTML = AdminData.applications.map(appRow).join(''); }
+  function renderApps() {
+    $('#appRows').innerHTML = AdminData.applications.length
+      ? AdminData.applications.map(appRow).join('')
+      : `<div class="t-row body" style="grid-template-columns:1fr;justify-items:center;padding:42px 20px;color:var(--muted)"><div style="text-align:center"><i class="ti ti-files" style="font-size:30px;display:block;margin-bottom:8px;color:var(--muted-2)"></i>No applications yet — they appear here once you start filing for clients.</div></div>`;
+  }
 
   // ── Render: Invoices ──────────────────────────────────────────
   function invRow(i) {
@@ -71,10 +77,18 @@
       <div class="row-actions"><button class="mini-btn" title="Download"><i class="ti ti-download"></i></button></div>
     </div>`;
   }
-  function renderInvoices() { $('#invRows').innerHTML = AdminData.invoices.map(invRow).join(''); }
+  function renderInvoices() {
+    $('#invRows').innerHTML = AdminData.invoices.length
+      ? AdminData.invoices.map(invRow).join('')
+      : `<div class="t-row body" style="grid-template-columns:1fr;justify-items:center;padding:42px 20px;color:var(--muted)"><div style="text-align:center"><i class="ti ti-receipt" style="font-size:30px;display:block;margin-bottom:8px;color:var(--muted-2)"></i>No invoices yet.</div></div>`;
+  }
 
   // ── Render: Counsellors ───────────────────────────────────────
   function renderCounsellors() {
+    if (!AdminData.counsellors.length) {
+      $('#counsRows').innerHTML = `<div class="t-row body" style="grid-template-columns:1fr;justify-items:center;padding:42px 20px;color:var(--muted)"><div style="text-align:center"><i class="ti ti-user-star" style="font-size:30px;display:block;margin-bottom:8px;color:var(--muted-2)"></i>Just you for now — founder-led, as the website says.</div></div>`;
+      return;
+    }
     $('#counsRows').innerHTML = AdminData.counsellors.map((c) => `
       <div class="t-row body" style="grid-template-columns: 2fr 1.6fr 1fr 1fr 90px;">
         <div class="cli-cell"><div class="av" style="background-image:url('${c.avatar}')"></div><div class="nm">${esc(c.name)}</div></div>
@@ -88,11 +102,11 @@
   // ── Render: Universities (CRUD) ───────────────────────────────
   function uniCard(u) {
     return `<div class="uni-admin" data-id="${u.id}" data-country="${u.cc}" data-name="${esc(u.name)} ${esc(u.city)}">
-      <div class="ph" style="background-image:url('${u.photo}')"><span class="flag">${u.flag} ${esc(u.city)}</span></div>
+      <div class="ph" style="background:${u.photo ? `url('${u.photo}') center/cover` : (u.cc === 'cz' ? 'linear-gradient(150deg,#8e3434,#2c1212)' : 'linear-gradient(150deg,#44506e,#181d2c)')}"><span class="flag">${u.flag} ${esc(u.city)}</span></div>
       <div class="body">
         <div class="nm">${esc(u.name)}</div>
         <div class="lo">Founded ${u.founded} · ${esc(u.country)}</div>
-        <div class="meta-row"><span class="chip">Rank #${u.ranking}</span><span class="chip">${u.acceptance}% accept</span><span class="chip">${esc(u.tuition)}</span></div>
+        <div class="meta-row"><span class="chip">Rank #${u.ranking}</span>${u.acceptance ? `<span class="chip">${u.acceptance}% accept</span>` : ''}<span class="chip">${esc(u.tuition)}</span></div>
         <div class="acts">
           <button class="btn btn-ghost btn-sm act-edit" data-id="${u.id}"><i class="ti ti-pencil"></i> Edit</button>
           <button class="btn btn-ghost btn-sm act-del" data-id="${u.id}"><i class="ti ti-trash"></i></button>
