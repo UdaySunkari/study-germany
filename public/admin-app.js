@@ -6,7 +6,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  const ME = { role: 'admin', userId: 'riya', name: 'Riya Sharma', avatar: 'https://i.pravatar.cc/120?img=45' };
+  const ME = { role: 'admin', userId: 'admin', name: 'Vayas team', avatar: '' };
 
   // ── Toast ─────────────────────────────────────────────────────
   let toastTimer;

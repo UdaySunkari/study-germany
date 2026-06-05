@@ -360,10 +360,10 @@
 
     <div class="side-foot">
       <div class="user-pill">
-        <div class="av" style="background-image:url('https://i.pravatar.cc/120?img=45')"></div>
+        <div class="av" id="adminAv" style="background:linear-gradient(135deg,#2a2a35,#5b5b66);display:grid;place-items:center;color:#fff;font-weight:600;font-size:13px;"></div>
         <div class="who">
-          <div class="name">Riya Sharma</div>
-          <div class="role">Lead counsellor · Admin</div>
+          <div class="name" id="adminName">Admin</div>
+          <div class="role" id="adminRole">Vayas console</div>
         </div>
         <i class="ti ti-dots-vertical"></i>
       </div>
@@ -385,7 +385,7 @@
       <!-- ===== OVERVIEW ===== -->
       <section class="view active" data-view="overview">
         <div class="view-head">
-          <div class="left"><h2>Good morning, Riya</h2><p>Here's what's happening across your client portfolio today.</p></div>
+          <div class="left"><h2 id="adminGreeting">Good morning</h2><p>Here's what's happening across your client portfolio today.</p></div>
           <div class="right"><button class="btn btn-ghost" data-modal="broadcast"><i class="ti ti-speakerphone"></i> Broadcast</button><button class="btn btn-dark" data-modal="addClient"><i class="ti ti-user-plus"></i> Add client</button></div>
         </div>
 
@@ -475,7 +475,7 @@
           </div>
           <div class="chat-main">
             <div class="chat-head">
-              <div class="av online" id="chatHeadAv" style="background-image:url('https://i.pravatar.cc/120?img=47')"></div>
+              <div class="av online" id="chatHeadAv" style="background:linear-gradient(135deg,#2a2a35,#5b5b66);"></div>
               <div class="info"><div class="name" id="chatHeadName">Aanya Raj</div><div class="sub online" id="chatHeadSub">Online · UCL · MSc Data Science</div></div>
               <div class="actions">
                 <button class="icon-btn" data-modal="clientDetail" id="chatViewClient" aria-label="View client"><i class="ti ti-user"></i></button>
@@ -576,6 +576,27 @@
     if (window.Auth) Auth.signOut('Login.html');
     else window.location.href = 'Login.html';
   });
+</script>
+<script>
+  /* Real admin identity from the signed-in account */
+  (async () => {
+    if (!(window.Auth && Auth.configured)) return;
+    let user = null; try { user = await Auth.getUser(); } catch(e){}
+    if (!user) return;
+    const meta = user.user_metadata || {};
+    const name = (meta.full_name || meta.name || (user.email||'').split('@')[0] || 'Admin').trim();
+    const first = name.split(/\s+/)[0];
+    const initials = name.split(/\s+/).slice(0,2).map(w => (w[0]||'').toUpperCase()).join('') || 'A';
+    const g = document.getElementById('adminGreeting');
+    if (g){
+      const h = new Date().getHours();
+      const part = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+      g.textContent = part + ', ' + first;
+    }
+    const n = document.getElementById('adminName'); if (n) n.textContent = name;
+    const r = document.getElementById('adminRole'); if (r) r.textContent = user.email || 'Admin';
+    const a = document.getElementById('adminAv'); if (a) a.textContent = initials;
+  })();
 </script>
 </body>
 </html>
