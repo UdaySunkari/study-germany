@@ -151,7 +151,7 @@
   .user-pill:hover{ background: rgba(10,10,12,0.04); }
   .user-pill .av{
     width: 36px; height: 36px; border-radius: 50%;
-    background-image: url('https://picsum.photos/seed/me-portrait/120/120');
+    background: linear-gradient(135deg, #2a2a35, #5b5b66);
     background-size: cover; background-position: center;
     border: 2px solid #fff;
     box-shadow: 0 2px 6px rgba(10,10,12,0.12);
@@ -1081,7 +1081,7 @@
   }
   .avatar-edit .av-big{
     width: 76px; height: 76px; border-radius: 50%;
-    background-image: url('https://picsum.photos/seed/me-portrait/200/200');
+    background: linear-gradient(135deg, #2a2a35, #5b5b66);
     background-size: cover; background-position: center;
     border: 3px solid #fff;
     box-shadow: 0 4px 14px rgba(10,10,12,0.16);
@@ -1387,6 +1387,25 @@
     .help-topics{ grid-template-columns: 1fr; }
   }
   .flag-img{ width:18px; height:13.5px; border-radius:2.5px; object-fit:cover; display:inline-block; vertical-align:-2px; box-shadow:0 0 0 1px rgba(10,10,12,0.10); }
+  /* ============ INTERACTION POLISH (unified with site) ============ */
+  .card, .app-card, .uni-card, .contact-card{
+    transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s cubic-bezier(.2,.7,.2,1);
+  }
+  .card:hover, .app-card:hover, .uni-card:hover, .contact-card:hover{
+    transform: translateY(-3px); box-shadow: var(--shadow-lift);
+  }
+  .settings-card{ transition: box-shadow .45s cubic-bezier(.2,.7,.2,1); }
+  .settings-card:hover{ box-shadow: var(--shadow-lift); }
+  .btn, .icon-btn, .filter-chip, .chip-opt{
+    transition: transform .25s cubic-bezier(.2,.7,.2,1), background .2s ease, box-shadow .25s ease, color .2s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn:active, .icon-btn:active, .filter-chip:active, .chip-opt:active{ transform: scale(.96); }
+  .filter-chip:hover{ transform: translateY(-1px); }
+  .nav-item{ transition: background .2s ease, color .2s ease, transform .25s cubic-bezier(.2,.7,.2,1); }
+  .nav-item:hover{ background: rgba(10,10,12,0.05); transform: translateX(2px); }
+  .notif, .deadline-item, .doc-row, .inv-row, .t-row{ transition: background .2s ease; }
+  .user-pill .av.initials{ display:grid; place-items:center; color:#fff; font-weight:600; font-size:13px; letter-spacing:.02em; }
 </style>
 </head>
 <body>
@@ -1403,7 +1422,7 @@
     <div class="nav-section-label">Workspace</div>
     <button class="nav-item active" data-view="overview"><i class="ti ti-layout-grid"></i> Overview</button>
     <button class="nav-item" data-view="applications"><i class="ti ti-files"></i> Applications <span class="badge">5</span></button>
-    <button class="nav-item" data-view="messages"><i class="ti ti-message-circle"></i> Messages <span class="badge">2</span></button>
+    <button class="nav-item" data-view="messages"><i class="ti ti-message-circle"></i> Messages</button>
     <button class="nav-item" data-view="invoices"><i class="ti ti-receipt"></i> Invoices</button>
     <button class="nav-item" data-view="documents"><i class="ti ti-folder"></i> Documents</button>
 
@@ -1420,10 +1439,10 @@
       <div class="user-pill">
         <div class="av"></div>
         <div class="who">
-          <div class="name">Aanya Raj</div>
-          <div class="role">UCL · MSc Data Sci</div>
+          <div class="name">Student</div>
+          <div class="role">Vayas student</div>
         </div>
-        <i class="ti ti-dots-vertical"></i>
+        <button class="icon-btn" id="pillSignout" title="Sign out" aria-label="Sign out"><i class="ti ti-logout"></i></button>
       </div>
     </div>
   </aside>
@@ -1431,10 +1450,10 @@
   <!-- =========== MAIN =========== -->
   <main class="main">
     <header class="topbar">
-      <h1 id="pageTitle">Hello, <em>Aanya</em></h1>
+      <h1 id="pageTitle">Hello, <em>there</em></h1>
       <div class="search">
         <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search applications, messages, files…" />
+        <input type="text" id="globalSearch" placeholder="Search universities, courses…" />
         <kbd>⌘K</kbd>
       </div>
       <div class="notif-wrap" id="notifWrap">
@@ -1449,7 +1468,7 @@
               <div class="n-ico green"><i class="ti ti-calendar-check"></i></div>
               <div class="n-body">
                 <div class="n-title">UCL interview confirmed for <b>April 14, 10:00 BST</b></div>
-                <div class="n-meta">12m ago · Riya Sharma</div>
+                <div class="n-meta">12m ago · Counsellor team</div>
               </div>
               <div class="n-dot"></div>
             </div>
@@ -1504,25 +1523,6 @@
 
       <!-- ============ OVERVIEW ============ -->
       <section class="view active" data-view="overview">
-        <div id="liveTest" style="display:none;margin-bottom:18px;border:1px solid rgba(10,10,12,0.1);border-radius:18px;padding:20px;background:#fff;">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-            <div>
-              <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a95;font-weight:600;">Live account · test</div>
-              <div style="font-family:'Instrument Serif',serif;font-size:21px;margin-top:2px;">Signed in as <span id="ltEmail">…</span></div>
-            </div>
-            <button id="ltLogout" type="button" style="padding:9px 15px;border-radius:999px;border:1px solid rgba(10,10,12,0.12);background:#fff;font-size:13px;cursor:pointer;">Sign out</button>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
-            <label style="font-size:13px;color:#5b5b66;">Full name<input id="ltName" type="text" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;box-sizing:border-box;"/></label>
-            <label style="font-size:13px;color:#5b5b66;">Target country<input id="ltCountry" type="text" placeholder="Germany" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;box-sizing:border-box;"/></label>
-          </div>
-          <label style="font-size:13px;color:#5b5b66;display:block;margin-top:12px;">Notes<textarea id="ltNotes" rows="2" style="display:block;width:100%;margin-top:5px;padding:9px 11px;border:1px solid rgba(10,10,12,0.12);border-radius:10px;font:inherit;resize:vertical;box-sizing:border-box;"></textarea></label>
-          <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
-            <button id="ltSave" type="button" style="padding:10px 18px;border-radius:999px;border:0;background:#0a0a0c;color:#fff;font-size:14px;cursor:pointer;">Save to my account</button>
-            <span id="ltStatus" style="font-size:13px;color:#5b5b66;"></span>
-          </div>
-          <div style="font-size:12px;color:#8a8a95;margin-top:10px;">Saves to your Supabase <code>profiles</code> table. Reload the page and your data loads back — that's real login + per-user data persistence.</div>
-        </div>
         <div class="greet">
           <div class="greet-hero">
             <div>
@@ -1591,33 +1591,13 @@
 
           <div class="card">
             <div class="card-head">
-              <h3><i class="ti ti-message-circle"></i> Recent messages</h3>
-              <a class="more" data-jump="messages" href="#">Open chat <i class="ti ti-arrow-right"></i></a>
+              <h3><i class="ti ti-message-circle"></i> Your counsellor</h3>
+              <a class="more" data-jump="messages" href="#">Contact <i class="ti ti-arrow-right"></i></a>
             </div>
-            <div class="deadline-list">
-              <div class="msg-preview">
-                <div class="av" style="background-image:url('https://picsum.photos/seed/riya-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Riya Sharma</span><span class="time">12m</span></div>
-                  <div class="preview">Great news — your UCL interview slot is confirmed for April 14…</div>
-                </div>
-                <div class="unread"></div>
-              </div>
-              <div class="msg-preview">
-                <div class="av" style="background-image:url('https://picsum.photos/seed/marco-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Marco Bellini</span><span class="time">2h</span></div>
-                  <div class="preview">I reviewed your SOP draft — three small notes attached.</div>
-                </div>
-                <div class="unread"></div>
-              </div>
-              <div class="msg-preview">
-                <div class="av" style="background-image:url('https://picsum.photos/seed/sara-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Sara Okonkwo</span><span class="time">Yesterday</span></div>
-                  <div class="preview">Visa documents looking good. One thing on financials…</div>
-                </div>
-              </div>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 14px;">Questions about your shortlist, documents or visa? Message us directly — a real person replies, usually within a working day.</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <a class="btn btn-dark" href="https://wa.me/4915292621905?text=Hi%20Vayas%2C%20I%20have%20a%20question%20about%20my%20application" target="_blank" rel="noopener" style="justify-content:center;"><i class="ti ti-brand-whatsapp"></i> WhatsApp us</a>
+              <a class="btn btn-ghost" href="mailto:hello@vayasabroad.com" style="justify-content:center;"><i class="ti ti-mail"></i> hello@vayasabroad.com</a>
             </div>
           </div>
 
@@ -1750,85 +1730,28 @@
         <div class="view-head">
           <div class="left">
             <h2>Messages</h2>
-            <p>Direct line to your counsellor team. Replies usually within an hour.</p>
-          </div>
-          <div class="right">
-            <button class="btn btn-ghost"><i class="ti ti-phone"></i> Schedule call</button>
-            <button class="btn btn-dark"><i class="ti ti-edit"></i> New thread</button>
+            <p>A direct line to your counsellor — no bots, no ticket numbers.</p>
           </div>
         </div>
 
-        <div class="chat-shell">
-          <div class="chat-list">
-            <div class="lh"><i class="ti ti-search"></i><input type="text" placeholder="Search conversations…" /></div>
-            <div class="items">
-              <div class="chat-item active" data-chat="riya">
-                <div class="av online" style="background-image:url('https://picsum.photos/seed/riya-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Riya Sharma</span><span class="time">12m</span></div>
-                  <div class="row2"><span class="preview">Great news — your UCL interview slot is confirmed…</span><span class="unread-badge">2</span></div>
-                </div>
-              </div>
-              <div class="chat-item" data-chat="marco">
-                <div class="av" style="background-image:url('https://picsum.photos/seed/marco-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Marco Bellini</span><span class="time">2h</span></div>
-                  <div class="row2"><span class="preview">I reviewed your SOP draft — three small notes.</span><span class="unread-badge">1</span></div>
-                </div>
-              </div>
-              <div class="chat-item" data-chat="sara">
-                <div class="av online" style="background-image:url('https://picsum.photos/seed/sara-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Sara Okonkwo</span><span class="time">Yesterday</span></div>
-                  <div class="row2"><span class="preview">Visa documents looking good. One thing on financials…</span></div>
-                </div>
-              </div>
-              <div class="chat-item" data-chat="support">
-                <div class="av" style="background-image:url('https://picsum.photos/seed/team-portrait/120/120')"></div>
-                <div class="body">
-                  <div class="row1"><span class="name">Support team</span><span class="time">Mar 24</span></div>
-                  <div class="row2"><span class="preview">Your invoice INV-2026-0481 is now available.</span></div>
-                </div>
-              </div>
-            </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; max-width:920px;">
+          <div class="card">
+            <div class="card-head"><h3><i class="ti ti-brand-whatsapp"></i> WhatsApp</h3></div>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 16px;">The fastest way to reach us. Send your question, a document photo, or just say hi — we usually reply within an hour during the day.</p>
+            <a class="btn btn-dark" href="https://wa.me/4915292621905?text=Hi%20Vayas%2C%20I%20have%20a%20question%20about%20my%20application" target="_blank" rel="noopener" style="justify-content:center;"><i class="ti ti-brand-whatsapp"></i> Open WhatsApp chat</a>
           </div>
-
-          <div class="chat-main">
-            <div class="chat-head">
-              <div class="av" style="background-image:url('https://picsum.photos/seed/riya-portrait/120/120')"></div>
-              <div class="info">
-                <div class="name">Riya Sharma</div>
-                <div class="status">Online · Your lead counsellor, London</div>
-              </div>
-              <div class="actions">
-                <button class="icon-btn" aria-label="Call"><i class="ti ti-phone"></i></button>
-                <button class="icon-btn" aria-label="Video"><i class="ti ti-video"></i></button>
-                <button class="icon-btn" aria-label="Info"><i class="ti ti-info-circle"></i></button>
-              </div>
-            </div>
-
-            <div class="chat-stream" id="stream">
-              <div class="chat-empty" style="margin:auto;text-align:center;color:var(--muted);padding:40px;">
-                <i class="ti ti-messages" style="font-size:34px;display:block;margin-bottom:10px;color:var(--muted-2);"></i>
-                Start the conversation — your counsellor replies live.
-              </div>
-            </div>
-
-            <div class="composer">
-              <div class="row">
-                <textarea id="composerInput" placeholder="Write a message…" rows="1"></textarea>
-                <div class="tools">
-                  <button class="icon-btn" aria-label="Attach"><i class="ti ti-paperclip"></i></button>
-                  <button class="icon-btn" aria-label="Emoji"><i class="ti ti-mood-smile"></i></button>
-                </div>
-                <button class="send" id="sendBtn" disabled aria-label="Send"><i class="ti ti-arrow-up"></i></button>
-              </div>
-            </div>
+          <div class="card">
+            <div class="card-head"><h3><i class="ti ti-mail"></i> Email</h3></div>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 16px;">Better for longer questions or when you want everything in writing. We reply within one working day.</p>
+            <a class="btn btn-ghost" href="mailto:hello@vayasabroad.com" style="justify-content:center;"><i class="ti ti-mail"></i> hello@vayasabroad.com</a>
+          </div>
+          <div class="card" style="grid-column:1/-1;">
+            <div class="card-head"><h3><i class="ti ti-sparkles"></i> In-app chat is coming</h3></div>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 0;">We're building secure in-dashboard messaging with your counsellor. Until then, WhatsApp is the official channel — same people, same answers, just faster to ship.</p>
           </div>
         </div>
       </section>
 
-      <!-- ============ INVOICES ============ -->
       <section class="view" data-view="invoices">
         <div class="view-head">
           <div class="left">
@@ -2079,7 +2002,7 @@
         <div class="no-results-msg" id="uniNoResults"><i class="ti ti-mood-empty"></i>No universities match these filters.</div>
         <div class="uni-grid">
           <div class="uni-card" data-modal="uniDetail" data-uni="UCL" data-country="uk" data-ranking="9" data-tuition="46000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/ucl/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #44506e, #181d2c)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> London</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2091,7 +2014,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Imperial" data-country="uk" data-ranking="8" data-tuition="46000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/imperial-uni/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #2e5e74, #0e2630)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> London</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2103,7 +2026,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Toronto" data-country="ca" data-ranking="21" data-tuition="43000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/toronto-uni/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #8e3434, #2c1212)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/ca.svg" alt="" /> Toronto</span>
               <button class="save saved" aria-label="Saved" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2115,7 +2038,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="NYU" data-country="us" data-ranking="38" data-tuition="60000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/nyu-campus/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #4e3a78, #1a122c)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/us.svg" alt="" /> New York</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2127,7 +2050,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Monash" data-country="au" data-ranking="49" data-tuition="28000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/monash-uni/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #1f6e5e, #0e2a24)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/au.svg" alt="" /> Melbourne</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2139,7 +2062,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="ETH" data-country="ch" data-ranking="7" data-tuition="1600">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/eth-zurich/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #b2562e, #3c2117)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/ch.svg" alt="" /> Zürich</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2151,7 +2074,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Trinity" data-country="ie" data-ranking="87" data-tuition="23000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/trinity-college/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #2e5e4e, #16302a)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/ie.svg" alt="" /> Dublin</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2163,7 +2086,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="TUM" data-country="de" data-ranking="30" data-tuition="0">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/tum-munich/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #2a6ea8, #102a40)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/de.svg" alt="" /> Munich</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2175,7 +2098,7 @@
           </div>
 
           <div class="uni-card" data-modal="uniDetail" data-uni="Edinburgh" data-country="uk" data-ranking="22" data-tuition="38000">
-            <div class="photo" style="background-image:url('https://picsum.photos/seed/edinburgh-uni/600/400')">
+            <div class="photo" style="background-image:linear-gradient(150deg, #6e4456, #2c1620)">
               <span class="flag-pill"><img class="flag-img" src="assets/flags/gb.svg" alt="" /> Edinburgh</span>
               <button class="save" aria-label="Save" onclick="event.stopPropagation(); toggleSave(this)"><i class="ti ti-bookmark"></i></button>
             </div>
@@ -2294,11 +2217,11 @@
                     </div>
                   </div>
                   <div class="ff-row">
-                    <div class="ff"><label>First name</label><input value="Aanya" /></div>
-                    <div class="ff"><label>Last name</label><input value="Raj" /></div>
+                    <div class="ff"><label>First name</label><input value="" placeholder="First name" data-profile="first" /></div>
+                    <div class="ff"><label>Last name</label><input value="" placeholder="Last name" data-profile="last" /></div>
                   </div>
                   <div class="ff-row">
-                    <div class="ff"><label>Email</label><input value="aanya.raj@gmail.com" type="email" /></div>
+                    <div class="ff"><label>Email</label><input value="" placeholder="you@email.com" type="email" data-profile="email" /></div>
                     <div class="ff"><label>Phone</label><input value="+91 98XX XXXX 47" type="tel" /></div>
                   </div>
                   <div class="ff"><label>Date of birth</label><input value="1999-08-14" type="date" /></div>
@@ -2373,7 +2296,7 @@
             <!-- NOTIFICATIONS -->
             <div class="settings-section" data-tab="notifications">
               <div class="settings-card">
-                <div class="sc-head"><h3>Email notifications</h3><p>Sent to aanya.raj@gmail.com — change in Profile.</p></div>
+                <div class="sc-head"><h3>Email notifications</h3><p>Sent to your account email — change in Profile.</p></div>
                 <div class="sc-body">
                   <div class="opt-row"><div class="info"><div class="t">Application updates</div><div class="s">Status changes, offers, decisions</div></div><div class="ctrl"><button class="toggle" aria-checked="true" role="switch"></button></div></div>
                   <div class="opt-row"><div class="info"><div class="t">New messages</div><div class="s">When your counsellor replies</div></div><div class="ctrl"><button class="toggle" aria-checked="true" role="switch"></button></div></div>
@@ -2425,7 +2348,7 @@
               <div class="settings-card">
                 <div class="sc-head"><h3>Billing details</h3><p>Used on invoices and receipts.</p></div>
                 <div class="sc-body">
-                  <div class="ff"><label>Full name</label><input value="Aanya Raj" /></div>
+                  <div class="ff"><label>Full name</label><input value="" placeholder="Your full name" data-profile="full" /></div>
                   <div class="ff"><label>Address</label><input value="14 Carter Road, Bandra West" /></div>
                   <div class="ff-row">
                     <div class="ff"><label>City</label><input value="Mumbai" /></div>
@@ -2598,7 +2521,7 @@
   <div class="modal-body">
     <div class="ff"><label>To</label>
       <select>
-        <option>Riya Sharma · Your lead counsellor</option>
+        <option>Counsellor team · Your lead counsellor</option>
         <option>Marco Bellini · Applications specialist</option>
         <option>Sara Okonkwo · Visa &amp; documents</option>
         <option>Support team</option>
@@ -2631,7 +2554,7 @@
   <div class="modal-body">
     <div class="ff"><label>With</label>
       <select>
-        <option>Riya Sharma · Lead counsellor</option>
+        <option>Counsellor team · Lead counsellor</option>
         <option>Marco Bellini · Applications</option>
         <option>Sara Okonkwo · Visa</option>
       </select>
@@ -2880,7 +2803,6 @@
 
 <div class="toast" id="toast"><i class="ti ti-check"></i><span id="toastMsg">Saved</span></div>
 
-<script src="livechat.js"></script>
 <script>
   /* ============ View routing ============ */
   const navItems = document.querySelectorAll('.nav-item[data-view]');
@@ -2888,7 +2810,7 @@
   const pageTitle = document.getElementById('pageTitle');
 
   const titleMap = {
-    overview: 'Hello, <em>Aanya</em>',
+    overview: 'Hello, <em>there</em>',
     applications: 'Workspace',
     messages: 'Workspace',
     invoices: 'Workspace',
@@ -3355,110 +3277,6 @@
 
   function scrollChatToBottom(){ if(stream) stream.scrollTop = stream.scrollHeight; }
 
-  /* ============ LIVE CHAT (student side) ============ */
-  const STUDENT = { role: 'student', userId: 'aanya', name: 'Aanya Raj', avatar: 'https://i.pravatar.cc/120?img=47' };
-  const RIYA_AV = 'https://i.pravatar.cc/120?img=45';
-  const THREAD = 'client:aanya';
-  let adminOnline = false;
-  let sTyping = null;
-
-  if (window.LiveChat) {
-    LiveChat.init(STUDENT);
-    LiveChat.open(THREAD);
-    LiveChat.on('message', ({ threadId }) => { if (threadId === THREAD) { removeSTyping(); renderStudentStream(); } });
-    LiveChat.on('typing', ({ threadId, from, typing }) => {
-      if (threadId !== THREAD || from === 'student') return;
-      if (typing) showSTyping(); else removeSTyping();
-    });
-    LiveChat.on('presence', ({ role, online }) => { if (role === 'admin' || role === 'counsellor') adminOnline = online; });
-  }
-
-  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-  function studentMsgHTML(m){
-    const mine = m.from === 'student';
-    const att = m.attachment ? `<div class="att" style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(10,10,12,0.04);border:1px solid var(--line);border-radius:12px;margin-top:6px;cursor:pointer"><i class="ti ti-file-text" style="font-size:22px"></i><div><div style="font-size:13px;font-weight:500">${esc(m.attachment.name)}</div><div style="font-size:11.5px;color:var(--muted)">${esc(m.attachment.size)}</div></div></div>` : '';
-    return `<div class="msg ${mine ? 'me' : 'them'}">
-      ${mine ? '' : `<div class="av" style="background-image:url('${RIYA_AV}')"></div>`}
-      <div><div class="bubble">${esc(m.body)}</div>${att}<div class="meta">${new Date(m.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}${mine ? ' · <i class="ti ti-checks"></i>' : ''}</div></div>
-    </div>`;
-  }
-
-  function renderStudentStream(){
-    if (!window.LiveChat) return;
-    const hist = LiveChat.history(THREAD);
-    if (!hist.length) {
-      stream.innerHTML = '<div class="chat-empty" style="margin:auto;text-align:center;color:var(--muted);padding:40px;"><i class="ti ti-messages" style="font-size:34px;display:block;margin-bottom:10px;color:var(--muted-2);"></i>Start the conversation — your counsellor replies live.</div>';
-      return;
-    }
-    stream.innerHTML = hist.map(studentMsgHTML).join('');
-    scrollChatToBottom();
-  }
-
-  function showSTyping(){
-    if (sTyping) return;
-    sTyping = document.createElement('div');
-    sTyping.className = 'msg them';
-    sTyping.innerHTML = `<div class="av" style="background-image:url('${RIYA_AV}')"></div><div><div class="typing"><span></span><span></span><span></span></div></div>`;
-    stream.appendChild(sTyping); scrollChatToBottom();
-  }
-  function removeSTyping(){ if (sTyping){ sTyping.remove(); sTyping = null; } }
-
-  // Render any existing live history on load (no seeded/example messages)
-  setTimeout(() => { purgeSeed(); renderStudentStream(); scrollChatToBottom(); }, 60);
-
-  // One-time cleanup: remove any old demo/auto messages left in this browser.
-  function purgeSeed(){
-    if (!window.LiveChat) return;
-    const key = 'meridian_chat_' + THREAD;
-    let list = [];
-    try { list = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
-    const cleaned = list.filter(m => !/^(seed_|auto_)/.test(m.id || ''));
-    if (cleaned.length !== list.length) localStorage.setItem(key, JSON.stringify(cleaned));
-  }
-
-  composer.addEventListener('input', () => {
-    sendBtn.disabled = !composer.value.trim();
-    composer.style.height = 'auto';
-    composer.style.height = Math.min(140, composer.scrollHeight) + 'px';
-    if (window.LiveChat) LiveChat.typing(THREAD, !!composer.value.trim());
-  });
-
-  composer.addEventListener('keydown', e => {
-    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); }
-  });
-  sendBtn.addEventListener('click', send);
-
-  function send(){
-    const text = composer.value.trim();
-    if(!text) return;
-
-    if (window.LiveChat) {
-      LiveChat.send({ threadId: THREAD, body: text });
-      LiveChat.typing(THREAD, false);
-      composer.value = ''; composer.style.height = 'auto'; sendBtn.disabled = true;
-      renderStudentStream();
-      return;
-    }
-
-    // Fallback (LiveChat unavailable)
-    const msg = document.createElement('div');
-    msg.className = 'msg me';
-    msg.innerHTML = `<div><div class="bubble"></div><div class="meta">just now · <i class="ti ti-check"></i></div></div>`;
-    msg.querySelector('.bubble').textContent = text;
-    stream.appendChild(msg);
-    composer.value = ''; composer.style.height = 'auto'; sendBtn.disabled = true;
-    scrollChatToBottom();
-  }
-
-  /* ============ Chat list switching ============ */
-  document.querySelectorAll('.chat-item').forEach(c => {
-    c.addEventListener('click', () => {
-      document.querySelectorAll('.chat-item').forEach(x => x.classList.remove('active'));
-      c.classList.add('active');
-    });
-  });
-
   /* ============ Cmd+K — handled in global hotkeys above ============ */
 
   /* ============ Animate progress bars when applications view opens ============ */
@@ -3480,32 +3298,46 @@
 </script>
 
 <script>
-  /* ===== Live account test: real login + per-user data saving ===== */
+  /* ===== Real account: identity, sign out, global search ===== */
+  (() => {
+    const so = document.getElementById('pillSignout');
+    if (so) so.onclick = () => (window.Auth && Auth.signOut) ? Auth.signOut('Login.html') : (location.href = 'Login.html');
+
+    const gs = document.getElementById('globalSearch');
+    if (gs) gs.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && gs.value.trim()){
+        setView('universities');
+        const uniSearch = document.querySelector('.view[data-view="universities"] input');
+        if (uniSearch){ uniSearch.value = gs.value.trim(); uniSearch.dispatchEvent(new Event('input', { bubbles:true })); }
+      }
+    });
+  })();
+
   (async () => {
-    if (!(window.Auth && Auth.configured)) return;     // demo mode: leave dashboard as preview
-    const user = await Auth.getUser();
-    if (!user) return;                                  // head gate already redirects; safety only
-    const sb = Auth.client, $ = (id) => document.getElementById(id);
-    const card = $('liveTest'); if (card) card.style.display = 'block';
-    if ($('ltEmail')) $('ltEmail').textContent = user.email;
-    if ($('ltLogout')) $('ltLogout').onclick = () => Auth.signOut('Login.html');
-    // load this user's saved row
-    try {
-      const { data } = await sb.from('profiles').select('full_name,target_country,notes').eq('user_id', user.id).maybeSingle();
-      if (data) { $('ltName').value = data.full_name || ''; $('ltCountry').value = data.target_country || ''; $('ltNotes').value = data.notes || ''; }
-    } catch (e) { console.warn('load profile:', e); }
-    // save (upsert)
-    if ($('ltSave')) $('ltSave').onclick = async () => {
-      $('ltStatus').textContent = 'Saving…';
-      try {
-        const { error } = await sb.from('profiles').upsert({
-          user_id: user.id, full_name: $('ltName').value, target_country: $('ltCountry').value,
-          notes: $('ltNotes').value, updated_at: new Date().toISOString()
-        });
-        if (error) throw error;
-        $('ltStatus').textContent = 'Saved \u2713 — reload the page to confirm it persists.';
-      } catch (e) { $('ltStatus').textContent = 'Error: ' + (e.message || e); }
-    };
+    if (!(window.Auth && Auth.configured)) return;
+    let user = null;
+    try { user = await Auth.getUser(); } catch (e) {}
+    if (!user) return;
+    const meta = user.user_metadata || {};
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const name = (meta.full_name || meta.name || (user.email || '').split('@')[0] || 'Student').trim();
+    const parts = name.split(/\s+/);
+    const first = parts[0];
+    const initials = parts.slice(0, 2).map(w => (w[0] || '').toUpperCase()).join('') || 'S';
+
+    titleMap.overview = 'Hello, <em>' + esc(first) + '</em>';
+    const active = document.querySelector('.view.active');
+    if (active && active.dataset.view === 'overview') pageTitle.innerHTML = titleMap.overview;
+
+    const pillName = document.querySelector('.user-pill .name'); if (pillName) pillName.textContent = name;
+    const pillRole = document.querySelector('.user-pill .role'); if (pillRole) pillRole.textContent = user.email || 'Vayas student';
+    const av = document.querySelector('.user-pill .av'); if (av){ av.textContent = initials; av.classList.add('initials'); }
+
+    const set = (sel, val) => { const el = document.querySelector(sel); if (el && !el.value) el.value = val; };
+    set('input[data-profile="first"]', parts[0] || '');
+    set('input[data-profile="last"]', parts.slice(1).join(' '));
+    set('input[data-profile="full"]', name);
+    set('input[data-profile="email"]', user.email || '');
   })();
 </script>
 </body>
