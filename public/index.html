@@ -1019,6 +1019,45 @@
   .wa-fab .dot{ width:34px; height:34px; border-radius:50%; background:#128C7E; display:grid; place-items:center; flex:none; }
   .wa-fab .dot i{ color:#fff; font-size:20px; }
   @media(max-width:560px){ .wa-fab span{ display:none; } .wa-fab{ padding:12px; } }
+
+  /* ============ MOBILE FIXES (phones) ============ */
+  @media (max-width: 640px){
+    img, svg, video{ max-width: 100%; height: auto; }
+    .wrap{ padding: 0 18px; }
+
+    /* nav: fit in one row */
+    .nav{ padding: 8px 8px 8px 14px; }
+    .brand{ font-size: 16px; gap: 8px; }
+    .brand small{ display: none; }
+    .nav-cta{ gap: 6px; }
+    .nav-cta .btn{ padding: 8px 12px; font-size: 13px; }
+
+    /* hero CTAs: stack full-width instead of overflowing */
+    .hero-cta{ display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 10px; }
+    .hero-cta .btn{ justify-content: center; }
+
+    /* hero search: let the input shrink instead of pushing the button out */
+    .hero-search .search-box{ padding: 6px 6px 6px 14px; gap: 8px; }
+    .hero-search input{ min-width: 0; flex: 1; }
+
+    /* section headings: stack title + intro text */
+    .section-head{ flex-direction: column; align-items: flex-start; gap: 14px; }
+
+    /* consult form: single column, inputs allowed to shrink (was the main page-width blowout) */
+    .form-grid{ grid-template-columns: 1fr; }
+    .form-row input, .form-row select{ width: 100%; min-width: 0; }
+    .form-card{ padding: 22px 18px; }
+
+    /* marquees never widen the page */
+    .marquee, .t-marquee{ max-width: 100%; }
+
+    /* destination filter pills: scroll sideways instead of overflowing */
+    .dest-tabs{ max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .dest-tabs::-webkit-scrollbar{ display: none; }
+  }
+  @media (max-width: 420px){
+    .nav-cta .btn-ghost{ display: none; } /* Sign in still reachable via footer */
+  }
 </style>
 </head>
 <body>

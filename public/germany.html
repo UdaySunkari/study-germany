@@ -1008,6 +1008,34 @@
   .q .ans{ padding:0 22px 22px; color:var(--muted); font-size:14.5px; line-height:1.6; opacity:0; transform:translateY(-8px); transition:opacity .25s ease, transform .35s cubic-bezier(0.25,1,0.5,1) !important; }
   .q[data-open="true"] .ans{ opacity:1; transform:translateY(0); transition-delay:.05s; }
 
+
+  /* ============ MOBILE FIXES (phones) ============ */
+  @media (max-width: 640px){
+    img, svg, video{ max-width: 100%; height: auto; }
+    .wrap{ padding: 0 18px; }
+
+    /* nav: fit in one row */
+    .nav{ padding: 8px 8px 8px 14px; }
+    .brand{ font-size: 16px; gap: 8px; }
+    .brand small{ display: none; }
+    .nav-cta{ gap: 6px; }
+    .nav-cta .btn{ padding: 8px 12px; font-size: 13px; }
+
+    /* hero CTAs: stack full-width instead of overflowing */
+    .hero-cta{ display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 10px; }
+    .hero-cta .btn{ justify-content: center; }
+
+    /* section headings: stack title + intro text */
+    .section-head{ flex-direction: column; align-items: flex-start; gap: 14px; }
+
+    /* consult form: single column, inputs allowed to shrink (was the main page-width blowout) */
+    .form-grid{ grid-template-columns: 1fr; }
+    .form-row input, .form-row select{ width: 100%; min-width: 0; }
+    .form-card{ padding: 22px 18px; }
+  }
+  @media (max-width: 480px){
+    .nav-cta .btn-ghost{ display: none; } /* "All destinations" duplicated by breadcrumb */
+  }
 </style>
 </head>
 <body>
