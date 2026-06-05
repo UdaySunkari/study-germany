@@ -19,7 +19,7 @@ const SUPABASE_URL  = 'https://imuazoxpywjpccltyadt.supabase.co';       // e.g. 
 const SUPABASE_ANON = 'sb_publishable_4uNLxDkCUmHcx8yrzo_vnw_5LcqCqZL';  // the long "anon public" key
 const ADMIN_EMAILS  = [                          // only these emails get the admin console
   'udaykumar.sunkari1@gmail.com',
-  'turbosolutionss@gmail.com',
+  'vayasabroad@gmail.com',
 ];
 
 const _configured = !/YOUR_SUPABASE/.test(SUPABASE_URL + SUPABASE_ANON)
