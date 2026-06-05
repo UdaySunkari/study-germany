@@ -149,9 +149,7 @@
   }
   .hero-stage .photo{
     position:absolute; inset:0;
-    background-image: url("https://picsum.photos/seed/meridian-hero-students/2000/1100");
-    background-size: cover; background-position: center 38%;
-    animation: kenburns 26s ease-in-out infinite alternate;
+    background: var(--paper-2);
   }
   @keyframes kenburns{
     from{ transform: scale(1.04) translate(0,0); }
@@ -343,11 +341,11 @@
     display: inline-block;
     box-shadow: 0 4px 10px rgba(10,10,12,0.1);
   }
-  .avatars span:nth-child(1){ background-image: url('https://picsum.photos/seed/avatar-a/80/80'); margin-left:0; }
-  .avatars span:nth-child(2){ background-image: url('https://picsum.photos/seed/avatar-b/80/80'); }
-  .avatars span:nth-child(3){ background-image: url('https://picsum.photos/seed/avatar-c/80/80'); }
-  .avatars span:nth-child(4){ background-image: url('https://picsum.photos/seed/avatar-d/80/80'); }
-  .avatars span:nth-child(5){ background-image: url('https://picsum.photos/seed/avatar-e/80/80'); }
+  .avatars span:nth-child(1){ background: var(--paper-2); margin-left:0; }
+  .avatars span:nth-child(2){ background: var(--paper-2); }
+  .avatars span:nth-child(3){ background: var(--paper-2); }
+  .avatars span:nth-child(4){ background: var(--paper-2); }
+  .avatars span:nth-child(5){ background: var(--paper-2); }
 
   @keyframes float{
     0%, 100% { transform: translateY(0); }
