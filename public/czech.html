@@ -962,21 +962,6 @@
   }
   @media(max-width: 880px){ .country-hero .grid{ grid-template-columns:1fr; gap:28px; } }
 
-  /* Prague photo strip */
-  .photo-strip{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:34px; }
-  .photo-strip figure{
-    margin:0; border-radius: var(--radius-lg); overflow:hidden;
-    border:1px solid var(--glass-edge); box-shadow: var(--shadow-lift); background: var(--paper-2);
-    aspect-ratio: 4/3; position:relative;
-  }
-  .photo-strip img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .photo-strip figcaption{
-    position:absolute; left:14px; bottom:12px; padding:6px 12px; border-radius:999px;
-    background: rgba(10,10,12,0.55); color:#fff; font-size:12.5px; letter-spacing:.02em;
-    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  }
-  @media(max-width: 640px){ .photo-strip{ grid-template-columns:1fr; gap:14px; } }
-
   /* professional WhatsApp button — refined, on-brand */
   .btn-wa{
     background:#128C7E; color:#fff; border-color:transparent;
@@ -1101,10 +1086,6 @@
       <div class="stat fade-up"><div class="num">€0</div><div class="label">Tuition at public universities if you study in Czech — any nationality</div></div>
     </div>
     <div class="facts-note">Facts about the Czech Republic — verified for 2026. Always re-check before relying on them.</div>
-    <div class="photo-strip">
-      <figure><img src="assets/prague-tram-church.webp" alt="A red Prague tram passing St. Nicholas Church in Malá Strana" loading="lazy" /><figcaption>Malá Strana, Prague</figcaption></figure>
-      <figure><img src="assets/prague-tram-street.webp" alt="A tram on a quiet street of ornate facades in Prague" loading="lazy" /><figcaption>Everyday Prague — trams &amp; old facades</figcaption></figure>
-    </div>
   </div>
 </section>
 
