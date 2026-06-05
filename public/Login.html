@@ -56,7 +56,7 @@
   }
   .side .photo{
     position: absolute; inset:0;
-    background-image: url('https://picsum.photos/seed/meridian-login/1400/1800');
+    background-image: url('assets/berlin-aerial.webp');
     background-size: cover; background-position: center;
     animation: kenburns 28s ease-in-out infinite alternate;
   }
@@ -117,7 +117,6 @@
     font-family: var(--serif); font-size: 21px; line-height: 1.3; letter-spacing: -0.005em;
   }
   .side .quote-card .who{ display:flex; align-items:center; gap:10px; margin-top:14px; font-size:13px; }
-  .side .quote-card .av{ width: 32px; height: 32px; border-radius: 50%; background-image: url('https://picsum.photos/seed/aanya-portrait/80/80'); background-size:cover; background-position:center; border:2px solid #fff; }
 
   /* right side form */
   .form-side{
@@ -166,6 +165,27 @@
   }
   .form-card h2 em{ font-style: italic; color: #2b2b34; }
   .form-card p.sub{ color: var(--muted); font-size: 15px; margin: 0 0 28px; }
+
+  .mode-tabs{
+    display:flex; gap:2px; padding:5px; margin-bottom:24px;
+    background: rgba(255,255,255,0.7); border:1px solid var(--line);
+    border-radius: 999px; box-shadow: var(--shadow-soft);
+  }
+  .mode-tab{
+    flex:1; padding: 10px 14px; border-radius: 999px;
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  .mode-tab[aria-selected="true"]{
+    background: linear-gradient(180deg, #1a1a22 0%, #0a0a0c 100%);
+    color: #fff; box-shadow: 0 6px 16px -6px rgba(10,10,12,0.45);
+  }
+  #signupForm{ display:none; }
+  .form-card.signup #loginForm{ display:none; }
+  .form-card.signup #signupForm{ display:block; }
+  .msg{ margin-top:14px; padding:10px 14px; border-radius:10px; font-size:13px; display:none; }
+  .msg.err{ display:block; background:rgba(179,65,65,0.08); border:1px solid rgba(179,65,65,0.2); color:#b34141; }
+  .msg.ok{ display:block; background:rgba(31,138,91,0.08); border:1px solid rgba(31,138,91,0.25); color:#1f8a5b; }
 
   .oauth-row{ display:flex; gap: 8px; margin-bottom: 22px; }
   .oauth-btn{
@@ -318,12 +338,17 @@
     <div class="form-body">
       <div class="form-card">
         <span class="eyebrow"><span class="dot"></span> Sept '26 intake · open</span>
-        <h2>Sign in to <em>your future.</em></h2>
-        <p class="sub">Continue your application, message your counsellor, or check what's due this week.</p>
+        <h2 id="cardTitle">Sign in to <em>your future.</em></h2>
+        <p class="sub" id="cardSub">Continue your application, message your counsellor, or check what's due this week.</p>
+
+        <div class="mode-tabs" role="tablist" aria-label="Sign in or create account">
+          <button type="button" class="mode-tab" id="tabLogin" role="tab" aria-selected="true" onclick="setMode('login')">Sign in</button>
+          <button type="button" class="mode-tab" id="tabSignup" role="tab" aria-selected="false" onclick="setMode('signup')">Create account</button>
+        </div>
 
         <div class="oauth-row">
-          <button type="button" class="oauth-btn" onclick="alert('Social sign-in isn\'t enabled yet — please use your email and password.')"><i class="ti ti-brand-google"></i> Google</button>
-          <button type="button" class="oauth-btn" onclick="alert('Social sign-in isn\'t enabled yet — please use your email and password.')"><i class="ti ti-brand-apple"></i> Apple</button>
+          <button type="button" class="oauth-btn" onclick="showMsg('Social sign-in isn\'t enabled yet — please use your email and password.','err')"><i class="ti ti-brand-google"></i> Google</button>
+          <button type="button" class="oauth-btn" onclick="showMsg('Social sign-in isn\'t enabled yet — please use your email and password.','err')"><i class="ti ti-brand-apple"></i> Apple</button>
         </div>
 
         <div class="divider">or with email</div>
@@ -351,7 +376,7 @@
               <span class="box"><i class="ti ti-check"></i></span>
               <span>Remember me for 30 days</span>
             </label>
-            <a class="forgot" href="#">Forgot?</a>
+            <a class="forgot" href="#" onclick="return handleForgot(event)">Forgot?</a>
           </div>
 
           <button type="submit" class="btn-primary" id="loginBtn">
@@ -361,8 +386,42 @@
           </button>
         </form>
 
-        <div class="signup-line">
-          New to Vayas? <a href="#" onclick="return handleSignup(event)">Create an account</a> — it's free.
+        <form id="signupForm" autocomplete="on" onsubmit="return handleSignup(event)">
+          <div class="field">
+            <label for="suName">Full name</label>
+            <div class="input">
+              <i class="ti ti-user"></i>
+              <input id="suName" type="text" placeholder="Your full name" autocomplete="name" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="suEmail">Email</label>
+            <div class="input">
+              <i class="ti ti-mail"></i>
+              <input id="suEmail" type="email" placeholder="you@somewhere.com" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="suPassword">Password</label>
+            <div class="input">
+              <i class="ti ti-lock"></i>
+              <input id="suPassword" type="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required />
+              <button type="button" class="toggle-pw" id="togglePw2" aria-label="Show password"><i class="ti ti-eye"></i></button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="signupBtn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="label">Create my account</span>
+            <i class="ti ti-arrow-right"></i>
+          </button>
+          <p style="font-size:12.5px; color:var(--muted); text-align:center; margin:14px 0 0;">Free for students. By continuing you agree to our <a href="terms.html" style="border-bottom:1px solid var(--line-2);">Terms</a> and <a href="privacy.html" style="border-bottom:1px solid var(--line-2);">Privacy policy</a>.</p>
+        </form>
+
+        <div class="msg" id="formMsg" role="status"></div>
+
+        <div class="signup-line" id="switchLine">
+          New to Vayas? <a href="#" onclick="setMode('signup'); return false;">Create an account</a> — it's free.
         </div>
       </div>
     </div>
@@ -383,88 +442,118 @@
 <script src="auth.js"></script>
 <script src="api.js"></script>
 <script>
-  // password toggle
-  const pw = document.getElementById('password');
-  const toggle = document.getElementById('togglePw');
-  toggle.addEventListener('click', () => {
-    const is = pw.type === 'password';
-    pw.type = is ? 'text' : 'password';
-    toggle.innerHTML = is ? '<i class="ti ti-eye-off"></i>' : '<i class="ti ti-eye"></i>';
-  });
+  // password visibility toggles
+  function wireToggle(btnId, inputId){
+    const btn = document.getElementById(btnId), inp = document.getElementById(inputId);
+    if(!btn || !inp) return;
+    btn.addEventListener('click', () => {
+      const show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password';
+      btn.innerHTML = show ? '<i class="ti ti-eye-off"></i>' : '<i class="ti ti-eye"></i>';
+    });
+  }
+  wireToggle('togglePw','password');
+  wireToggle('togglePw2','suPassword');
 
-  // Auth: real Supabase login once configured in auth.js; demo preview otherwise.
-  async function handleLogin(e){
-    e.preventDefault();
-    const btn = document.getElementById('loginBtn');
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    btn.classList.add('loading');
-    btn.querySelector('.label').textContent = 'Signing in…';
-
-    // Real, secure login (active once you've filled in auth.js)
-    if (window.Auth && Auth.configured) {
-      try {
-        const { user } = await Auth.signIn(email, password);
-        window.location.href = Auth.isAdmin(user) ? 'AdminDashboard.html' : 'Dashboard.html';
-      } catch (err) {
-        btn.classList.remove('loading');
-        btn.querySelector('.label').textContent = 'Sign in';
-        showError('Invalid email or password.');
-      }
-      return false;
-    }
-
-    // DEMO MODE — Supabase not set up yet. Lets you preview the dashboards;
-    // this is NOT secure and lets anyone through. Configuring auth.js turns it off.
-    showError('Demo mode — login isn\u2019t connected yet. Set up Supabase in auth.js to make it real.');
-    const isAdmin = /admin|counsellor|console/i.test(email);
-    setTimeout(() => { window.location.href = isAdmin ? 'AdminDashboard.html' : 'Dashboard.html'; }, 900);
-    return false;
+  // Sign in <-> Create account
+  function setMode(mode){
+    const card = document.querySelector('.form-card');
+    const signup = mode === 'signup';
+    card.classList.toggle('signup', signup);
+    document.getElementById('tabLogin').setAttribute('aria-selected', String(!signup));
+    document.getElementById('tabSignup').setAttribute('aria-selected', String(signup));
+    document.getElementById('cardTitle').innerHTML = signup ? 'Start your <em>journey.</em>' : 'Sign in to <em>your future.</em>';
+    document.getElementById('cardSub').textContent = signup
+      ? 'Create a free account to track your applications, documents and messages in one place.'
+      : "Continue your application, message your counsellor, or check what's due this week.";
+    document.getElementById('switchLine').innerHTML = signup
+      ? 'Already have an account? <a href="#" onclick="setMode(\'login\'); return false;">Sign in</a> instead.'
+      : 'New to Vayas? <a href="#" onclick="setMode(\'signup\'); return false;">Create an account</a> — it\u2019s free.';
+    hideMsg();
   }
 
-  // Sign up a new student account, then sign in (for testing the flow).
-  async function handleSignup(e){
+  function showMsg(msg, kind){
+    const el = document.getElementById('formMsg');
+    el.textContent = msg;
+    el.className = 'msg ' + (kind === 'ok' ? 'ok' : 'err');
+  }
+  function hideMsg(){ document.getElementById('formMsg').className = 'msg'; }
+  function setLoading(btnId, on, idleLabel, busyLabel){
+    const btn = document.getElementById(btnId);
+    btn.classList.toggle('loading', on);
+    btn.querySelector('.label').textContent = on ? busyLabel : idleLabel;
+  }
+
+  async function handleLogin(e){
     e.preventDefault();
+    hideMsg();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     if (!(window.Auth && Auth.configured)) {
-      showError('Sign-up isn\u2019t connected yet — set up Supabase in auth.js first.');
+      showMsg('Sign-in is temporarily unavailable. Message us on WhatsApp and we\u2019ll help you directly.', 'err');
       return false;
     }
-    if (!email || password.length < 6) {
-      showError('Enter an email and a password of at least 6 characters, then tap Create an account.');
-      return false;
-    }
+    setLoading('loginBtn', true, 'Sign in', 'Signing in\u2026');
     try {
-      await Auth.signUp(email, password);
+      const { user } = await Auth.signIn(email, password);
+      window.location.href = Auth.isAdmin(user) ? 'AdminDashboard.html' : 'Dashboard.html';
+    } catch (err) {
+      setLoading('loginBtn', false, 'Sign in', '');
+      showMsg('Invalid email or password.', 'err');
+    }
+    return false;
+  }
+
+  async function handleSignup(e){
+    e.preventDefault();
+    hideMsg();
+    const name = document.getElementById('suName').value.trim();
+    const email = document.getElementById('suEmail').value.trim();
+    const password = document.getElementById('suPassword').value;
+    if (!(window.Auth && Auth.configured)) {
+      showMsg('Account creation is temporarily unavailable. Message us on WhatsApp and we\u2019ll set you up.', 'err');
+      return false;
+    }
+    if (!name || !email || password.length < 6) {
+      showMsg('Please fill in your name, email and a password of at least 6 characters.', 'err');
+      return false;
+    }
+    setLoading('signupBtn', true, 'Create my account', 'Creating\u2026');
+    try {
+      await Auth.signUp(email, password, name);
       try {
         const { user } = await Auth.signIn(email, password);
         window.location.href = Auth.isAdmin(user) ? 'AdminDashboard.html' : 'Dashboard.html';
       } catch {
-        showError('Account created! Confirm via the email Supabase sent, then sign in. (Tip: turn off email confirmation in Supabase for instant testing.)');
+        setLoading('signupBtn', false, 'Create my account', '');
+        showMsg('Account created! Check your inbox for a confirmation email, then sign in.', 'ok');
+        setMode('login');
       }
     } catch (err) {
-      showError(err && err.message ? err.message : 'Could not create the account.');
+      setLoading('signupBtn', false, 'Create my account', '');
+      const msg = (err && err.message) ? err.message : 'Could not create the account. Please try again.';
+      showMsg(/already/i.test(msg) ? 'An account with this email already exists — try signing in instead.' : msg, 'err');
     }
     return false;
   }
 
-  function showError(msg){
-    let el = document.getElementById('loginError');
-    if(!el){
-      el = document.createElement('div');
-      el.id = 'loginError';
-      el.style.cssText = 'margin-top:14px;padding:10px 14px;border-radius:10px;background:rgba(179,65,65,0.08);border:1px solid rgba(179,65,65,0.2);color:#b34141;font-size:13px;';
-      document.getElementById('loginForm').appendChild(el);
+  async function handleForgot(e){
+    e.preventDefault();
+    hideMsg();
+    const email = document.getElementById('email').value.trim();
+    if (!email) { showMsg('Type your email above first, then tap Forgot.', 'err'); return false; }
+    if (!(window.Auth && Auth.configured && Auth.client)) {
+      showMsg('Password reset is temporarily unavailable — message us on WhatsApp and we\u2019ll help.', 'err');
+      return false;
     }
-    el.textContent = msg;
+    try {
+      await Auth.client.auth.resetPasswordForEmail(email);
+      showMsg('If an account exists for ' + email + ', a reset link is on its way to your inbox.', 'ok');
+    } catch {
+      showMsg('Could not send the reset email right now. Please try again in a minute.', 'err');
+    }
+    return false;
   }
-
-  // Prefill the demo credentials for convenience
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('email').value = 'aanya.raj@example.com';
-    document.getElementById('password').value = 'meridian123';
-  });
 </script>
 
 <!-- Cloudflare Web Analytics — free, cookieless, privacy-friendly traffic stats.

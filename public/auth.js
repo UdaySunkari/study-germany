@@ -38,10 +38,13 @@ const Auth = {
     return data;
   },
 
-  // Create a new student account.
-  async signUp(email, password) {
+  // Create a new student account (name is stored in the user's profile metadata).
+  async signUp(email, password, fullName) {
     if (!_sb) throw Object.assign(new Error('Auth not configured'), { code: 'no-config' });
-    const { data, error } = await _sb.auth.signUp({ email, password });
+    const { data, error } = await _sb.auth.signUp({
+      email, password,
+      options: fullName ? { data: { full_name: fullName } } : undefined
+    });
     if (error) throw error;
     return data;
   },
