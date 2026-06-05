@@ -1056,7 +1056,11 @@
     .dest-tabs::-webkit-scrollbar{ display: none; }
   }
   @media (max-width: 420px){
-    .nav-cta .btn-ghost{ display: none; } /* Sign in still reachable via footer */
+    /* keep Sign in visible but compact so the nav still fits */
+    .nav{ padding-left: 10px; }
+    .brand{ font-size: 15px; gap: 6px; }
+    .nav-cta .btn{ padding: 8px 10px; font-size: 12.5px; }
+    .nav-cta .btn-dark i{ display: none; } /* drop the arrow icon to save space */
   }
 </style>
 </head>
@@ -1769,6 +1773,7 @@
       </div>
       <div>
         <h5>Company</h5>
+        <a href="Login.html">Sign in</a>
         <a href="#">About</a>
         <a href="#">Counsellors</a>
         <a href="#">Stories</a>
