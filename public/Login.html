@@ -357,13 +357,6 @@
           <button type="button" class="mode-tab" id="tabSignup" role="tab" aria-selected="false" onclick="setMode('signup')">Create account</button>
         </div>
 
-        <div class="oauth-row">
-          <button type="button" class="oauth-btn" onclick="showMsg('Social sign-in isn\'t enabled yet — please use your email and password.','err')"><i class="ti ti-brand-google"></i> Google</button>
-          <button type="button" class="oauth-btn" onclick="showMsg('Social sign-in isn\'t enabled yet — please use your email and password.','err')"><i class="ti ti-brand-apple"></i> Apple</button>
-        </div>
-
-        <div class="divider">or with email</div>
-
         <div class="form-stack" id="formStack">
         <form id="loginForm" autocomplete="on" onsubmit="return handleLogin(event)">
           <div class="field">
@@ -485,6 +478,13 @@
     hideMsg();
     syncStackHeight();
   }
+
+  // Already signed in (or just returned from Google)? Route to the right home.
+  (async () => {
+    if (!(window.Auth && Auth.configured)) return;
+    let u = null; try { u = await Auth.getUser(); } catch (e) {}
+    if (u) window.location.replace(Auth.isAdmin(u) ? 'AdminDashboard.html' : 'Dashboard.html');
+  })();
 
   function syncStackHeight(){
     const stack = document.getElementById('formStack');
