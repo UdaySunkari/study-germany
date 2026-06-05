@@ -1000,6 +1000,25 @@
   .q .ans{ padding:0 22px 22px; color:var(--muted); font-size:14.5px; line-height:1.6; opacity:0; transform:translateY(-8px); transition:opacity .25s ease, transform .35s cubic-bezier(0.25,1,0.5,1) !important; }
   .q[data-open="true"] .ans{ opacity:1; transform:translateY(0); transition-delay:.05s; }
 
+  /* professional WhatsApp button — refined, on-brand */
+  .btn-wa{
+    background:#128C7E; color:#fff; border-color:transparent;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 24px -12px rgba(18,140,126,0.7);
+  }
+  .btn-wa:hover{ transform: translateY(-1px); background:#0f7d70; box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 16px 30px -12px rgba(18,140,126,0.75); }
+  .btn-wa i{ font-size:18px; }
+  /* refined floating WhatsApp — glass pill, not a loud blob */
+  .wa-fab{
+    position:fixed; right:22px; bottom:22px; z-index:80; display:flex; align-items:center; gap:10px;
+    padding:12px 18px 12px 14px; border-radius:999px; text-decoration:none;
+    background: var(--glass-strong); -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
+    border:1px solid var(--glass-edge); box-shadow: var(--shadow-lift); color: var(--ink);
+    font: 600 14px var(--sans); transition: transform .18s, box-shadow .2s;
+  }
+  .wa-fab:hover{ transform: translateY(-2px); }
+  .wa-fab .dot{ width:34px; height:34px; border-radius:50%; background:#128C7E; display:grid; place-items:center; flex:none; }
+  .wa-fab .dot i{ color:#fff; font-size:20px; }
+  @media(max-width:560px){ .wa-fab span{ display:none; } .wa-fab{ padding:12px; } }
 </style>
 </head>
 <body>
@@ -1187,7 +1206,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Ireland.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english pr" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Ireland.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/dublin-cliffs/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇮🇪</div>
@@ -1201,7 +1220,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Netherlands.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Netherlands.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe english" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/amsterdam-canal/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇳🇱</div>
@@ -1215,7 +1234,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20France.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20France.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="europe" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/paris-louvre/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇫🇷</div>
@@ -1229,7 +1248,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20Kingdom.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20Kingdom.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/london-bigben/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇬🇧</div>
@@ -1243,7 +1262,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Canada.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Canada.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/toronto-lake/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇨🇦</div>
@@ -1257,7 +1276,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20States.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20States.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/newyork-skyline/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇺🇸</div>
@@ -1271,7 +1290,7 @@
         </div>
       </a>
 
-      <a href="https://wa.me/4915226389297?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Australia.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
+      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20Australia.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english pr" target="_blank" rel="noopener">
         <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/sydney-opera/700/900')"></div>
         <div class="scrim"></div>
         <div class="flag" aria-hidden="true">🇦🇺</div>
@@ -1721,7 +1740,7 @@
         <h5>Contact</h5>
         <a href="mailto:hello@vayasabroad.com">Email us</a>
         <a href="#consult">Book a free call</a>
-        <a href="https://wa.me/4915226389297" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/4915292621905" target="_blank" rel="noopener">WhatsApp</a>
         <a href="impressum.html">Impressum</a>
       </div>
     </div>
@@ -2038,7 +2057,7 @@
   // Homepage consultation form → opens WhatsApp to your number with the details prefilled.
   function submitLead(e){
     e.preventDefault();
-    const NUMBER = '4915226389297';
+    const NUMBER = '4915292621905';
     const val = id => ((document.getElementById(id) || {}).value || '').trim();
     const sel = id => {
       const el = document.querySelector('#' + id + ' .label-text');
@@ -2065,5 +2084,9 @@
      3) Enter your domain, copy the token it shows  4) Replace YOUR_CLOUDFLARE_TOKEN below on every page.
      Until you do, this line is harmless and changes nothing on the site. -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
+<a class="wa-fab" href="https://wa.me/4915292621905?text=Hi!%20I%27d%20like%20help%20applying%20to%20study%20abroad." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="dot"><i class="ti ti-brand-whatsapp"></i></span>
+  <span>Chat with us</span>
+</a>
 </body>
 </html>
