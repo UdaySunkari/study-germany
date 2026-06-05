@@ -1872,6 +1872,7 @@
       { type: 'country', name: 'Canada', flag: 'assets/flags/ca.svg',           emoji: '🇨🇦', meta: '240+ institutions · 3 intakes', tag: 'PGWP', ico: 'world' },
       { type: 'country', name: 'Australia', flag: 'assets/flags/au.svg',        emoji: '🇦🇺', meta: '43 universities · Feb / July', tag: 'PR pathway', ico: 'world' },
       { type: 'country', name: 'Germany', flag: 'assets/flags/de.svg',          emoji: '🇩🇪', meta: '400+ institutions · 2 intakes', tag: 'Low fees', ico: 'world' },
+      { type: 'page', name: 'Studienkolleg (after Class 12)', flag: 'assets/flags/de.svg', meta: '1-year foundation · FSP · partner colleges', tag: 'Bachelor route', ico: 'school', url: 'germany.html#studienkolleg' },
       { type: 'country', name: 'Ireland', flag: 'assets/flags/ie.svg',          emoji: '🇮🇪', meta: '34 institutions · Sept', tag: '2-yr stay-back', ico: 'world' },
       { type: 'country', name: 'New Zealand', flag: 'assets/flags/nz.svg',      emoji: '🇳🇿', meta: '8 universities · Feb / July', tag: 'Work rights', ico: 'world' },
       { type: 'country', name: 'France', flag: 'assets/flags/fr.svg',           emoji: '🇫🇷', meta: '3,500+ programs', tag: 'Schengen', ico: 'world' },
@@ -1919,6 +1920,7 @@
         }
         groups = [
           { label: 'Countries',    items: match.filter(c => c.type === 'country') },
+          { label: 'Pathways',     items: match.filter(c => c.type === 'page') },
           { label: 'Universities', items: match.filter(c => c.type === 'uni') },
           { label: 'Courses',      items: match.filter(c => c.type === 'course') },
         ].filter(g => g.items.length);
@@ -1927,7 +1929,7 @@
       out.innerHTML = groups.map(g => `
         <div class="search-cat">${g.label}</div>
         ${g.items.map(it => `
-          <div class="search-row" role="option" data-name="${escapeHtml(it.name)}">
+          <div class="search-row" role="option" data-name="${escapeHtml(it.name)}"${it.url ? ` data-url="${it.url}"` : ''}>
             <div class="row-ico">${iconFor(it)}</div>
             <div class="row-main">
               <div class="row-name">${highlight(it.name, query)}</div>
@@ -1958,6 +1960,8 @@
       if(!row) return;
       input.value = row.dataset.name;
       close();
+      // direct deep links (e.g. Studienkolleg)
+      if(row.dataset.url){ window.location.href = row.dataset.url; return; }
       // Germany has a dedicated detail page
       if(row.dataset.name && row.dataset.name.toLowerCase().indexOf('germany') !== -1){ window.location.href = 'germany.html'; return; }
       if(row.dataset.name && (row.dataset.name.toLowerCase().indexOf('czech') !== -1 || row.dataset.name.toLowerCase().indexOf('charles') !== -1)){ window.location.href = 'czech.html'; return; }
