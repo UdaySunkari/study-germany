@@ -1219,8 +1219,8 @@
     <div class="section-head" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
       <div class="left" style="text-align:center;">
         <span class="kicker">Destinations</span>
-        <h2 class="display">Germany now.<br /><em>Europe next.</em></h2>
-        <p style="max-width:54ch; margin:14px auto 0; color:var(--muted); font-size:15px; line-height:1.6;">We specialise in Germany — it's where we are and where we've done it ourselves. These are the next destinations we're opening for Indian students, starting across Europe.</p>
+        <h2 class="display">Germany &amp; Czechia now.<br /><em>Europe next.</em></h2>
+        <p style="max-width:54ch; margin:14px auto 0; color:var(--muted); font-size:15px; line-height:1.6;">We specialise in Germany and the Czech Republic — affordable, English-friendly Europe, guided by people who live here. More destinations are opening for Indian students soon.</p>
       </div>
     </div>
 
@@ -1246,6 +1246,20 @@
             <div class="sub">400+ public universities · Oct &amp; April intakes</div>
           </div>
           <div class="glass-pill">Public, low fees</div>
+        </div>
+      </a>
+
+      <a href="czech.html" class="dest-card live" data-region="europe">
+        <div class="dest-bg" style="background-image:url('assets/prague-aerial.webp')"></div>
+        <div class="scrim"></div>
+        <div class="flag" aria-hidden="true">🇨🇿</div>
+        <div class="corner-badge">Open now</div>
+        <div class="meta">
+          <div>
+            <h3>Czech Republic</h3>
+            <div class="sub">Prague &amp; Brno · Sept intake</div>
+          </div>
+          <div class="glass-pill">Very low fees</div>
         </div>
       </a>
 
@@ -1316,20 +1330,6 @@
             <div class="sub">3 intakes a year</div>
           </div>
           <div class="glass-pill">PGWP pathway</div>
-        </div>
-      </a>
-
-      <a href="https://wa.me/4915292621905?text=Hi%21%20I%27m%20an%20Indian%20student%20interested%20in%20studying%20in%20United%20States.%20Please%20add%20me%20to%20the%20waitlist." class="dest-card soon" data-region="english" target="_blank" rel="noopener">
-        <div class="dest-bg" style="background-image:url('https://picsum.photos/seed/newyork-skyline/700/900')"></div>
-        <div class="scrim"></div>
-        <div class="flag" aria-hidden="true">🇺🇸</div>
-        <div class="corner-badge">Coming soon</div>
-        <div class="meta">
-          <div>
-            <h3>United States</h3>
-            <div class="sub">Fall / Spring intakes</div>
-          </div>
-          <div class="glass-pill">F-1 visa · OPT</div>
         </div>
       </a>
 
@@ -1639,7 +1639,7 @@
                 <div class="cselect-list">
                   <div class="copt" data-value="any" data-emoji="🌍">🌍<span>Not sure yet — surprise me</span><i class="ti ti-check check"></i></div>
                   <div class="copt" data-value="uk"     data-emoji="🇬🇧">🇬🇧<span>United Kingdom</span><i class="ti ti-check check"></i></div>
-                  <div class="copt" data-value="us"     data-emoji="🇺🇸">🇺🇸<span>United States</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="cz"     data-emoji="🇨🇿">🇨🇿<span>Czech Republic</span><i class="ti ti-check check"></i></div>
                   <div class="copt" data-value="ca"     data-emoji="🇨🇦">🇨🇦<span>Canada</span><i class="ti ti-check check"></i></div>
                   <div class="copt" data-value="au"     data-emoji="🇦🇺">🇦🇺<span>Australia</span><i class="ti ti-check check"></i></div>
                   <div class="copt" data-value="ie"     data-emoji="🇮🇪">🇮🇪<span>Ireland</span><i class="ti ti-check check"></i></div>
@@ -1756,7 +1756,7 @@
       <div>
         <h5>Destinations</h5>
         <a href="#">United Kingdom</a>
-        <a href="#">United States</a>
+        <a href="czech.html">Czech Republic</a>
         <a href="#">Canada</a>
         <a href="#">Australia</a>
         <a href="#">Ireland</a>
@@ -1858,7 +1858,7 @@
 
     const corpus = [
       { type: 'country', name: 'United Kingdom',   emoji: '🇬🇧', meta: '160+ universities · Sept / Jan', tag: 'From £14k', ico: 'world' },
-      { type: 'country', name: 'United States',    emoji: '🇺🇸', meta: '800+ universities · Fall / Spring', tag: 'F-1 visa', ico: 'world' },
+      { type: 'country', name: 'Czech Republic',   emoji: '🇨🇿', meta: 'Prague & Brno · Sept intake', tag: 'Very low fees', ico: 'world' },
       { type: 'country', name: 'Canada',           emoji: '🇨🇦', meta: '240+ institutions · 3 intakes', tag: 'PGWP', ico: 'world' },
       { type: 'country', name: 'Australia',        emoji: '🇦🇺', meta: '43 universities · Feb / July', tag: 'PR pathway', ico: 'world' },
       { type: 'country', name: 'Germany',          emoji: '🇩🇪', meta: '400+ institutions · 2 intakes', tag: 'Low fees', ico: 'world' },
@@ -1868,7 +1868,7 @@
       { type: 'uni', name: 'University of Oxford',          emoji: '🎓', meta: 'United Kingdom · Russell Group', tag: 'Top 5', ico: 'school' },
       { type: 'uni', name: 'Imperial College London',       emoji: '🎓', meta: 'United Kingdom · STEM-focused',  tag: 'Top 10', ico: 'school' },
       { type: 'uni', name: 'University of Toronto',         emoji: '🎓', meta: 'Canada · U15',                   tag: 'Top 20', ico: 'school' },
-      { type: 'uni', name: 'NYU',                           emoji: '🎓', meta: 'United States · New York',       tag: 'Top 40', ico: 'school' },
+      { type: 'uni', name: 'Charles University',            emoji: '🎓', meta: 'Czech Republic · Prague',       tag: 'Est. 1348', ico: 'school' },
       { type: 'uni', name: 'Monash University',             emoji: '🎓', meta: 'Australia · Group of Eight',     tag: 'Top 50', ico: 'school' },
       { type: 'uni', name: 'Trinity College Dublin',        emoji: '🎓', meta: 'Ireland · Sept intake',          tag: 'Top 90', ico: 'school' },
       { type: 'uni', name: 'TU Munich',                     emoji: '🎓', meta: 'Germany · English programs',     tag: 'Top 30', ico: 'school' },
@@ -1950,6 +1950,7 @@
       close();
       // Germany has a dedicated detail page
       if(row.dataset.name && row.dataset.name.toLowerCase().indexOf('germany') !== -1){ window.location.href = 'germany.html'; return; }
+      if(row.dataset.name && (row.dataset.name.toLowerCase().indexOf('czech') !== -1 || row.dataset.name.toLowerCase().indexOf('charles') !== -1)){ window.location.href = 'czech.html'; return; }
       // smooth scroll to destinations
       document.getElementById('destinations').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
