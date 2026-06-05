@@ -180,9 +180,20 @@
     background: linear-gradient(180deg, #1a1a22 0%, #0a0a0c 100%);
     color: #fff; box-shadow: 0 6px 16px -6px rgba(10,10,12,0.45);
   }
-  #signupForm{ display:none; }
-  .form-card.signup #loginForm{ display:none; }
-  .form-card.signup #signupForm{ display:block; }
+  .form-stack{
+    display: grid;
+    overflow: hidden;
+    transition: height .45s cubic-bezier(.2,.7,.2,1);
+  }
+  .form-stack > form{
+    grid-area: 1 / 1;
+    align-self: start;
+    transition: opacity .35s cubic-bezier(.2,.7,.2,1), transform .45s cubic-bezier(.2,.7,.2,1), visibility .35s;
+  }
+  #signupForm{ opacity: 0; transform: translateY(14px); visibility: hidden; pointer-events: none; }
+  .form-card.signup #loginForm{ opacity: 0; transform: translateY(-14px); visibility: hidden; pointer-events: none; }
+  .form-card.signup #signupForm{ opacity: 1; transform: none; visibility: visible; pointer-events: auto; }
+  #cardSub{ min-height: 2.9em; }
   .msg{ margin-top:14px; padding:10px 14px; border-radius:10px; font-size:13px; display:none; }
   .msg.err{ display:block; background:rgba(179,65,65,0.08); border:1px solid rgba(179,65,65,0.2); color:#b34141; }
   .msg.ok{ display:block; background:rgba(31,138,91,0.08); border:1px solid rgba(31,138,91,0.25); color:#1f8a5b; }
@@ -353,6 +364,7 @@
 
         <div class="divider">or with email</div>
 
+        <div class="form-stack" id="formStack">
         <form id="loginForm" autocomplete="on" onsubmit="return handleLogin(event)">
           <div class="field">
             <label for="email">Email</label>
@@ -417,6 +429,7 @@
           </button>
           <p style="font-size:12.5px; color:var(--muted); text-align:center; margin:14px 0 0;">Free for students. By continuing you agree to our <a href="terms.html" style="border-bottom:1px solid var(--line-2);">Terms</a> and <a href="privacy.html" style="border-bottom:1px solid var(--line-2);">Privacy policy</a>.</p>
         </form>
+        </div>
 
         <div class="msg" id="formMsg" role="status"></div>
 
@@ -470,7 +483,21 @@
       ? 'Already have an account? <a href="#" onclick="setMode(\'login\'); return false;">Sign in</a> instead.'
       : 'New to Vayas? <a href="#" onclick="setMode(\'signup\'); return false;">Create an account</a> — it\u2019s free.';
     hideMsg();
+    syncStackHeight();
   }
+
+  function syncStackHeight(){
+    const stack = document.getElementById('formStack');
+    if(!stack) return;
+    const active = document.querySelector('.form-card').classList.contains('signup')
+      ? document.getElementById('signupForm') : document.getElementById('loginForm');
+    stack.style.height = active.offsetHeight + 'px';
+  }
+  window.addEventListener('resize', syncStackHeight);
+  window.addEventListener('load', syncStackHeight);
+  // fonts shift heights slightly; re-sync once they're ready
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncStackHeight);
+  syncStackHeight();
 
   function showMsg(msg, kind){
     const el = document.getElementById('formMsg');
