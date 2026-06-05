@@ -466,31 +466,17 @@
       <!-- ===== MESSAGES (LIVE) ===== -->
       <section class="view" data-view="messages">
         <div class="view-head">
-          <div class="left"><h2>Messages</h2><p>Live chat with your clients. <span class="live-badge"><span class="pulse"></span> Real-time</span></p></div>
+          <div class="left"><h2>Messages</h2><p>In-app client messaging is coming with the data layer.</p></div>
         </div>
-        <div class="chat-shell">
-          <div class="chat-list">
-            <div class="lh"><i class="ti ti-search"></i><input type="text" id="chatSearch" placeholder="Search clients…" /></div>
-            <div class="items" id="chatItems"></div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; max-width:920px;">
+          <div class="panel" style="background:var(--glass-strong);border:1px solid var(--line);border-radius:18px;padding:22px;">
+            <h3 style="margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:20px;"><i class="ti ti-brand-whatsapp"></i> Today: WhatsApp</h3>
+            <p style="color:var(--muted);font-size:13.5px;margin:0 0 14px;">Until in-app chat ships, students reach you on the business WhatsApp. Same conversations, no missed messages.</p>
+            <a href="https://wa.me/4915292621905" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:#0a0a0c;color:#fff;font-size:14px;">Open WhatsApp</a>
           </div>
-          <div class="chat-main">
-            <div class="chat-head">
-              <div class="av online" id="chatHeadAv" style="background:linear-gradient(135deg,#2a2a35,#5b5b66);"></div>
-              <div class="info"><div class="name" id="chatHeadName">Aanya Raj</div><div class="sub online" id="chatHeadSub">Online · UCL · MSc Data Science</div></div>
-              <div class="actions">
-                <button class="icon-btn" data-modal="clientDetail" id="chatViewClient" aria-label="View client"><i class="ti ti-user"></i></button>
-                <button class="icon-btn" aria-label="Call"><i class="ti ti-phone"></i></button>
-                <button class="icon-btn" aria-label="Info"><i class="ti ti-info-circle"></i></button>
-              </div>
-            </div>
-            <div class="chat-stream" id="stream"></div>
-            <div class="composer">
-              <div class="row">
-                <textarea id="composerInput" placeholder="Message your client…" rows="1"></textarea>
-                <div class="tools"><button class="icon-btn" aria-label="Attach"><i class="ti ti-paperclip"></i></button></div>
-                <button class="send" id="sendBtn" disabled aria-label="Send"><i class="ti ti-arrow-up"></i></button>
-              </div>
-            </div>
+          <div class="panel" style="background:var(--glass-strong);border:1px solid var(--line);border-radius:18px;padding:22px;">
+            <h3 style="margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:20px;"><i class="ti ti-sparkles"></i> Next: built-in chat</h3>
+            <p style="color:var(--muted);font-size:13.5px;margin:0;">Secure in-dashboard messaging with each client — stored per student, replied from this console. Ships together with real clients, applications and invoices on Supabase.</p>
           </div>
         </div>
       </section>
@@ -567,7 +553,6 @@
 <div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modalEl"></div></div>
 <div class="toast" id="toast"><i class="ti ti-check"></i><span id="toastMsg">Saved</span></div>
 
-<script src="livechat.js"></script>
 <script src="admin-data.js"></script>
 <script src="admin-app.js"></script>
 <script>

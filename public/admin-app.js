@@ -333,150 +333,13 @@
     if (local) { local.value = q; local.dispatchEvent(new Event('input')); }
   });
 
-  // ============================================================================
-  //  LIVE CHAT
-  // ============================================================================
-  let currentThread = 'aanya';
-  const byThreadId = {};
-  AdminData.clients.forEach((c) => (byThreadId[c.threadId] = c));
-
-  LiveChat.init(ME);
-
-  // Seed the demo thread (shared localStorage with the student dashboard) once.
-  // (No seeded/example conversation — threads start empty and fill live.)
-  function seedThreadIfEmpty() { /* intentionally empty */ }
-
-  function renderChatList() {
-    const items = AdminData.clients.map((c) => {
-      const hist = LiveChat.history(c.threadId);
-      const last = hist[hist.length - 1];
-      const unread = hist.filter((m) => m.from === 'student' && !m._seen).length;
-      return `<div class="chat-item ${c.id === currentThread ? 'active' : ''}" data-client="${c.id}">
-        <div class="av ${c.online ? 'online' : ''}" style="background-image:url('${c.avatar}')"></div>
-        <div class="body">
-          <div class="row1"><span class="name">${esc(c.name)}</span><span class="time">${last ? timeAgo(last.ts) : ''}</span></div>
-          <div class="row1"><span class="preview">${esc(last ? (last.from === 'admin' ? 'You: ' : '') + last.body : c.course)}</span>${unread ? `<span class="unread-badge">${unread}</span>` : ''}</div>
-        </div>
-      </div>`;
-    }).join('');
-    $('#chatItems').innerHTML = items;
-  }
-
-  function timeAgo(ts) {
-    const d = Date.now() - ts;
-    if (d < 60000) return 'now';
-    if (d < 3600000) return Math.floor(d / 60000) + 'm';
-    if (d < 86400000) return Math.floor(d / 3600000) + 'h';
-    return Math.floor(d / 86400000) + 'd';
-  }
-
-  function msgHTML(m) {
-    const mine = m.from === 'admin' || m.from === 'counsellor';
-    const client = byThreadId['client:' + currentThread] || AdminData.clients[0];
-    const av = mine ? ME.avatar : client.avatar;
-    const att = m.attachment ? `<div style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(10,10,12,0.04);border:1px solid var(--line);border-radius:12px;margin-top:6px;cursor:pointer"><i class="ti ti-file-text" style="font-size:22px"></i><div><div style="font-size:13px;font-weight:500">${esc(m.attachment.name)}</div><div style="font-size:11.5px;color:var(--muted)">${esc(m.attachment.size)}</div></div></div>` : '';
-    return `<div class="msg ${mine ? 'me' : 'them'}">
-      ${mine ? '' : `<div class="av" style="background-image:url('${av}')"></div>`}
-      <div><div class="bubble">${esc(m.body)}</div>${att}<div class="meta">${new Date(m.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${mine ? ' · <i class="ti ti-checks"></i>' : ''}</div></div>
-    </div>`;
-  }
-
-  function renderStream() {
-    const tid = 'client:' + currentThread;
-    const hist = LiveChat.history(tid);
-    const stream = $('#stream');
-    if (!hist.length) {
-      const c = AdminData.clients.find((x) => x.id === currentThread) || AdminData.clients[0];
-      stream.innerHTML = `<div style="margin:auto;text-align:center;color:var(--muted);padding:40px"><i class="ti ti-messages" style="font-size:34px;display:block;margin-bottom:10px;color:var(--muted-2)"></i>No messages yet with ${esc(c.name)}.<br>Say hello — it sends live.</div>`;
-      return;
-    }
-    stream.innerHTML = hist.map(msgHTML).join('');
-    scrollBottom();
-    // mark student msgs seen
-    hist.forEach((m) => (m._seen = true));
-  }
-
-  function openThread(clientId) {
-    currentThread = clientId;
-    const c = AdminData.clients.find((x) => x.id === clientId) || AdminData.clients[0];
-    seedThreadIfEmpty(c);
-    LiveChat.open(c.threadId);
-    $('#chatHeadName').textContent = c.name;
-    $('#chatHeadAv').style.backgroundImage = `url('${c.avatar}')`;
-    $('#chatHeadAv').classList.toggle('online', c.online);
-    $('#chatHeadSub').textContent = (c.online ? 'Online · ' : 'Last seen recently · ') + c.course;
-    $('#chatHeadSub').classList.toggle('online', c.online);
-    renderChatList();
-    renderStream();
-  }
-
-  function scrollBottom() { const s = $('#stream'); if (s) s.scrollTop = s.scrollHeight; }
-
-  // Composer
-  const composer = $('#composerInput');
-  const sendBtn = $('#sendBtn');
-  composer.addEventListener('input', () => {
-    sendBtn.disabled = !composer.value.trim();
-    composer.style.height = 'auto';
-    composer.style.height = Math.min(140, composer.scrollHeight) + 'px';
-    LiveChat.typing('client:' + currentThread, !!composer.value.trim());
-  });
-  composer.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(); } });
-  sendBtn.addEventListener('click', doSend);
-  function doSend() {
-    const body = composer.value.trim();
-    if (!body) return;
-    LiveChat.send({ threadId: 'client:' + currentThread, body });
-    composer.value = ''; composer.style.height = 'auto'; sendBtn.disabled = true;
-    LiveChat.typing('client:' + currentThread, false);
-    renderStream();
-    renderChatList();
-  }
-
-  // Incoming live messages
-  let typingEl = null;
-  LiveChat.on('message', ({ threadId }) => {
-    if (threadId === 'client:' + currentThread) { removeTyping(); renderStream(); }
-    renderChatList();
-    updateUnreadBadge();
-  });
-  LiveChat.on('typing', ({ threadId, from, typing }) => {
-    if (threadId !== 'client:' + currentThread || from === 'admin') return;
-    if (typing) showTyping(); else removeTyping();
-  });
-  function showTyping() {
-    if (typingEl) return;
-    const c = AdminData.clients.find((x) => x.id === currentThread);
-    typingEl = document.createElement('div');
-    typingEl.className = 'typing-row';
-    typingEl.innerHTML = `<div class="msg them" style="max-width:none"><div class="av" style="background-image:url('${c.avatar}')"></div><div><div class="typing"><span></span><span></span><span></span></div></div></div>`;
-    $('#stream').appendChild(typingEl);
-    scrollBottom();
-  }
-  function removeTyping() { if (typingEl) { typingEl.remove(); typingEl = null; } }
-
+  // Live chat removed — real client messaging ships with the Supabase data layer.
+  function openThread() {}
+  function scrollBottom() {}
   function updateUnreadBadge() {
-    let total = 0;
-    AdminData.clients.forEach((c) => {
-      total += LiveChat.history(c.threadId).filter((m) => m.from === 'student' && !m._seen).length;
-    });
-    $('#msgBadge').textContent = total || '';
-    $('#kpiUnread').textContent = total;
-    $('#msgBadge').style.display = total ? '' : 'none';
+    const b = $('#msgBadge'); if (b) { b.textContent = ''; b.style.display = 'none'; }
+    const k = $('#kpiUnread'); if (k) k.textContent = '0';
   }
-
-  // chat list click + search
-  $('#chatItems').addEventListener('click', (e) => {
-    const item = e.target.closest('.chat-item');
-    if (item) openThread(item.dataset.client);
-  });
-  $('#chatSearch').addEventListener('input', () => {
-    const q = $('#chatSearch').value.trim().toLowerCase();
-    $$('#chatItems .chat-item').forEach((it) => {
-      const name = it.querySelector('.name').textContent.toLowerCase();
-      it.style.display = !q || name.includes(q) ? '' : 'none';
-    });
-  });
 
   // ── Boot ──────────────────────────────────────────────────────
   renderClients();
@@ -485,14 +348,5 @@
   renderCounsellors();
   renderUnis();
   wireAllFilters();
-  // purge any old demo/auto messages left in this browser
-  AdminData.clients.forEach((c) => {
-    const key = 'meridian_chat_' + c.threadId;
-    let list = [];
-    try { list = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
-    const cleaned = list.filter((m) => !/^(seed_|auto_)/.test(m.id || ''));
-    if (cleaned.length !== list.length) localStorage.setItem(key, JSON.stringify(cleaned));
-  });
-  openThread('aanya');
   updateUnreadBadge();
 })();

@@ -52,17 +52,17 @@ const AdminData = (() => {
 
   // ── Clients (read-only demo) ────────────────────────────────
   const clients = [
-    { id: 'aanya',  name: 'Aanya Raj',     email: 'aanya.raj@example.com', avatar: 'https://i.pravatar.cc/120?img=47', counsellor: 'Riya Sharma',  apps: 5, stage: 'offer',  course: 'UCL · MSc Data Science', online: true,
+    { id: 'aanya',  name: 'Aanya Raj',     email: 'aanya.raj@example.com', avatar: '', counsellor: 'Riya Sharma',  apps: 5, stage: 'offer',  course: 'UCL · MSc Data Science', online: true,
       stats: { applications: 5, offers: 2, documents: 14 }, threadId: 'client:aanya' },
-    { id: 'diego',  name: 'Diego Morales', email: 'diego.m@example.com',   avatar: 'https://i.pravatar.cc/120?img=12', counsellor: 'Marco Bellini', apps: 3, stage: 'active', course: 'U of Toronto · Civil Eng', online: false,
+    { id: 'diego',  name: 'Diego Morales', email: 'diego.m@example.com',   avatar: '', counsellor: 'Marco Bellini', apps: 3, stage: 'active', course: 'U of Toronto · Civil Eng', online: false,
       stats: { applications: 3, offers: 1, documents: 9 }, threadId: 'client:diego' },
-    { id: 'mei',    name: 'Mei Lin',       email: 'mei.lin@example.com',   avatar: 'https://i.pravatar.cc/120?img=32', counsellor: 'Sara Okonkwo', apps: 2, stage: 'active', course: 'Monash · MBA', online: true,
+    { id: 'mei',    name: 'Mei Lin',       email: 'mei.lin@example.com',   avatar: '', counsellor: 'Sara Okonkwo', apps: 2, stage: 'active', course: 'Monash · MBA', online: true,
       stats: { applications: 2, offers: 0, documents: 7 }, threadId: 'client:mei' },
-    { id: 'tobi',   name: 'Tobi Adeyemi',  email: 'tobi.a@example.com',    avatar: 'https://i.pravatar.cc/120?img=68', counsellor: 'Riya Sharma',  apps: 4, stage: 'offer',  course: 'NYU · MFA Film', online: false,
+    { id: 'tobi',   name: 'Tobi Adeyemi',  email: 'tobi.a@example.com',    avatar: '', counsellor: 'Riya Sharma',  apps: 4, stage: 'offer',  course: 'NYU · MFA Film', online: false,
       stats: { applications: 4, offers: 3, documents: 11 }, threadId: 'client:tobi' },
-    { id: 'rahul',  name: 'Rahul Patel',   email: 'rahul.p@example.com',   avatar: 'https://i.pravatar.cc/120?img=15', counsellor: 'Marco Bellini', apps: 2, stage: 'new',    course: 'TU Munich · MS CS', online: false,
+    { id: 'rahul',  name: 'Rahul Patel',   email: 'rahul.p@example.com',   avatar: '', counsellor: 'Marco Bellini', apps: 2, stage: 'new',    course: 'TU Munich · MS CS', online: false,
       stats: { applications: 2, offers: 0, documents: 4 }, threadId: 'client:rahul' },
-    { id: 'sara',   name: 'Sara Khan',     email: 'sara.k@example.com',    avatar: 'https://i.pravatar.cc/120?img=23', counsellor: 'Sara Okonkwo', apps: 1, stage: 'new',    course: 'Trinity · MSc', online: true,
+    { id: 'sara',   name: 'Sara Khan',     email: 'sara.k@example.com',    avatar: '', counsellor: 'Sara Okonkwo', apps: 1, stage: 'new',    course: 'Trinity · MSc', online: true,
       stats: { applications: 1, offers: 0, documents: 3 }, threadId: 'client:sara' },
   ];
 
@@ -88,9 +88,9 @@ const AdminData = (() => {
   ];
 
   const counsellors = [
-    { name: 'Riya Sharma',   avatar: 'https://i.pravatar.cc/120?img=45', specialty: 'Applications & strategy', clients: 2, online: true },
-    { name: 'Marco Bellini', avatar: 'https://i.pravatar.cc/120?img=12', specialty: 'SOPs & essays',           clients: 2, online: false },
-    { name: 'Sara Okonkwo',  avatar: 'https://i.pravatar.cc/120?img=33', specialty: 'Visas & documentation',   clients: 2, online: true },
+    { name: 'Riya Sharma',   avatar: '', specialty: 'Applications & strategy', clients: 2, online: true },
+    { name: 'Marco Bellini', avatar: '', specialty: 'SOPs & essays',           clients: 2, online: false },
+    { name: 'Sara Okonkwo',  avatar: '', specialty: 'Visas & documentation',   clients: 2, online: true },
   ];
 
   return {
