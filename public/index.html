@@ -1905,19 +1905,33 @@
       indicator.style.transform = `translateX(${tr.left - wr.left - 6}px)`;
     }
 
+    // Pick how many cards are "featured" (wide) so the grid always tiles cleanly:
+    // rows are either 2 featured (span 3) or 3 regular (span 2) — never a stranded card.
+    function balanceFeatured(visible){
+      const n = visible.length;
+      let F = 0;
+      if(n % 3 === 2) F = 2;            // e.g. 8 -> 2 featured + rows of 3
+      else if(n % 3 === 1) F = (n >= 4 ? 4 : 0);  // e.g. 4 -> all featured (2+2)
+      else F = 0;                       // e.g. 6 -> clean rows of 3
+      visible.forEach((c, i) => c.classList.toggle('front', i < F));
+    }
+
     function filter(f){
+      const visible = [];
       cards.forEach((c, i) => {
         const ok = f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f);
         c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1)';
         c.style.transitionDelay = ok ? (i * 30) + 'ms' : '0ms';
         if(ok){
           c.style.display = '';
+          visible.push(c);
           requestAnimationFrame(() => { c.style.opacity = 1; c.style.transform = 'scale(1) translateY(0)'; });
         } else {
           c.style.opacity = 0; c.style.transform = 'scale(0.96) translateY(6px)';
           setTimeout(() => { if(c.style.opacity === '0') c.style.display = 'none'; }, 400);
         }
       });
+      balanceFeatured(visible);
     }
 
     tabs.forEach(t => {
@@ -1930,6 +1944,7 @@
 
     // init
     const initial = wrap.querySelector('.dest-tab[aria-selected="true"]') || tabs[0];
+    balanceFeatured([...cards].filter(c => { const f = initial.dataset.filter; return f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f); }));
     requestAnimationFrame(() => moveIndicatorTo(initial));
     window.addEventListener('resize', () => {
       const cur = wrap.querySelector('.dest-tab[aria-selected="true"]');
