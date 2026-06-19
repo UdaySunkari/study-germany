@@ -1086,6 +1086,25 @@
     .nav-cta .btn{ padding: 8px 10px; font-size: 12.5px; }
     .nav-cta .btn-dark i{ display: none; } /* drop the arrow icon to save space */
   }
+
+  /* ---------- FOUNDERS ---------- */
+  .founder-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .founder-card{ display:flex; gap:20px; padding:28px; background:var(--glass-strong); border:1px solid var(--line); border-radius:var(--radius); backdrop-filter:blur(22px) saturate(160%); -webkit-backdrop-filter:blur(22px) saturate(160%); box-shadow:var(--shadow-soft); transition:transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s cubic-bezier(.2,.7,.2,1); }
+  .founder-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lift); }
+  .founder-av{ width:84px; height:84px; flex:0 0 84px; border-radius:50%; background:linear-gradient(160deg,#fff,#efe7da); border:1px solid var(--line); box-shadow:0 4px 12px rgba(10,10,12,0.10); display:grid; place-items:center; overflow:hidden; }
+  .founder-av img{ width:100%; height:100%; object-fit:cover; }
+  .founder-body{ flex:1; min-width:0; }
+  .founder-name{ font-family:var(--serif); font-size:26px; line-height:1.05; letter-spacing:-0.01em; }
+  .founder-role{ font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted-2); margin-top:4px; }
+  .founder-story{ color:var(--muted); font-size:14.5px; line-height:1.6; margin:14px 0 0; }
+  .founder-foot{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid var(--line); }
+  .founder-tag{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--ink-2); }
+  .founder-tag svg{ width:15px; height:15px; opacity:.6; }
+  .founder-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-2); border-bottom:1px solid var(--line-2); padding-bottom:1px; }
+  .founder-link:hover{ color:var(--ink); }
+  .founder-link svg{ width:14px; height:14px; }
+  @media (max-width:900px){ .founder-grid{ grid-template-columns:1fr; } }
+  @media (max-width:480px){ .founder-card{ flex-direction:column; } }
 </style>
 </head>
 <body>
@@ -1631,6 +1650,49 @@
   </div>
 </section>
 
+<!-- ============== FOUNDERS ============== -->
+<section id="founders">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="kicker">Who you're working with</span>
+        <h2 class="display">Not a call centre.<br /><em>The two of us.</em></h2>
+      </div>
+      <div class="right">We met at Studienkolleg in Düsseldorf — became best friends, and somewhere in there had one idea between us: help students back home make the move we did. Our degrees pulled us to different cities; the idea, and the friendship, stayed. Message Vayas and you reach one of us directly.</div>
+    </div>
+
+    <div class="founder-grid">
+
+      <article class="founder-card">
+        <div class="founder-av"><img src="assets/uday.webp" alt="Uday Kumar Sunkari" /></div>
+        <div class="founder-body">
+          <div class="founder-name">Uday Kumar Sunkari</div>
+          <div class="founder-role">Co-founder · Germany &amp; APS</div>
+          <p class="founder-story">I came to Germany with a lot of dreams and not much certainty — and I still remember how small I felt back home before any of this worked out. I studied at Studienkolleg Düsseldorf, then Digital Technology &amp; Management at OTH Amberg-Weiden, where I'm now a working student. I went through it all myself: APS, the blocked account, the visa, finding a flat, the language. Now I help students from back home make the same move — with me beside them, not a script. That's why we started Vayas.</p>
+          <div class="founder-foot">
+            <span class="founder-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg> OTH Amberg-Weiden</span>
+            <a class="founder-link" href="https://www.linkedin.com/in/uday-kumar-sunkari" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.5h3.5V21H3.2V8.5Zm6.1 0h3.36v1.7h.05c.47-.84 1.6-1.72 3.3-1.72 3.53 0 4.18 2.2 4.18 5.05V21h-3.5v-5.5c0-1.3-.02-2.98-1.82-2.98-1.82 0-2.1 1.42-2.1 2.88V21H9.3V8.5Z"/></svg> LinkedIn</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="founder-card">
+        <div class="founder-av"><img src="assets/namish.webp" alt="Namish Nethi" /></div>
+        <div class="founder-body">
+          <div class="founder-name">Namish Nethi</div>
+          <div class="founder-role">Co-founder · Outreach &amp; negotiation</div>
+          <p class="founder-story">Like Uday, I came to Germany chasing something bigger than what I'd left behind — and I'm a working student too, studying International Business at Hochschule Bochum. My side is people: sales, negotiation and marketing. In plain terms, I'm the one who makes sure your case is heard, your options are pushed for, and that talking to Vayas never feels like a sales pitch. We've both done this the hard way — now we do it for you.</p>
+          <div class="founder-foot">
+            <span class="founder-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg> Hochschule Bochum</span>
+            <a class="founder-link" href="https://www.linkedin.com/in/namish-nethi/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.5h3.5V21H3.2V8.5Zm6.1 0h3.36v1.7h.05c.47-.84 1.6-1.72 3.3-1.72 3.53 0 4.18 2.2 4.18 5.05V21h-3.5v-5.5c0-1.3-.02-2.98-1.82-2.98-1.82 0-2.1 1.42-2.1 2.88V21H9.3V8.5Z"/></svg> LinkedIn</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============== CONSULT ============== -->
 <section id="consult">
   <div class="wrap">
@@ -1672,19 +1734,14 @@
               <div class="cselect-panel">
                 <div class="cselect-list">
                   <div class="copt" data-value="any" data-emoji="🌍">🌍<span>Not sure yet — surprise me</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="uk" data-flag="assets/flags/gb.svg"><img class="flag-img" src="assets/flags/gb.svg" alt="" /><span>United Kingdom</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="cz" data-flag="assets/flags/cz.svg"><img class="flag-img" src="assets/flags/cz.svg" alt="" /><span>Czech Republic</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="ca" data-flag="assets/flags/ca.svg"><img class="flag-img" src="assets/flags/ca.svg" alt="" /><span>Canada</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="au" data-flag="assets/flags/au.svg"><img class="flag-img" src="assets/flags/au.svg" alt="" /><span>Australia</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="ie" data-flag="assets/flags/ie.svg"><img class="flag-img" src="assets/flags/ie.svg" alt="" /><span>Ireland</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="nz" data-flag="assets/flags/nz.svg"><img class="flag-img" src="assets/flags/nz.svg" alt="" /><span>New Zealand</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="de" data-flag="assets/flags/de.svg"><img class="flag-img" src="assets/flags/de.svg" alt="" /><span>Germany</span><i class="ti ti-check check"></i></div>
-                                    <div class="copt" data-value="fr" data-flag="assets/flags/fr.svg"><img class="flag-img" src="assets/flags/fr.svg" alt="" /><span>France</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="de" data-flag="assets/flags/de.svg"><img class="flag-img" src="assets/flags/de.svg" alt="" /><span>Germany</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="cz" data-flag="assets/flags/cz.svg"><img class="flag-img" src="assets/flags/cz.svg" alt="" /><span>Czech Republic</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="ie" data-flag="assets/flags/ie.svg"><img class="flag-img" src="assets/flags/ie.svg" alt="" /><span>Ireland</span><i class="ti ti-check check"></i></div>
                   <div class="copt" data-value="nl" data-flag="assets/flags/nl.svg"><img class="flag-img" src="assets/flags/nl.svg" alt="" /><span>Netherlands</span><i class="ti ti-check check"></i></div>
-                  <div class="copt" data-value="se" data-flag="assets/flags/se.svg"><img class="flag-img" src="assets/flags/se.svg" alt="" /><span>Sweden</span><i class="ti ti-check check"></i></div>
-                  <div class="copt" data-value="ch" data-flag="assets/flags/ch.svg"><img class="flag-img" src="assets/flags/ch.svg" alt="" /><span>Switzerland</span><i class="ti ti-check check"></i></div>
-                  <div class="copt" data-value="sg" data-flag="assets/flags/sg.svg"><img class="flag-img" src="assets/flags/sg.svg" alt="" /><span>Singapore</span><i class="ti ti-check check"></i></div>
-                  <div class="copt" data-value="jp" data-flag="assets/flags/jp.svg"><img class="flag-img" src="assets/flags/jp.svg" alt="" /><span>Japan</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="fr" data-flag="assets/flags/fr.svg"><img class="flag-img" src="assets/flags/fr.svg" alt="" /><span>France</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="uk" data-flag="assets/flags/gb.svg"><img class="flag-img" src="assets/flags/gb.svg" alt="" /><span>United Kingdom</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="hu" data-flag="assets/flags/hu.svg"><img class="flag-img" src="assets/flags/hu.svg" alt="" /><span>Hungary</span><i class="ti ti-check check"></i></div>
+                  <div class="copt" data-value="au" data-flag="assets/flags/au.svg"><img class="flag-img" src="assets/flags/au.svg" alt="" /><span>Australia</span><i class="ti ti-check check"></i></div>
                 </div>
               </div>
             </div>
@@ -1789,12 +1846,12 @@
       </div>
       <div>
         <h5>Destinations</h5>
-        <a href="#destinations">United Kingdom</a>
-        <a href="czech.html">Czech Republic</a>
-        <a href="#destinations">Canada</a>
-        <a href="#destinations">Australia</a>
-        <a href="#destinations">Ireland</a>
         <a href="germany.html">Germany</a>
+        <a href="czech.html">Czech Republic</a>
+        <a href="#destinations">Ireland</a>
+        <a href="#destinations">Netherlands</a>
+        <a href="#destinations">United Kingdom</a>
+        <a href="#destinations">Australia</a>
       </div>
       <div>
         <h5>Services</h5>
@@ -1889,33 +1946,32 @@
     const btn = document.getElementById('heroSearchBtn');
 
     const corpus = [
-      { type: 'country', name: 'United Kingdom', flag: 'assets/flags/gb.svg',   emoji: '🇬🇧', meta: '160+ universities · Sept / Jan', tag: 'From £14k', ico: 'world' },
-      { type: 'country', name: 'Czech Republic', flag: 'assets/flags/cz.svg',   emoji: '🇨🇿', meta: 'Prague & Brno · Sept intake', tag: 'Very low fees', ico: 'world' },
-      { type: 'country', name: 'Canada', flag: 'assets/flags/ca.svg',           emoji: '🇨🇦', meta: '240+ institutions · 3 intakes', tag: 'PGWP', ico: 'world' },
-      { type: 'country', name: 'Australia', flag: 'assets/flags/au.svg',        emoji: '🇦🇺', meta: '43 universities · Feb / July', tag: 'PR pathway', ico: 'world' },
-      { type: 'country', name: 'Germany', flag: 'assets/flags/de.svg',          emoji: '🇩🇪', meta: '400+ institutions · 2 intakes', tag: 'Low fees', ico: 'world' },
-      { type: 'page', name: 'Studienkolleg (after Class 12)', flag: 'assets/flags/de.svg', meta: '1-year foundation · FSP · partner colleges', tag: 'Bachelor route', ico: 'school', url: 'germany.html#studienkolleg' },
-      { type: 'country', name: 'Ireland', flag: 'assets/flags/ie.svg',          emoji: '🇮🇪', meta: '34 institutions · Sept', tag: '2-yr stay-back', ico: 'world' },
-      { type: 'country', name: 'New Zealand', flag: 'assets/flags/nz.svg',      emoji: '🇳🇿', meta: '8 universities · Feb / July', tag: 'Work rights', ico: 'world' },
-      { type: 'country', name: 'France', flag: 'assets/flags/fr.svg',           emoji: '🇫🇷', meta: '3,500+ programs', tag: 'Schengen', ico: 'world' },
-      { type: 'uni', name: 'University of Oxford',          emoji: '🎓', meta: 'United Kingdom · Russell Group', tag: 'Top 5', ico: 'school' },
-      { type: 'uni', name: 'Imperial College London',       emoji: '🎓', meta: 'United Kingdom · STEM-focused',  tag: 'Top 10', ico: 'school' },
-      { type: 'uni', name: 'University of Toronto',         emoji: '🎓', meta: 'Canada · U15',                   tag: 'Top 20', ico: 'school' },
-      { type: 'uni', name: 'Charles University',            emoji: '🎓', meta: 'Czech Republic · Prague',       tag: 'Est. 1348', ico: 'school' },
-      { type: 'uni', name: 'Monash University',             emoji: '🎓', meta: 'Australia · Group of Eight',     tag: 'Top 50', ico: 'school' },
-      { type: 'uni', name: 'Trinity College Dublin',        emoji: '🎓', meta: 'Ireland · Sept intake',          tag: 'Top 90', ico: 'school' },
-      { type: 'uni', name: 'TU Munich',                     emoji: '🎓', meta: 'Germany · English programs',     tag: 'Top 30', ico: 'school' },
-      { type: 'uni', name: 'University of Edinburgh',       emoji: '🎓', meta: 'United Kingdom · Scotland',      tag: 'Top 25', ico: 'school' },
-      { type: 'course', name: 'MSc Data Science',           emoji: '📊', meta: '12 months · UK, US, AU, DE',  tag: 'Course',  ico: 'chart-dots' },
-      { type: 'course', name: 'MBA',                        emoji: '💼', meta: '1–2 years · Global',          tag: 'Course',  ico: 'briefcase' },
-      { type: 'course', name: 'MS Computer Science',        emoji: '💻', meta: '18–24 months · Global',       tag: 'Course',  ico: 'code' },
-      { type: 'course', name: 'BSc Engineering',            emoji: '⚙️', meta: '3–4 years · Global',          tag: 'Course',  ico: 'tools' },
-      { type: 'course', name: 'LLM in International Law',   emoji: '⚖️', meta: '12 months · UK, IE, NL',      tag: 'Course',  ico: 'scale' },
-      { type: 'course', name: 'MA Architecture',            emoji: '🏛️', meta: '2 years · UK, IT, NL',         tag: 'Course',  ico: 'building' },
-      { type: 'course', name: 'MSc Public Health',          emoji: '🩺', meta: '12 months · UK, US, CA',      tag: 'Course',  ico: 'heartbeat' },
+      { type: 'country', name: 'Germany',        flag: 'assets/flags/de.svg', emoji: '\U0001F1E9\U0001F1EA', meta: '400+ public universities \u00b7 Oct & April', tag: 'Low fees',         ico: 'world' },
+      { type: 'page',    name: 'Studienkolleg (after Class 12)', flag: 'assets/flags/de.svg', meta: '1-year foundation \u00b7 FSP \u00b7 partner colleges', tag: 'Bachelor route', ico: 'school', url: 'germany.html#studienkolleg' },
+      { type: 'country', name: 'Czech Republic', flag: 'assets/flags/cz.svg', emoji: '\U0001F1E8\U0001F1FF', meta: 'Prague & Brno \u00b7 Sept intake',         tag: 'Very low fees',    ico: 'world' },
+      { type: 'country', name: 'Ireland',        flag: 'assets/flags/ie.svg', emoji: '\U0001F1EE\U0001F1EA', meta: 'Sept intake \u00b7 English-taught',        tag: '2-yr stay-back',   ico: 'world' },
+      { type: 'country', name: 'Netherlands',    flag: 'assets/flags/nl.svg', emoji: '\U0001F1F3\U0001F1F1', meta: 'Sept / Feb \u00b7 widely English-taught',  tag: 'Orientation year', ico: 'world' },
+      { type: 'country', name: 'France',         flag: 'assets/flags/fr.svg', emoji: '\U0001F1EB\U0001F1F7', meta: 'English-taught programmes available',  tag: 'Schengen',         ico: 'world' },
+      { type: 'country', name: 'United Kingdom', flag: 'assets/flags/gb.svg', emoji: '\U0001F1EC\U0001F1E7', meta: 'Sept / Jan intakes',                  tag: 'Graduate Route',   ico: 'world' },
+      { type: 'country', name: 'Hungary',        flag: 'assets/flags/hu.svg', emoji: '\U0001F1ED\U0001F1FA', meta: 'Budapest \u00b7 Sept intake',              tag: 'Low EU fees',      ico: 'world' },
+      { type: 'country', name: 'Australia',      flag: 'assets/flags/au.svg', emoji: '\U0001F1E6\U0001F1FA', meta: 'Feb / July intakes',                  tag: 'PR points',        ico: 'world' },
+      { type: 'uni', name: 'TU Munich',               emoji: '\U0001F393', meta: 'Germany \u00b7 English programs',     tag: 'Top 30',    ico: 'school' },
+      { type: 'uni', name: 'Charles University',      emoji: '\U0001F393', meta: 'Czech Republic \u00b7 Prague',        tag: 'Est. 1348', ico: 'school' },
+      { type: 'uni', name: 'Trinity College Dublin',  emoji: '\U0001F393', meta: 'Ireland \u00b7 Sept intake',          tag: 'Top 90',    ico: 'school' },
+      { type: 'uni', name: 'University of Oxford',     emoji: '\U0001F393', meta: 'United Kingdom \u00b7 Russell Group', tag: 'Top 5',     ico: 'school' },
+      { type: 'uni', name: 'Imperial College London', emoji: '\U0001F393', meta: 'United Kingdom \u00b7 STEM-focused',  tag: 'Top 10',    ico: 'school' },
+      { type: 'uni', name: 'University of Edinburgh',  emoji: '\U0001F393', meta: 'United Kingdom \u00b7 Scotland',      tag: 'Top 25',    ico: 'school' },
+      { type: 'uni', name: 'Monash University',        emoji: '\U0001F393', meta: 'Australia \u00b7 Group of Eight',     tag: 'Top 50',    ico: 'school' },
+      { type: 'course', name: 'MSc Data Science',         emoji: '\U0001F4CA', meta: '12 months \u00b7 DE, IE, NL', tag: 'Course', ico: 'chart-dots' },
+      { type: 'course', name: 'MBA',                      emoji: '\U0001F4BC', meta: '1\u20132 years \u00b7 Europe',     tag: 'Course', ico: 'briefcase' },
+      { type: 'course', name: 'MS Computer Science',      emoji: '\U0001F4BB', meta: '18\u201324 months \u00b7 Europe',  tag: 'Course', ico: 'code' },
+      { type: 'course', name: 'BSc Engineering',          emoji: '\u2699\uFE0F', meta: '3\u20134 years \u00b7 DE, CZ',     tag: 'Course', ico: 'tools' },
+      { type: 'course', name: 'LLM in International Law', emoji: '\u2696\uFE0F', meta: '12 months \u00b7 IE, NL',     tag: 'Course', ico: 'scale' },
+      { type: 'course', name: 'MA Architecture',          emoji: '\U0001F3DB\uFE0F', meta: '2 years \u00b7 NL, FR',       tag: 'Course', ico: 'building' },
+      { type: 'course', name: 'MSc Public Health',        emoji: '\U0001FA7A', meta: '12 months \u00b7 DE, IE',     tag: 'Course', ico: 'heartbeat' },
     ];
 
-    const trending = ['MSc Data Science', 'United Kingdom', 'Canada', 'MBA'];
+    const trending = ['MSc Data Science', 'Germany', 'United Kingdom', 'MBA'];
 
     function iconFor(item){
       if(item.type === 'country') return item.flag ? `<img class="flag-img" src="${item.flag}" alt="" />` : `<span class="emoji">${item.emoji}</span>`;
