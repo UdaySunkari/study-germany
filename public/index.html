@@ -482,6 +482,14 @@
   .destinations{
     display:grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
   }
+  /* smooth tab switching */
+  .destinations{ transition: opacity .22s ease, height .34s cubic-bezier(.2,.7,.2,1); }
+  .destinations.switching{ opacity: 0; }
+  .dest-card.pre{ opacity: 0; transform: translateY(12px) scale(.985); }
+  @media (prefers-reduced-motion: reduce){
+    .destinations{ transition: none !important; height: auto !important; }
+    .dest-card.pre{ opacity: 1 !important; transform: none !important; }
+  }
   .dest-card{
     position: relative;
     aspect-ratio: 4/5;
@@ -1916,29 +1924,70 @@
       visible.forEach((c, i) => c.classList.toggle('front', i < F));
     }
 
-    function filter(f){
-      const visible = [];
-      cards.forEach((c, i) => {
-        const ok = f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f);
-        c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1)';
-        c.style.transitionDelay = ok ? (i * 30) + 'ms' : '0ms';
-        if(ok){
-          c.style.display = '';
-          visible.push(c);
-          requestAnimationFrame(() => { c.style.opacity = 1; c.style.transform = 'scale(1) translateY(0)'; });
-        } else {
-          c.style.opacity = 0; c.style.transform = 'scale(0.96) translateY(6px)';
-          setTimeout(() => { if(c.style.opacity === '0') c.style.display = 'none'; }, 400);
-        }
+    const grid = document.querySelector('.destinations');
+    const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let seq = 0;
+
+    function visibleFor(f){
+      const v = [];
+      cards.forEach(c => {
+        if(f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f)) v.push(c);
       });
-      balanceFeatured(visible);
+      return v;
+    }
+
+    function applyFilter(f){
+      // Reduced motion (or no grid): swap instantly, no animation.
+      if(!grid || reduceMotion()){
+        cards.forEach(c => {
+          const ok = f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f);
+          c.style.display = ok ? '' : 'none';
+          c.classList.remove('pre');
+        });
+        balanceFeatured(visibleFor(f));
+        return;
+      }
+
+      const my = ++seq;                 // lets a newer click supersede this one
+      const oldH = grid.offsetHeight;
+      grid.style.height = oldH + 'px';  // lock height so the section below can glide
+      grid.classList.add('switching');  // fade the grid out
+
+      setTimeout(() => {
+        if(my !== seq) return;
+        // --- while invisible: show/hide, rebalance, set the cards' pre-reveal state ---
+        const visible = [];
+        cards.forEach(c => {
+          const ok = f === 'all' || (c.dataset.region || '').split(/\s+/).includes(f);
+          if(ok){ c.style.display = ''; c.style.transition = 'none'; c.classList.add('pre'); visible.push(c); }
+          else  { c.style.display = 'none'; }
+        });
+        balanceFeatured(visible);
+
+        // measure the new height, then start from the old one
+        grid.style.height = 'auto';
+        const newH = grid.offsetHeight;
+        grid.style.height = oldH + 'px';
+        void grid.offsetHeight;          // force reflow so 'pre' + 'none' apply
+
+        // --- ease everything back in ---
+        grid.classList.remove('switching');
+        grid.style.height = newH + 'px';
+        visible.forEach((c, i) => {
+          c.style.transition = 'opacity .45s ease, transform .5s cubic-bezier(.2,.7,.2,1)';
+          c.style.transitionDelay = (i * 28) + 'ms';
+          c.classList.remove('pre');
+        });
+
+        setTimeout(() => { if(my === seq) grid.style.height = ''; }, 600);
+      }, 210);
     }
 
     tabs.forEach(t => {
       t.addEventListener('click', () => {
         tabs.forEach(x => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
         moveIndicatorTo(t);
-        filter(t.dataset.filter);
+        applyFilter(t.dataset.filter);
       });
     });
 
