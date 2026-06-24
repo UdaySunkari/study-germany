@@ -8,19 +8,19 @@
 //        • Project API key "anon public" → paste into SUPABASE_ANON below
 //      (The anon key is safe to ship in front-end code — it is meant to be public.)
 //   3. Authentication → Users → "Add user" for each of you (email + password).
-//   4. Put those same admin emails into ADMIN_EMAILS below.
+//   4. Run admin-rls-setup.sql in the Supabase SQL editor. That file grants you
+//      admin, turns on Row-Level Security, and writes the policies that actually
+//      protect the data. Admin status now lives in the database (app_metadata.role),
+//      NOT in this file — so it can't be read off or bypassed from the browser.
 //
-//  That's it — login becomes real and the admin console becomes protected.
-//  Until you fill these in, the site keeps working but the admin gate is OFF
-//  (it will warn in the console instead of locking people out).
+//  That's it — login becomes real and the data becomes protected at the database
+//  layer. The checks in this file are only UX (hide/redirect); the real security
+//  is the RLS policies. Until Supabase is configured the site still works, but the
+//  gate is OFF (it warns in the console instead of locking people out).
 // ============================================================================
 
 const SUPABASE_URL  = 'https://imuazoxpywjpccltyadt.supabase.co';       // e.g. https://abcd1234.supabase.co
 const SUPABASE_ANON = 'sb_publishable_4uNLxDkCUmHcx8yrzo_vnw_5LcqCqZL';  // the long "anon public" key
-const ADMIN_EMAILS  = [                          // only these emails get the admin console
-  'udaykumar.sunkari1@gmail.com',
-  'vayasabroad@gmail.com',
-];
 
 const _configured = !/YOUR_SUPABASE/.test(SUPABASE_URL + SUPABASE_ANON)
   && typeof supabase !== 'undefined';
@@ -62,8 +62,11 @@ const Auth = {
 
   isAdmin(user) {
     if (!user) return false;
-    const list = ADMIN_EMAILS.map((e) => e.toLowerCase());
-    return list.includes((user.email || '').toLowerCase());
+    // Admin status is set on the server (Supabase app_metadata.role) and rides
+    // inside the signed JWT, so it can't be forged from the browser. This check
+    // is only a UX hint for hiding/redirecting — the data itself is protected by
+    // the RLS policies in admin-rls-setup.sql, which Postgres enforces server-side.
+    return (user.app_metadata && user.app_metadata.role) === 'admin';
   },
 
   // Use at the top of a protected page. Redirects to login unless a valid
