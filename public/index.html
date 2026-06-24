@@ -2257,7 +2257,30 @@
 </script>
 
 <script>
-  // Homepage consultation form → opens WhatsApp to your number with the details prefilled.
+  // ── Lead capture ──────────────────────────────────────────────────────────
+  //  Saves every submission to Supabase the moment someone clicks, so the lead
+  //  is kept even if they never finish the WhatsApp step. The publishable key is
+  //  safe to ship (it's public by design) and the table's RLS only allows
+  //  inserts from the public — reading the leads list requires an admin login.
+  const SB_URL  = 'https://imuazoxpywjpccltyadt.supabase.co';
+  const SB_KEY  = 'sb_publishable_4uNLxDkCUmHcx8yrzo_vnw_5LcqCqZL';
+  function saveLead(payload){
+    try {
+      fetch(SB_URL + '/rest/v1/leads', {
+        method: 'POST',
+        headers: {
+          'apikey': SB_KEY,
+          'Authorization': 'Bearer ' + SB_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload),
+        keepalive: true          // completes even if the tab navigates away
+      }).catch(() => {});         // never let a failed save block the user
+    } catch (_) {}
+  }
+
+  // Homepage consultation form → save the lead, then open WhatsApp prefilled.
   function submitLead(e){
     e.preventDefault();
     const NUMBER = '4915292621905';
@@ -2267,13 +2290,26 @@
       if (!el || el.querySelector('.placeholder')) return '';
       return el.textContent.trim();
     };
-    const name = [val('fn'), val('ln')].filter(Boolean).join(' ');
-    let msg = "Hi Vayas! I'd like to book a free consultation.";
-    if (name)        msg += '\nName: ' + name;
-    if (val('em'))   msg += '\nEmail: ' + val('em');
-    if (sel('csDest')) msg += '\nDestination: ' + sel('csDest');
-    if (sel('csLevel')) msg += '\nLevel: ' + sel('csLevel');
+    const fn = val('fn'), ln = val('ln'), em = val('em');
+    const dest = sel('csDest'), level = sel('csLevel');
+    const name = [fn, ln].filter(Boolean).join(' ');
 
+    // 1) Save first — this is the part that stops leads from leaking.
+    saveLead({
+      type: 'consultation',
+      first_name: fn || null,
+      last_name:  ln || null,
+      email:      em || null,
+      destination: dest || null,
+      level:      level || null
+    });
+
+    // 2) Then open WhatsApp (kept in the click gesture so it isn't blocked).
+    let msg = "Hi Vayas! I'd like to book a free consultation.";
+    if (name)  msg += '\nName: ' + name;
+    if (em)    msg += '\nEmail: ' + em;
+    if (dest)  msg += '\nDestination: ' + dest;
+    if (level) msg += '\nLevel: ' + level;
     window.open('https://wa.me/' + NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
 
     const btn = e.target.querySelector('button[type="submit"]');
@@ -2281,6 +2317,16 @@
       setTimeout(() => { btn.innerHTML = 'Sent \u2014 check WhatsApp \u2713'; }, 1200); }
     return false;
   }
+
+  // "Coming soon" country cards → record which country was wanted before WhatsApp.
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('a.dest-card.soon').forEach(function(card){
+      card.addEventListener('click', function(){
+        const h = card.querySelector('h3');
+        saveLead({ type: 'waitlist', destination: h ? h.textContent.trim() : null });
+      });
+    });
+  });
 </script>
 <!-- Cloudflare Web Analytics — free, cookieless, privacy-friendly traffic stats.
      SETUP (~5 min): 1) Sign in at https://dash.cloudflare.com  2) Analytics & Logs → Web Analytics → "Add a site"
